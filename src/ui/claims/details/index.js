@@ -19,6 +19,7 @@ import { selectCurrentUserId } from 'store/auth/selectors';
 import { registerToVote, endorse, flag } from 'store/entities/votes/actions';
 import messages from 'ui/claims/messages';
 import votesMessages from 'ui/votes/messages';
+import styles from './index.module.scss';
 import { STATUSES as CLAIM_STATUSES } from 'store/entities/claims/helpers';
 import { STATUSES as VOTE_STATUSES } from 'store/entities/votes/helpers';
 import Loading from 'ui/common/loading';
@@ -227,6 +228,29 @@ class Details extends Component {
     }
   }
 
+  renderSkillInfo() {
+    const { claim } = this.props;
+    const { skill } = claim;
+    const skillDescriptionParts = Array.isArray(skill.description) ? skill.description : (skill ? [skill.description] : []);
+
+    return (
+      <div className="card">
+        <div className="card-img-top p-3 text-center">
+          <img src={skill.badge} alt={skill.id} className={styles.skillInfoBadge} />
+        </div>
+        <div className="card-block">
+          <h4 className="card-title">{skill.name}</h4>
+          {skillDescriptionParts && <div className="card-text">
+            {skillDescriptionParts.map((part, index) => <p key={index}>{part}</p>)}
+          </div>}
+          {skill.links && skill.links.length && <ul className="list-unstyled">
+            {skill.links.map((link, index) => <li key={index}><a href={link.url} className="card-link" target="_blank">{link.name || link.url}</a></li>)}
+          </ul>}
+        </div>
+      </div>
+    );
+  }
+
   render() {
     const { claim } = this.props;
 
@@ -241,6 +265,10 @@ class Details extends Component {
         <div className="row">
           <div className="col-12">
             {this.renderBreadcrumbs()}
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-12 col-md-9">
             <h1 className="text-primary mt-4">{claim.title}</h1>
             <div className="my-3">
               {this.renderStatusBar()}
@@ -253,6 +281,9 @@ class Details extends Component {
               </dl>
             </dl>}
             {claim.vote && this.renderVoteActions()}
+          </div>
+          <div className="hidden-sm-down col-md-3">
+            {this.renderSkillInfo()}
           </div>
         </div>
       </article>

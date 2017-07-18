@@ -10,6 +10,7 @@
     "classnames": "^2.2.5",
     "compression": "^1.6.2",
     "humps": "^2.0.1",
+    "jwt-decode": "2.2.0",
     "material-ui": "^0.18.3",
     "morgan": "^1.8.2",
     "prop-types": "^15.5.10",

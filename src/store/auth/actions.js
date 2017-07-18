@@ -15,3 +15,17 @@ export const verifyEmail = {
   success: (response) => defineAction(types.VERIFY_EMAIL.SUCCESS, response),
   failure: (error) => defineAction(types.VERIFY_EMAIL.FAILURE, error),
 };
+
+export const login = {
+  request: (values, form) => defineAction(types.LOGIN.REQUEST, values, { form }),
+  start: (values) => defineAction(types.LOGIN.START, values),
+  success: ({ token, user }) => defineAction(types.LOGIN.SUCCESS, { token, user }),
+  failure: (error) => defineAction(types.LOGIN.FAILURE, error),
+};
+
+export const logout = {
+  request: () => defineAction(types.LOGOUT.REQUEST),
+  start: () => defineAction(types.LOGOUT.START),
+  success: () => defineAction(types.LOGOUT.SUCCESS),
+  failure: (error) => defineAction(types.LOGOUT.FAILURE, error),
+};

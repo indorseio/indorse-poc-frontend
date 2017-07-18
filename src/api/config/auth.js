@@ -13,3 +13,19 @@ export function verifyEmail({ email, verifyToken }) {
     data: { email, verifyToken }
   };
 }
+
+export function login({ email, password }) {
+  return {
+    endpoint: 'login',
+    method: 'POST',
+    data: { email, password }
+  };
+}
+
+export function logout() {
+  return {
+    endpoint: 'logout',
+    method: 'POST',
+    requireAuth: true,
+  };
+}

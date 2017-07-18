@@ -12,7 +12,7 @@ export default function creator(history) {
       locale: 'en',
       messages: enMessages
     }
-  }
+  };
 
   const router = routerMiddleware(history);
   const sagaMiddleware = createSagaMiddleware();

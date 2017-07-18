@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import autobind from 'react-autobind';
 import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } from 'reactstrap';
+import { UncontrolledNavDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import classnames from 'classnames';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
 import { Link } from 'react-router-dom';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 import brand from 'resources/brand';
+import { loggedIn, currentUser } from 'store/auth/selectors';
+import { logout } from 'store/auth/actions';
+import routeTemplates from 'ui/common/routes/templates';
 
 class Header extends Component {
   static propTypes = {
@@ -35,8 +41,47 @@ class Header extends Component {
     });
   }
 
+  renderAnonymousNav() {
+    return (
+      <Nav navbar className="ml-auto">
+        <NavItem>
+          <NavLink tag={Link} to={routeTemplates.auth.login}>
+            <FormattedMessage id="app.layout.header.login" defaultMessage="Login" />
+          </NavLink>
+        </NavItem>
+        <NavItem>
+          <NavLink tag={Link} to={routeTemplates.auth.signUp}>
+            <FormattedMessage id="app.layout.header.sign-up" defaultMessage="Sign Up" />
+          </NavLink>
+        </NavItem>
+      </Nav>
+    );
+  }
+
+  renderUserNav() {
+    const { currentUser } = this.props;
+
+    return (
+      <Nav navbar className="ml-auto">
+        <UncontrolledNavDropdown>
+          <DropdownToggle nav caret>
+            {currentUser.name || currentUser.email}
+          </DropdownToggle>
+           <DropdownMenu>
+            {/* <DropdownItem tag={Link} to="/password/change">
+              <FormattedMessage id="app.layout.header.change-password" defaultMessage="Change Password" />
+            </DropdownItem> */}
+            <DropdownItem onClick={this.props.logout.request} style={{ cursor: 'pointer' }}>
+              <FormattedMessage id="app.layout.header.logout" defaultMessage="Logout" />
+            </DropdownItem>
+          </DropdownMenu>
+        </UncontrolledNavDropdown>
+      </Nav>
+    );
+  }
+
   render() {
-    const { className } = this.props;
+    const { loggedIn, className } = this.props;
 
     return (
       <Navbar tag="header" fixed="top" toggleable="md" inverse className={classnames(className)}>
@@ -49,13 +94,7 @@ class Header extends Component {
             </h1>
           </NavbarBrand>
           <Collapse isOpen={this.state.isOpen} navbar>
-            <Nav navbar className="ml-auto">
-              <NavItem>
-                <NavLink tag={Link} to="/" onClick={this.collapseNavbar}>
-                  <FormattedMessage id="app.layout.header.home" defaultMessage="Home" />
-                </NavLink>
-              </NavItem>
-            </Nav>
+            {loggedIn ? this.renderUserNav() : this.renderAnonymousNav()}
           </Collapse>
         </section>
       </Navbar>
@@ -63,4 +102,19 @@ class Header extends Component {
   }
 }
 
-export default injectIntl(Header);
+function mapStateToProps(state) {
+  return {
+    loggedIn: loggedIn(state),
+    currentUser: currentUser(state)
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    logout: {
+      request: bindActionCreators(logout.request, dispatch)
+    }
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(Header));

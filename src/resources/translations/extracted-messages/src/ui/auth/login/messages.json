@@ -1,0 +1,14 @@
+[
+  {
+    "id": "auth.login.fields.email.label",
+    "defaultMessage": "E-mail"
+  },
+  {
+    "id": "auth.login.fields.name.password",
+    "defaultMessage": "Password"
+  },
+  {
+    "id": "auth.login.buttons.submit",
+    "defaultMessage": "Login"
+  }
+]

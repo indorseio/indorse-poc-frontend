@@ -3,6 +3,9 @@ import Immutable from 'seamless-immutable';
 import * as types from './action-types';
 
 const initialState = Immutable({
+  loggedIn: false,
+  token: undefined,
+  currentUser: undefined,
   signedUp: false,
   emailVerification: {
     verifying: false,
@@ -42,6 +45,20 @@ export default function reducer(state = initialState, action) {
           verified: false,
           error: action.payload.message
         }
+      });
+    case types.LOGIN.SUCCESS:
+      return state.merge({
+        loggedIn: true,
+        token: action.payload.token,
+        currentUser: action.payload.user
+      });
+    case types.LOGIN.FAILURE:
+    case types.LOGOUT.SUCCESS:
+    case types.LOGOUT.FAILURE:
+      return state.merge({
+        loggedIn: false,
+        token: undefined,
+        currentUser: undefined
       });
     default:
       return state;

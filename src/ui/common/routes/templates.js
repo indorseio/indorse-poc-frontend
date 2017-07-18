@@ -4,5 +4,6 @@ export default {
     signUp: '/sign-up',
     verificationEmailSent: '/verification-email-sent',
     verifyEmail: '/verify-email',
+    login: '/login',
   }
 };

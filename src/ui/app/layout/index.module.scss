@@ -1,0 +1,28 @@
+@import "~ui/theme/config";
+
+.header {
+  background: linear-gradient(90deg, $blue, $purple);
+
+  h1 {
+    color: $white;
+  }
+
+  a {
+    cursor: pointer;
+  }
+
+  section {
+    @include media-breakpoint-up(lg) {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  button {
+    top: 0.5rem;
+  }
+}
+
+.content {
+  padding-top: 7rem;
+}

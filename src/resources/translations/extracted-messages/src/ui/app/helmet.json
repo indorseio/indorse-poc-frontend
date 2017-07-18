@@ -1,0 +1,14 @@
+[
+  {
+    "id": "app.helmet.title",
+    "defaultMessage": "Indorse - Ethereum based Decentralized Professional Network"
+  },
+  {
+    "id": "app.helmet.meta.description",
+    "defaultMessage": "Indorse aims to give back ownership of the data to the user, and allow them to profit from sharing their skills and activities on the platform."
+  },
+  {
+    "id": "app.helmet.meta.og.siteName",
+    "defaultMessage": "Indorse - Decentralised Professional Network"
+  }
+]

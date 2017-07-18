@@ -10,7 +10,11 @@ import { muiTheme } from 'ui/theme/config';
 import Helmet from './helmet';
 import Layout from './layout';
 
+import routeTemplates from 'ui/common/routes/templates';
 import Home from 'ui/home';
+import SignUp from 'ui/auth/sign-up';
+import VerificationEmailSent from 'ui/auth/verification-email-sent';
+import VerifyEmail from 'ui/auth/verify-email';
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
@@ -22,11 +26,14 @@ class App extends Component {
       <div className={styles.app}>
         <Helmet />
         <MuiThemeProvider muiTheme={muiTheme}>
-          <Layout>
-            <Switch>
-              <Route exact path="/" component={Home} />
-            </Switch>
-          </Layout>
+          <Switch>
+            <Route exact path={routeTemplates.auth.signUp} component={SignUp} />
+            <Route exact path={routeTemplates.auth.verificationEmailSent} component={VerificationEmailSent} />
+            <Route exact path={routeTemplates.auth.verifyEmail} component={VerifyEmail} />
+            <Layout>
+              <Route exact path={routeTemplates.root} component={Home} />
+            </Layout>
+          </Switch>
         </MuiThemeProvider>
       </div>
     );

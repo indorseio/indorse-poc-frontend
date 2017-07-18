@@ -44,7 +44,7 @@ class Header extends Component {
           <NavbarToggler right onClick={this.toggleNavbar} />
           <NavbarBrand tag={Link} to="/">
             <h1 className="mb-0">
-              <img src={brand.logo.default} alt="Logo" height="50" className="mr-2" />
+              <img src={brand.logo.white} alt="Logo" height="50" className="mr-2" />
               <span className="align-middle">{brand.name}</span>
             </h1>
           </NavbarBrand>

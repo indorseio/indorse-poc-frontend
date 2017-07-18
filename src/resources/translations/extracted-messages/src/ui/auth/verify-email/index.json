@@ -1,0 +1,14 @@
+[
+  {
+    "id": "auth.verify-email.verifying",
+    "defaultMessage": "Verifying your email..."
+  },
+  {
+    "id": "auth.verify-email.verified",
+    "defaultMessage": "Thank you for verifying your email. Please login to continue"
+  },
+  {
+    "id": "auth.verify-email.error",
+    "defaultMessage": "There was"
+  }
+]

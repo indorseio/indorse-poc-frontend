@@ -1,0 +1,10 @@
+[
+  {
+    "id": "auth.verification-email-sent.signed-up",
+    "defaultMessage": "Thank you for signing up"
+  },
+  {
+    "id": "auth.verification-email-sent.title",
+    "defaultMessage": "A message with a verification link has been sent to your email address. Please follow the link to verify your email."
+  }
+]

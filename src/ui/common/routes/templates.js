@@ -5,5 +5,8 @@ export default {
     verificationEmailSent: '/verification-email-sent',
     verifyEmail: '/verify-email',
     login: '/login',
+    changePassword: '/password/change',
+    forgotPassword: '/password/forgot',
+    resetPassword: '/password/reset',
   }
 };

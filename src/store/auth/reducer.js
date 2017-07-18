@@ -11,7 +11,8 @@ const initialState = Immutable({
     verifying: false,
     verified: false,
     error: undefined
-  }
+  },
+  forgotPasswordEmailSent: false
 });
 
 export default function reducer(state = initialState, action) {
@@ -60,6 +61,12 @@ export default function reducer(state = initialState, action) {
         token: undefined,
         currentUser: undefined
       });
+    case types.FORGOT_PASSWORD.START:
+      return state.merge({ forgotPasswordEmailSent: false });
+    case types.FORGOT_PASSWORD.SUCCESS:
+      return state.merge({ forgotPasswordEmailSent: true });
+    case types.FORGOT_PASSWORD.FAILURE:
+      return state.merge({ forgotPasswordEmailSent: false });
     default:
       return state;
   }

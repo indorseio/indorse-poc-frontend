@@ -10,5 +10,9 @@
   {
     "id": "auth.login.buttons.submit",
     "defaultMessage": "Login"
+  },
+  {
+    "id": "auth.login.links.forgot-password",
+    "defaultMessage": "Forgot Password?"
   }
 ]

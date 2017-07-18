@@ -29,3 +29,28 @@ export function logout() {
     requireAuth: true,
   };
 }
+
+export function changePassword({ oldPassword, newPassword }) {
+  return {
+    endpoint: 'password/change',
+    method: 'POST',
+    data: { oldPassword, newPassword },
+    requireAuth: true,
+  };
+}
+
+export function forgotPassword({ email }) {
+  return {
+    endpoint: 'password/forgot',
+    method: 'POST',
+    data: { email }
+  };
+}
+
+export function resetPassword({ email, password, passwordToken: passToken }) {
+  return {
+    endpoint: 'password/reset',
+    method: 'POST',
+    data: { email, password, passToken },
+  };
+}

@@ -4,7 +4,6 @@ import autoBind from 'react-autobind';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
-import { Link } from 'react-router-dom';
 
 import Layout from 'ui/auth/layout';
 import Alert from 'ui/common/alert';
@@ -14,12 +13,11 @@ import SubmitButton from 'ui/common/form/submit-button';
 
 import fields, { fieldNames } from './model';
 import * as messages from './messages';
-import { login } from 'store/auth/actions';
-import routeTemplates from 'ui/common/routes/templates';
+import { changePassword } from 'store/auth/actions';
 
 const validate = validator(fields);
 
-class Login extends Component {
+class ChangePassword extends Component {
   constructor(props) {
     super(props);
 
@@ -27,29 +25,29 @@ class Login extends Component {
   }
 
   onSubmit(values) {
-    return this.props.login.request(values, this.props.form);
+    return this.props.changePassword.request(values, this.props.form);
   }
 
   render() {
     const { handleSubmit, submitting, error, intl: { formatMessage } } = this.props;
 
     return (
-      <Layout>
+      <Layout standalone={false}>
         <form onSubmit={handleSubmit(this.onSubmit)}>
-          {error && <Alert color="danger" inverse>
+          {error && <Alert color="danger">
             {error}
           </Alert>}
           <div>
-            <Field name={fieldNames.email} component={TextField} label={formatMessage(messages.labels.email)} />
+            <Field name={fieldNames.oldPassword} component={TextField} type="password" label={formatMessage(messages.labels.oldPassword)} />
           </div>
           <div>
-            <Field name={fieldNames.password} component={TextField} type="password" label={formatMessage(messages.labels.password)} />
+            <Field name={fieldNames.newPassword} component={TextField} type="password" label={formatMessage(messages.labels.newPassword)} />
           </div>
-          <div className="mt-3 d-flex justify-content-between align-items-center">
-            <Link to={routeTemplates.auth.forgotPassword}>
-              {formatMessage(messages.links.forgotPassword)}
-            </Link>
-            <SubmitButton label={formatMessage(messages.buttons.submit)} primary disabled={submitting} />
+          <div>
+            <Field name={fieldNames.newPasswordConfirmation} component={TextField} type="password" label={formatMessage(messages.labels.newPasswordConfirmation)} />
+          </div>
+          <div className="mt-3">
+            <SubmitButton label={formatMessage(messages.buttons.submit)} primary fullWidth disabled={submitting} />
           </div>
         </form>
       </Layout>
@@ -59,13 +57,13 @@ class Login extends Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    login: {
-      request: bindActionCreators(login.request, dispatch)
+    changePassword: {
+      request: bindActionCreators(changePassword.request, dispatch)
     }
   }
 }
 
 export default connect(null, mapDispatchToProps)(reduxForm({
-  form: 'login',
+  form: 'change-pasword',
   validate
-})(injectIntl(Login)));
+})(injectIntl(ChangePassword)));

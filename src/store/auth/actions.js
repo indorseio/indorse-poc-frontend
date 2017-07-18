@@ -29,3 +29,24 @@ export const logout = {
   success: () => defineAction(types.LOGOUT.SUCCESS),
   failure: (error) => defineAction(types.LOGOUT.FAILURE, error),
 };
+
+export const changePassword = {
+  request: (values, form) => defineAction(types.CHANGE_PASSWORD.REQUEST, values, { form }),
+  start: () => defineAction(types.CHANGE_PASSWORD.START),
+  success: () => defineAction(types.CHANGE_PASSWORD.SUCCESS),
+  failure: (error) => defineAction(types.CHANGE_PASSWORD.FAILURE, error),
+};
+
+export const forgotPassword = {
+  request: (values, form) => defineAction(types.FORGOT_PASSWORD.REQUEST, values, { form }),
+  start: () => defineAction(types.FORGOT_PASSWORD.START),
+  success: () => defineAction(types.FORGOT_PASSWORD.SUCCESS),
+  failure: (error) => defineAction(types.FORGOT_PASSWORD.FAILURE, error),
+};
+
+export const resetPassword = {
+  request: (values, form) => defineAction(types.RESET_PASSWORD.REQUEST, values, { form }),
+  start: () => defineAction(types.RESET_PASSWORD.START),
+  success: () => defineAction(types.RESET_PASSWORD.SUCCESS),
+  failure: (error) => defineAction(types.RESET_PASSWORD.FAILURE, error),
+};

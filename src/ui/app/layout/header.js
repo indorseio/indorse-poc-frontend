@@ -67,10 +67,10 @@ class Header extends Component {
           <DropdownToggle nav caret>
             {currentUser.name || currentUser.email}
           </DropdownToggle>
-           <DropdownMenu>
-            {/* <DropdownItem tag={Link} to="/password/change">
+          <DropdownMenu>
+            <DropdownItem tag={Link} to={routeTemplates.auth.changePassword}>
               <FormattedMessage id="app.layout.header.change-password" defaultMessage="Change Password" />
-            </DropdownItem> */}
+            </DropdownItem>
             <DropdownItem onClick={this.props.logout.request} style={{ cursor: 'pointer' }}>
               <FormattedMessage id="app.layout.header.logout" defaultMessage="Logout" />
             </DropdownItem>

@@ -96,6 +96,65 @@ function* watchLogout() {
   yield takeEvery(types.LOGOUT.REQUEST, logout);
 }
 
+function* changePassword({ payload: values, meta }) {
+  const form = meta && meta.form;
+  yield put(actions.changePassword.start(values));
+  if (form) yield put(startSubmit(form));
+
+  try {
+    const response = yield call(callApi, api.changePassword(values));
+    yield put(actions.changePassword.success(response));
+    if (form) yield put(stopSubmit(form));
+    yield put(push(routeTemplates.root));
+  } catch (error) {
+    yield put(actions.changePassword.failure(error));
+    if (form) yield put(stopSubmit(form, { _error: error.message }));
+  }
+}
+
+function* watchChangePassword() {
+  yield takeEvery(types.CHANGE_PASSWORD.REQUEST, changePassword);
+}
+
+function* forgotPassword({ payload: values, meta }) {
+  const form = meta && meta.form;
+  yield put(actions.forgotPassword.start(values));
+  if (form) yield put(startSubmit(form));
+
+  try {
+    const response = yield call(callApi, api.forgotPassword(values));
+    yield put(actions.forgotPassword.success(response));
+    if (form) yield put(stopSubmit(form));
+  } catch (error) {
+    yield put(actions.forgotPassword.failure(error));
+    if (form) yield put(stopSubmit(form, { _error: error.message }));
+  }
+}
+
+function* watchForgotPassword() {
+  yield takeEvery(types.FORGOT_PASSWORD.REQUEST, forgotPassword);
+}
+
+function* resetPassword({ payload: values, meta }) {
+  const form = meta && meta.form;
+  yield put(actions.resetPassword.start(values));
+  if (form) yield put(startSubmit(form));
+
+  try {
+    const response = yield call(callApi, api.resetPassword(values));
+    yield put(actions.resetPassword.success(response));
+    if (form) yield put(stopSubmit(form));
+    yield put(push(routeTemplates.auth.login));
+  } catch (error) {
+    yield put(actions.resetPassword.failure(error));
+    if (form) yield put(stopSubmit(form, { _error: error.message }));
+  }
+}
+
+function* watchResetPassword() {
+  yield takeEvery(types.RESET_PASSWORD.REQUEST, resetPassword);
+}
+
 function* tryRestoreSession() {
   try {
     const token = yield call(storage.getToken);
@@ -119,4 +178,7 @@ export default function* auth() {
   yield fork(watchVerifyEmail);
   yield fork(watchLogin);
   yield fork(watchLogout);
+  yield fork(watchChangePassword);
+  yield fork(watchForgotPassword);
+  yield fork(watchResetPassword);
 }

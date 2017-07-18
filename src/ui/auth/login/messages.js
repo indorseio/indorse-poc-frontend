@@ -19,3 +19,10 @@ export const buttons = defineMessages({
     defaultMessage: 'Login'
   }
 });
+
+export const links = defineMessages({
+  forgotPassword: {
+    id: 'auth.login.links.forgot-password',
+    defaultMessage: 'Forgot Password?'
+  }
+});

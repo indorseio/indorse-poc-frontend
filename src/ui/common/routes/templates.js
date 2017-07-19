@@ -10,6 +10,9 @@ export default {
     resetPassword: '/password/reset',
   },
   admin: {
-    root: '/admin'
+    root: '/admin',
+    users: {
+      index: '/admin/users'
+    }
   }
 };

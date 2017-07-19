@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
+import { Switch, Route } from 'react-router-dom';
+
+import routeTemplates from 'ui/common/routes/templates';
+
+import Users from './users';
 
 class Admin extends Component {
   render() {
     return (
-      <div className="container">
-        <header className="text-center my-4">
-          <FormattedMessage id="admin.title" defaultMessage="Admin" tagName="h1" />
-        </header>
-      </div>
+      <Switch>
+        <Route to={routeTemplates.admin.users} component={Users} />
+      </Switch>
     );
   }
 }

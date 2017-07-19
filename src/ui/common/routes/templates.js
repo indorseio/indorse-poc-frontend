@@ -8,5 +8,8 @@ export default {
     changePassword: '/password/change',
     forgotPassword: '/password/forgot',
     resetPassword: '/password/reset',
+  },
+  admin: {
+    root: '/admin'
   }
 };

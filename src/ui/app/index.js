@@ -23,6 +23,8 @@ import ChangePassword from 'ui/auth/change-password';
 import ForgotPassword from 'ui/auth/forgot-password';
 import ResetPassword from 'ui/auth/reset-password';
 
+import Admin from 'ui/admin';
+
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
 injectTapEventPlugin();
@@ -43,6 +45,7 @@ class App extends Component {
             <Layout>
               <Route exact path={routeTemplates.root} component={Authenticated(Home, { flash: false })} />
               <Route exact path={routeTemplates.auth.changePassword} component={Authenticated(ChangePassword)} />
+              <Route exact path={routeTemplates.admin.root} component={Admin} />
             </Layout>
           </Switch>
         </MuiThemeProvider>

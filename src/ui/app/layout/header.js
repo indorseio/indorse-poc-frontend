@@ -9,7 +9,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import brand from 'resources/brand';
-import { loggedIn, currentUser } from 'store/auth/selectors';
+import { loggedIn, currentUser, currentUserIsAdmin } from 'store/auth/selectors';
 import { logout } from 'store/auth/actions';
 import routeTemplates from 'ui/common/routes/templates';
 
@@ -59,7 +59,7 @@ class Header extends Component {
   }
 
   renderUserNav() {
-    const { currentUser } = this.props;
+    const { currentUser, currentUserIsAdmin } = this.props;
 
     return (
       <Nav navbar className="ml-auto">
@@ -68,6 +68,9 @@ class Header extends Component {
             {currentUser.name || currentUser.email}
           </DropdownToggle>
           <DropdownMenu>
+            {currentUserIsAdmin && <DropdownItem tag={Link} to={routeTemplates.admin.root}>
+              <FormattedMessage id="app.layout.header.Admin" defaultMessage="Admin" />
+            </DropdownItem>}
             <DropdownItem tag={Link} to={routeTemplates.auth.changePassword}>
               <FormattedMessage id="app.layout.header.change-password" defaultMessage="Change Password" />
             </DropdownItem>
@@ -105,7 +108,8 @@ class Header extends Component {
 function mapStateToProps(state) {
   return {
     loggedIn: loggedIn(state),
-    currentUser: currentUser(state)
+    currentUser: currentUser(state),
+    currentUserIsAdmin: currentUserIsAdmin(state)
   };
 }
 

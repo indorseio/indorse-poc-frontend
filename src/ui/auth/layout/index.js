@@ -6,6 +6,7 @@ import Paper from 'material-ui/Paper';
 import brand from 'resources/brand';
 import styles from './index.module.scss';
 import routeTemplates from 'ui/common/routes/templates';
+import Flash from 'ui/common/flash';
 
 const Layout = ({ children, standalone = true }) => (
   <div className={classnames('container-fluid', styles.auth)}>
@@ -21,6 +22,7 @@ const Layout = ({ children, standalone = true }) => (
         <Paper zDepth={2}>
           <div className="card">
             <div className="card-block">
+              <Flash />
               {children}
             </div>
           </div>

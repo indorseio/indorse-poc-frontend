@@ -9,6 +9,8 @@ import * as api from 'api/config/auth';
 import callApi from 'store/api/saga';
 import routeTemplates from 'ui/common/routes/templates';
 import * as storage from './storage';
+import { messageTypes, buildMessage } from 'store/flash/builder';
+import messages from 'ui/auth/messages';
 
 function unwrapToken(token) {
   const decoded = jwtDecode(token);
@@ -46,6 +48,9 @@ function* verifyEmail({ payload: values }) {
   try {
     const response = yield call(callApi, api.verifyEmail(values));
     yield put(actions.verifyEmail.success(response));
+    yield put(push(routeTemplates.auth.login, {
+      flash: buildMessage({ kind: messageTypes.success, content: messages.emailVerified })
+    }));
   } catch (error) {
     yield put(actions.verifyEmail.failure(error));
   }
@@ -66,7 +71,9 @@ function* login({ payload: values, meta }) {
     storage.setToken(token);
     yield put(actions.login.success(unwrapToken(token)));
     if (form) yield put(stopSubmit(form));
-    yield put(push(routeTemplates.root));
+    yield put(push(routeTemplates.root, {
+      flash: buildMessage({ kind: messageTypes.success, content: messages.loggedIn })
+    }));
   } catch (error) {
     storage.deleteToken();
     yield put(actions.login.failure(error));
@@ -105,7 +112,9 @@ function* changePassword({ payload: values, meta }) {
     const response = yield call(callApi, api.changePassword(values));
     yield put(actions.changePassword.success(response));
     if (form) yield put(stopSubmit(form));
-    yield put(push(routeTemplates.root));
+    yield put(push(routeTemplates.root, {
+      flash: buildMessage({ kind: messageTypes.success, content: messages.passwordChanged })
+    }));
   } catch (error) {
     yield put(actions.changePassword.failure(error));
     if (form) yield put(stopSubmit(form, { _error: error.message }));
@@ -144,7 +153,9 @@ function* resetPassword({ payload: values, meta }) {
     const response = yield call(callApi, api.resetPassword(values));
     yield put(actions.resetPassword.success(response));
     if (form) yield put(stopSubmit(form));
-    yield put(push(routeTemplates.auth.login));
+    yield put(push(routeTemplates.auth.login, {
+      flash: buildMessage({ kind: messageTypes.success, content: messages.passwordResetSuccess })
+    }));
   } catch (error) {
     yield put(actions.resetPassword.failure(error));
     if (form) yield put(stopSubmit(form, { _error: error.message }));

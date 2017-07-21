@@ -8,6 +8,10 @@
     "defaultMessage": "New Password Confirmation"
   },
   {
+    "id": "auth.reset-password.header.title",
+    "defaultMessage": "Reset Password"
+  },
+  {
     "id": "auth.reset-password.buttons.submit",
     "defaultMessage": "Reset Password"
   }

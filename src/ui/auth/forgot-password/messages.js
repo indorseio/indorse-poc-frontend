@@ -9,6 +9,13 @@ export const labels = defineMessages({
   },
 });
 
+export const header = defineMessages({
+  title: {
+    id: 'auth.forgot-password.header.title',
+    defaultMessage: 'Forgot Password'
+  }
+});
+
 export const alerts = defineMessages({
   emailSent: {
     id: 'auth.forgot-password.email-sent',

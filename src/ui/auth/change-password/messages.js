@@ -17,6 +17,13 @@ export const labels = defineMessages({
   },
 });
 
+export const header = defineMessages({
+  title: {
+    id: 'auth.change-password.header.title',
+    defaultMessage: 'Change Password'
+  }
+});
+
 export const buttons = defineMessages({
   submit: {
     id: 'auth.change-password.buttons.submit',

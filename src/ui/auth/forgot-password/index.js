@@ -33,7 +33,7 @@ class ForgotPassword extends Component {
     const { emailSent, handleSubmit, submitting, error, intl: { formatMessage } } = this.props;
 
     return (
-      <Layout>
+      <Layout title={formatMessage(messages.header.title)}>
         {emailSent ?
           <Alert color="warning">
             {formatMessage(messages.alerts.emailSent)}

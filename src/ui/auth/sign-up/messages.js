@@ -21,9 +21,27 @@ export const labels = defineMessages({
   },
 });
 
+export const header = defineMessages({
+  title: {
+    id: 'auth.signUp.header.title',
+    defaultMessage: 'Sign Up'
+  }
+});
+
 export const buttons = defineMessages({
   submit: {
     id: 'auth.sign-up.buttons.submit',
     defaultMessage: 'Sign up'
+  }
+});
+
+export const links = defineMessages({
+  loginPrompt: {
+    id: 'auth.signUp.links.login.prompt',
+    defaultMessage: 'Already a member? {link}'
+  },
+  login: {
+    id: 'auth.signUp.links.login.link',
+    defaultMessage: 'Login'
   }
 });

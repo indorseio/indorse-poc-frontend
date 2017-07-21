@@ -32,7 +32,7 @@ class ResetPassword extends Component {
     const { handleSubmit, submitting, error, intl: { formatMessage } } = this.props;
 
     return (
-      <Layout>
+      <Layout title={formatMessage(messages.header.title)}>
         <form onSubmit={handleSubmit(this.onSubmit)}>
           {error && <Alert color="danger">
             {error}

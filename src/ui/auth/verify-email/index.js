@@ -23,7 +23,7 @@ class VerifyEmail extends Component {
     const { verifying, verified, error } = this.props;
 
     return (
-      <Layout>
+      <Layout showFooter={false}>
         {verifying && <Alert color="info">
           <FormattedMessage id="auth.verify-email.verifying" defaultMessage="Verifying your email..." />
         </Alert>}

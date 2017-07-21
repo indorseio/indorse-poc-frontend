@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { injectIntl } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import autoBind from 'react-autobind';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
+import { Link } from 'react-router-dom';
 
 import Layout from 'ui/auth/layout';
 import Alert from 'ui/common/alert';
@@ -14,6 +15,7 @@ import SubmitButton from 'ui/common/form/submit-button';
 import fields, { fieldNames } from './model';
 import * as messages from './messages';
 import { signUp } from 'store/auth/actions';
+import routeTemplates from 'ui/common/routes/templates';
 
 const validate = validator(fields);
 
@@ -28,11 +30,19 @@ class SignUp extends Component {
     return this.props.signUp.request(values, this.props.form);
   }
 
+  renderFooter() {
+    const { intl: { formatMessage } } = this.props;
+
+    return <FormattedMessage {...messages.links.loginPrompt} values={{
+      link: <Link to={routeTemplates.auth.login}>{formatMessage(messages.links.login)}</Link>
+    }} />;
+  }
+
   render() {
     const { handleSubmit, submitting, error, intl: { formatMessage } } = this.props;
 
     return (
-      <Layout>
+      <Layout title={formatMessage(messages.header.title)} footerContent={this.renderFooter()}>
         <form onSubmit={handleSubmit(this.onSubmit)}>
           {error && <Alert color="danger" inverse>
             {error}

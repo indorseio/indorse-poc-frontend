@@ -13,6 +13,13 @@ export const labels = defineMessages({
   },
 });
 
+export const header = defineMessages({
+  title: {
+    id: 'auth.login.header.title',
+    defaultMessage: 'Login to your account'
+  }
+});
+
 export const buttons = defineMessages({
   submit: {
     id: 'auth.login.buttons.submit',
@@ -24,5 +31,13 @@ export const links = defineMessages({
   forgotPassword: {
     id: 'auth.login.links.forgot-password',
     defaultMessage: 'Forgot Password?'
+  },
+  signUpPrompt: {
+    id: 'auth.login.links.signUp.prompt',
+    defaultMessage: 'New to {brand}? {link}'
+  },
+  signUp: {
+    id: 'auth.login.links.signUp.link',
+    defaultMessage: 'Sign Up'
   }
 });

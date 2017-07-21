@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { injectIntl } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
 import autoBind from 'react-autobind';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -12,6 +12,7 @@ import TextField from 'ui/common/form/fields/text-field';
 import validator from 'ui/common/form/validator';
 import SubmitButton from 'ui/common/form/submit-button';
 
+import brand from 'resources/brand';
 import fields, { fieldNames } from './model';
 import * as messages from './messages';
 import { login } from 'store/auth/actions';
@@ -30,11 +31,20 @@ class Login extends Component {
     return this.props.login.request(values, this.props.form);
   }
 
+  renderFooter() {
+    const { intl: { formatMessage } } = this.props;
+
+    return <FormattedMessage {...messages.links.signUpPrompt} values={{
+      brand: brand.name,
+      link: <Link to={routeTemplates.auth.signUp}>{formatMessage(messages.links.signUp)}</Link>
+    }} />;
+  }
+
   render() {
     const { handleSubmit, submitting, error, intl: { formatMessage } } = this.props;
 
     return (
-      <Layout>
+      <Layout title={formatMessage(messages.header.title)} footerContent={this.renderFooter()}>
         <form onSubmit={handleSubmit(this.onSubmit)}>
           {error && <Alert color="danger" inverse>
             {error}

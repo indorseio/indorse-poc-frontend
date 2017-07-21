@@ -32,8 +32,8 @@ class ChangePassword extends Component {
     const { handleSubmit, submitting, error, intl: { formatMessage } } = this.props;
 
     return (
-      <Layout standalone={false}>
-        <form onSubmit={handleSubmit(this.onSubmit)}>
+      <Layout standalone={false} title={formatMessage(messages.header.title)} showFooter={false}>
+        <form title={formatMessage(messages.header.title)} onSubmit={handleSubmit(this.onSubmit)}>
           {error && <Alert color="danger">
             {error}
           </Alert>}

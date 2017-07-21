@@ -13,6 +13,13 @@ export const labels = defineMessages({
   },
 });
 
+export const header = defineMessages({
+  title: {
+    id: 'auth.reset-password.header.title',
+    defaultMessage: 'Reset Password'
+  }
+});
+
 export const buttons = defineMessages({
   submit: {
     id: 'auth.reset-password.buttons.submit',

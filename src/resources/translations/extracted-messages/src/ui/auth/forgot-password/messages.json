@@ -4,6 +4,10 @@
     "defaultMessage": "E-mail"
   },
   {
+    "id": "auth.forgot-password.header.title",
+    "defaultMessage": "Forgot Password"
+  },
+  {
     "id": "auth.forgot-password.email-sent",
     "defaultMessage": "You will receive an email with instructions on how to reset your password in a few minutes."
   },

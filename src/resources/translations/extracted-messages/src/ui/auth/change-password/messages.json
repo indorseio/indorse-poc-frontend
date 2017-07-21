@@ -12,6 +12,10 @@
     "defaultMessage": "New Password Confirmation"
   },
   {
+    "id": "auth.change-password.header.title",
+    "defaultMessage": "Change Password"
+  },
+  {
     "id": "auth.change-password.buttons.submit",
     "defaultMessage": "Change Password"
   }

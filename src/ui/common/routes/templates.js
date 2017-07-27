@@ -15,5 +15,8 @@ export default {
     users: {
       index: '/admin/users'
     }
+  },
+  dashboard: {
+    claims: '/claims'
   }
 };

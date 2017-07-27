@@ -18,5 +18,8 @@ export default {
   },
   dashboard: {
     claims: '/claims'
+  },
+  claims: {
+    new: '/claims/new'
   }
 };

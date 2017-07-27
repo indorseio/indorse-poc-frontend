@@ -24,6 +24,7 @@ import ForgotPassword from 'ui/auth/forgot-password';
 import ResetPassword from 'ui/auth/reset-password';
 import ApprovalRequired from 'ui/auth/approval-required';
 import ClaimsDashboard from 'ui/dashboard/claims';
+import NewClaim from 'ui/claims/new';
 
 import Admin from 'ui/admin';
 
@@ -49,6 +50,7 @@ class App extends Component {
               <Route exact path={routeTemplates.dashboard.claims} component={Authenticated(ClaimsDashboard, { flash: false })} />
               <Route exact path={routeTemplates.auth.changePassword} component={Authenticated(ChangePassword)} />
               <Route path={routeTemplates.admin.root} component={AllowedRoles(Admin, { roles: ['admin'] })} />
+              <Route exact path={routeTemplates.claims.new} component={Authenticated(NewClaim)} />
             </Layout>
           </Switch>
         </MuiThemeProvider>

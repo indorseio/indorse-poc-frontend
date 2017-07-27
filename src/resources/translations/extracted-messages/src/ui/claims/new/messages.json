@@ -1,0 +1,22 @@
+[
+  {
+    "id": "claims.new.fields.title.label",
+    "defaultMessage": "Title"
+  },
+  {
+    "id": "claims.new.fields.description.label",
+    "defaultMessage": "Description"
+  },
+  {
+    "id": "claims.new.fields.proof.label",
+    "defaultMessage": "Proof"
+  },
+  {
+    "id": "claims.new.header.title",
+    "defaultMessage": "Create a new claim"
+  },
+  {
+    "id": "claims.new.buttons.submit",
+    "defaultMessage": "Submit"
+  }
+]

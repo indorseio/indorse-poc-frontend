@@ -6,3 +6,12 @@ export function fetchUserClaims({ userId }) {
     requireAuth: true
   };
 }
+
+export function createClaim({ title, description: desc, proof }) {
+  return {
+    endpoint: 'claims',
+    method: 'POST',
+    data: { title, desc, proof },
+    requireAuth: true
+  };
+}

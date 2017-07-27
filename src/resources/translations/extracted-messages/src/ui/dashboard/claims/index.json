@@ -2,5 +2,9 @@
   {
     "id": "dashboard.claims.title",
     "defaultMessage": "My Claims"
+  },
+  {
+    "id": "dashboard.claims.links.new",
+    "defaultMessage": "New Claim"
   }
 ]

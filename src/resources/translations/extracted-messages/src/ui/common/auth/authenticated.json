@@ -1,0 +1,6 @@
+[
+  {
+    "id": "common.auth.authenticated.required",
+    "defaultMessage": "You need to login first"
+  }
+]

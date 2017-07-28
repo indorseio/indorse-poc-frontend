@@ -11,6 +11,8 @@ import Helmet from './helmet';
 import Layout from './layout';
 
 import routeTemplates from 'ui/common/routes/templates';
+import Authenticated from 'ui/common/auth/authenticated';
+
 import Home from 'ui/home';
 import SignUp from 'ui/auth/sign-up';
 import VerificationEmailSent from 'ui/auth/verification-email-sent';
@@ -38,8 +40,8 @@ class App extends Component {
             <Route exact path={routeTemplates.auth.forgotPassword} component={ForgotPassword} />
             <Route exact path={routeTemplates.auth.resetPassword} component={ResetPassword} />
             <Layout>
-              <Route exact path={routeTemplates.root} component={Home} />
-              <Route exact path={routeTemplates.auth.changePassword} component={ChangePassword} />
+              <Route exact path={routeTemplates.root} component={Authenticated(Home, { flash: false })} />
+              <Route exact path={routeTemplates.auth.changePassword} component={Authenticated(ChangePassword)} />
             </Layout>
           </Switch>
         </MuiThemeProvider>

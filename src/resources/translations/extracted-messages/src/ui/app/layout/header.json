@@ -8,6 +8,10 @@
     "defaultMessage": "Sign Up"
   },
   {
+    "id": "app.layout.header.admin",
+    "defaultMessage": "Admin"
+  },
+  {
     "id": "app.layout.header.change-password",
     "defaultMessage": "Change Password"
   },

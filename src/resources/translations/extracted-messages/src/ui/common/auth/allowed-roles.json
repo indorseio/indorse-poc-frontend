@@ -1,0 +1,6 @@
+[
+  {
+    "id": "common.auth.allowed-role.required",
+    "defaultMessage": "Only {roles} can access this content"
+  }
+]

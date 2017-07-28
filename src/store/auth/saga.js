@@ -15,10 +15,10 @@ import messages from 'ui/auth/messages';
 function unwrapToken(token) {
   const decoded = jwtDecode(token);
   const { iat, exp } = decoded;
-  const { _id: id, name, email, verified: emailVerified, approved } = decoded;
+  const { _id: id, name, email, verified: emailVerified, approved, role } = decoded;
   return {
     token: { value: token, iat, exp },
-    user: { id, name, email, emailVerified, approved }
+    user: { id, name, email, emailVerified, approved, role }
   };
 }
 

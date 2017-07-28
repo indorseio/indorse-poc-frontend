@@ -1,0 +1,10 @@
+[
+  {
+    "id": "admin.users.approval-status-toggle.approved",
+    "defaultMessage": "Approved"
+  },
+  {
+    "id": "admin.users.approval-status-toggle.disapproved",
+    "defaultMessage": "Disapproved"
+  }
+]

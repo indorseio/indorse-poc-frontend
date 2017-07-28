@@ -27,9 +27,19 @@ export const currentUser = createSelector(
   authState => authState.currentUser
 );
 
+export const currentUserIsAdmin = createSelector(
+  currentUser,
+  currentUser => currentUser ? currentUser.role === 'admin' : false
+)
+
 export const currentUserId = createSelector(
   authState,
   authState => authState.currentUser ? authState.currentUser.id : undefined
+);
+
+export const currentUserRole = createSelector(
+  authState,
+  authState => authState.currentUser ? authState.currentUser.role : undefined
 );
 
 export const forgotPasswordEmailSent = createSelector(

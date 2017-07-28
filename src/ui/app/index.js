@@ -13,6 +13,7 @@ import Layout from './layout';
 import routeTemplates from 'ui/common/routes/templates';
 import AnonymousOnly from 'ui/common/auth/anonymous-only';
 import Authenticated from 'ui/common/auth/authenticated';
+import AllowedRoles from 'ui/common/auth/allowed-roles';
 
 import Home from 'ui/home';
 import SignUp from 'ui/auth/sign-up';
@@ -22,6 +23,8 @@ import Login from 'ui/auth/login';
 import ChangePassword from 'ui/auth/change-password';
 import ForgotPassword from 'ui/auth/forgot-password';
 import ResetPassword from 'ui/auth/reset-password';
+
+import Admin from 'ui/admin';
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
@@ -43,6 +46,7 @@ class App extends Component {
             <Layout>
               <Route exact path={routeTemplates.root} component={Authenticated(Home, { flash: false })} />
               <Route exact path={routeTemplates.auth.changePassword} component={Authenticated(ChangePassword)} />
+              <Route path={routeTemplates.admin.root} component={AllowedRoles(Admin, { roles: ['admin'] })} />
             </Layout>
           </Switch>
         </MuiThemeProvider>

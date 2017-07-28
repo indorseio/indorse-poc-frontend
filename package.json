@@ -13,6 +13,7 @@
     "jwt-decode": "2.2.0",
     "material-ui": "^0.18.3",
     "morgan": "^1.8.2",
+    "normalizr": "^3.2.3",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-autobind": "^1.0.6",

@@ -11,6 +11,7 @@ import Helmet from './helmet';
 import Layout from './layout';
 
 import routeTemplates from 'ui/common/routes/templates';
+import AnonymousOnly from 'ui/common/auth/anonymous-only';
 import Authenticated from 'ui/common/auth/authenticated';
 
 import Home from 'ui/home';
@@ -33,12 +34,12 @@ class App extends Component {
         <Helmet />
         <MuiThemeProvider muiTheme={muiTheme}>
           <Switch>
-            <Route exact path={routeTemplates.auth.signUp} component={SignUp} />
-            <Route exact path={routeTemplates.auth.verificationEmailSent} component={VerificationEmailSent} />
-            <Route exact path={routeTemplates.auth.verifyEmail} component={VerifyEmail} />
-            <Route exact path={routeTemplates.auth.login} component={Login} />
-            <Route exact path={routeTemplates.auth.forgotPassword} component={ForgotPassword} />
-            <Route exact path={routeTemplates.auth.resetPassword} component={ResetPassword} />
+            <Route exact path={routeTemplates.auth.signUp} component={AnonymousOnly(SignUp)} />
+            <Route exact path={routeTemplates.auth.verificationEmailSent} component={AnonymousOnly(VerificationEmailSent)} />
+            <Route exact path={routeTemplates.auth.verifyEmail} component={AnonymousOnly(VerifyEmail)} />
+            <Route exact path={routeTemplates.auth.login} component={AnonymousOnly(Login)} />
+            <Route exact path={routeTemplates.auth.forgotPassword} component={AnonymousOnly(ForgotPassword)} />
+            <Route exact path={routeTemplates.auth.resetPassword} component={AnonymousOnly(ResetPassword)} />
             <Layout>
               <Route exact path={routeTemplates.root} component={Authenticated(Home, { flash: false })} />
               <Route exact path={routeTemplates.auth.changePassword} component={Authenticated(ChangePassword)} />

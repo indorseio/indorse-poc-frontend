@@ -26,15 +26,16 @@ export const callApiRaw = ({ endpoint, method, headers, body }) => {
   );
 }
 
-export const callApiJson = ({ endpoint, method, data, session }) => {
-  const headers = {
-    'Content-Type': 'application/json'
+export const callApiJson = ({ endpoint, method, headers, data, session }) => {
+  const finalsHeaders = {
+    ...headers,
+    'Content-Type': 'application/json',
   };
 
   return callApiRaw({
     endpoint,
     method,
-    headers,
+    headers: finalsHeaders,
     body: JSON.stringify(decamelizeKeys({ ...session, ...data }))
   });
 }

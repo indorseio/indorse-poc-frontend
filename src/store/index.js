@@ -1,8 +1,10 @@
-import { createStore, applyMiddleware, combineReducers } from 'redux';
-import { routerReducer, routerMiddleware } from 'react-router-redux';
-import { intlReducer } from 'react-intl-redux';
+import { compose, createStore, applyMiddleware } from 'redux';
+import { routerMiddleware } from 'react-router-redux';
+import createSagaMiddleware from 'redux-saga';
 
 import enMessages from 'resources/translations/locales/en.json';
+import rootReducer from './reducers';
+import rootSaga from './sagas';
 
 export default function creator(history) {
   const initialState = {
@@ -10,18 +12,19 @@ export default function creator(history) {
       locale: 'en',
       messages: enMessages
     }
-  }
-
-  const reducer = combineReducers({
-    ...[],
-    router: routerReducer,
-    intl: intlReducer
-  });
+  };
 
   const router = routerMiddleware(history);
+  const sagaMiddleware = createSagaMiddleware();
+  const middleware = applyMiddleware(router, sagaMiddleware);
 
-  const enhancer = applyMiddleware(router);
+  const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+  const enhancer = composeEnhancers(
+    middleware
+  );
 
-  const store = createStore(reducer, initialState, enhancer);
+  const store = createStore(rootReducer, initialState, enhancer);
+  sagaMiddleware.run(rootSaga);
+
   return store;
 };

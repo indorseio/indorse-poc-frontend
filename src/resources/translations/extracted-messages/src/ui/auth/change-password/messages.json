@@ -1,0 +1,22 @@
+[
+  {
+    "id": "auth.change-password.fields.oldPassword.label",
+    "defaultMessage": "Old Password"
+  },
+  {
+    "id": "auth.change-password.fields.newPassword.label",
+    "defaultMessage": "New Password"
+  },
+  {
+    "id": "auth.change-password.fields.newPasswordConfirmation.label",
+    "defaultMessage": "New Password Confirmation"
+  },
+  {
+    "id": "auth.change-password.header.title",
+    "defaultMessage": "Change Password"
+  },
+  {
+    "id": "auth.change-password.buttons.submit",
+    "defaultMessage": "Change Password"
+  }
+]

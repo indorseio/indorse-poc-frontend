@@ -10,7 +10,18 @@ import { muiTheme } from 'ui/theme/config';
 import Helmet from './helmet';
 import Layout from './layout';
 
+import routeTemplates from 'ui/common/routes/templates';
+import AnonymousOnly from 'ui/common/auth/anonymous-only';
+import Authenticated from 'ui/common/auth/authenticated';
+
 import Home from 'ui/home';
+import SignUp from 'ui/auth/sign-up';
+import VerificationEmailSent from 'ui/auth/verification-email-sent';
+import VerifyEmail from 'ui/auth/verify-email';
+import Login from 'ui/auth/login';
+import ChangePassword from 'ui/auth/change-password';
+import ForgotPassword from 'ui/auth/forgot-password';
+import ResetPassword from 'ui/auth/reset-password';
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
@@ -22,11 +33,18 @@ class App extends Component {
       <div className={styles.app}>
         <Helmet />
         <MuiThemeProvider muiTheme={muiTheme}>
-          <Layout>
-            <Switch>
-              <Route exact path="/" component={Home} />
-            </Switch>
-          </Layout>
+          <Switch>
+            <Route exact path={routeTemplates.auth.signUp} component={AnonymousOnly(SignUp)} />
+            <Route exact path={routeTemplates.auth.verificationEmailSent} component={AnonymousOnly(VerificationEmailSent)} />
+            <Route exact path={routeTemplates.auth.verifyEmail} component={AnonymousOnly(VerifyEmail)} />
+            <Route exact path={routeTemplates.auth.login} component={AnonymousOnly(Login)} />
+            <Route exact path={routeTemplates.auth.forgotPassword} component={AnonymousOnly(ForgotPassword)} />
+            <Route exact path={routeTemplates.auth.resetPassword} component={AnonymousOnly(ResetPassword)} />
+            <Layout>
+              <Route exact path={routeTemplates.root} component={Authenticated(Home, { flash: false })} />
+              <Route exact path={routeTemplates.auth.changePassword} component={Authenticated(ChangePassword)} />
+            </Layout>
+          </Switch>
         </MuiThemeProvider>
       </div>
     );

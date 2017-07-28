@@ -1,0 +1,14 @@
+[
+  {
+    "id": "auth.layout.footer.default.prompt",
+    "defaultMessage": "{login} or {signUp}"
+  },
+  {
+    "id": "auth.layout.footer.default.login",
+    "defaultMessage": "Login"
+  },
+  {
+    "id": "auth.layout.footer.default.signUp",
+    "defaultMessage": "Sign Up"
+  }
+]

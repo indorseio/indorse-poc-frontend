@@ -1,0 +1,34 @@
+[
+  {
+    "id": "auth.sign-up.fields.name.label",
+    "defaultMessage": "Name"
+  },
+  {
+    "id": "auth.sign-up.fields.email.label",
+    "defaultMessage": "E-mail"
+  },
+  {
+    "id": "auth.sign-up.fields.password.label",
+    "defaultMessage": "Password"
+  },
+  {
+    "id": "auth.sign-up.fields.passwordConfirmation.label",
+    "defaultMessage": "Password Confirmation"
+  },
+  {
+    "id": "auth.signUp.header.title",
+    "defaultMessage": "Sign Up"
+  },
+  {
+    "id": "auth.sign-up.buttons.submit",
+    "defaultMessage": "Sign up"
+  },
+  {
+    "id": "auth.signUp.links.login.prompt",
+    "defaultMessage": "Already a member? {link}"
+  },
+  {
+    "id": "auth.signUp.links.login.link",
+    "defaultMessage": "Login"
+  }
+]

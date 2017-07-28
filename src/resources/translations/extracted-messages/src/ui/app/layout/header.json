@@ -1,6 +1,18 @@
 [
   {
-    "id": "app.layout.header.home",
-    "defaultMessage": "Home"
+    "id": "app.layout.header.login",
+    "defaultMessage": "Login"
+  },
+  {
+    "id": "app.layout.header.sign-up",
+    "defaultMessage": "Sign Up"
+  },
+  {
+    "id": "app.layout.header.change-password",
+    "defaultMessage": "Change Password"
+  },
+  {
+    "id": "app.layout.header.logout",
+    "defaultMessage": "Logout"
   }
 ]

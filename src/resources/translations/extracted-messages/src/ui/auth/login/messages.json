@@ -1,0 +1,30 @@
+[
+  {
+    "id": "auth.login.fields.email.label",
+    "defaultMessage": "E-mail"
+  },
+  {
+    "id": "auth.login.fields.name.password",
+    "defaultMessage": "Password"
+  },
+  {
+    "id": "auth.login.header.title",
+    "defaultMessage": "Login to your account"
+  },
+  {
+    "id": "auth.login.buttons.submit",
+    "defaultMessage": "Login"
+  },
+  {
+    "id": "auth.login.links.forgot-password",
+    "defaultMessage": "Forgot Password?"
+  },
+  {
+    "id": "auth.login.links.signUp.prompt",
+    "defaultMessage": "New to {brand}? {link}"
+  },
+  {
+    "id": "auth.login.links.signUp.link",
+    "defaultMessage": "Sign Up"
+  }
+]

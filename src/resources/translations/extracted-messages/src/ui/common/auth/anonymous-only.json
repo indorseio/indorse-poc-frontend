@@ -1,0 +1,6 @@
+[
+  {
+    "id": "common.auth.anonymous-only.authenticated",
+    "defaultMessage": "You are already logged in"
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "id": "auth.messages.email-verified",
+    "defaultMessage": "Your email is verified successfully"
+  },
+  {
+    "id": "auth.messages.logged-in",
+    "defaultMessage": "Logged in successfully"
+  },
+  {
+    "id": "auth.messages.password-changed",
+    "defaultMessage": "Password changed successfully"
+  },
+  {
+    "id": "auth.messages.password-reset-success",
+    "defaultMessage": "Password reset successfully. Please login to continue"
+  }
+]

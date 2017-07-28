@@ -37,6 +37,11 @@ export const currentUserId = createSelector(
   authState => authState.currentUser ? authState.currentUser.id : undefined
 );
 
+export const currentUserRole = createSelector(
+  authState,
+  authState => authState.currentUser ? authState.currentUser.role : undefined
+);
+
 export const forgotPasswordEmailSent = createSelector(
   authState,
   authState => authState.forgotPasswordEmailSent

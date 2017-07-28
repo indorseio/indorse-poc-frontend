@@ -43,18 +43,20 @@ class Header extends Component {
 
   renderAnonymousNav() {
     return (
-      <Nav navbar className="ml-auto">
-        <NavItem>
-          <NavLink tag={Link} to={routeTemplates.auth.login}>
-            <FormattedMessage id="app.layout.header.login" defaultMessage="Login" />
-          </NavLink>
-        </NavItem>
-        <NavItem>
-          <NavLink tag={Link} to={routeTemplates.auth.signUp}>
-            <FormattedMessage id="app.layout.header.sign-up" defaultMessage="Sign Up" />
-          </NavLink>
-        </NavItem>
-      </Nav>
+      <Collapse isOpen={this.state.isOpen} navbar>
+        <Nav navbar className="ml-auto">
+          <NavItem>
+            <NavLink tag={Link} to={routeTemplates.auth.login}>
+              <FormattedMessage id="app.layout.header.login" defaultMessage="Login" />
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink tag={Link} to={routeTemplates.auth.signUp}>
+              <FormattedMessage id="app.layout.header.sign-up" defaultMessage="Sign Up" />
+            </NavLink>
+          </NavItem>
+        </Nav>
+      </Collapse>
     );
   }
 
@@ -62,24 +64,30 @@ class Header extends Component {
     const { currentUser, currentUserIsAdmin } = this.props;
 
     return (
-      <Nav navbar className="ml-auto">
-        <UncontrolledNavDropdown>
-          <DropdownToggle nav caret>
-            {currentUser.name || currentUser.email}
-          </DropdownToggle>
-          <DropdownMenu>
-            {currentUserIsAdmin && <DropdownItem tag={Link} to={routeTemplates.admin.root}>
-              <FormattedMessage id="app.layout.header.Admin" defaultMessage="Admin" />
-            </DropdownItem>}
-            <DropdownItem tag={Link} to={routeTemplates.auth.changePassword}>
-              <FormattedMessage id="app.layout.header.change-password" defaultMessage="Change Password" />
-            </DropdownItem>
-            <DropdownItem onClick={this.props.logout.request} style={{ cursor: 'pointer' }}>
-              <FormattedMessage id="app.layout.header.logout" defaultMessage="Logout" />
-            </DropdownItem>
-          </DropdownMenu>
-        </UncontrolledNavDropdown>
-      </Nav>
+      <Collapse isOpen={this.state.isOpen} navbar>
+        <Nav navbar className="mr-auto">
+          <NavItem>
+            {currentUserIsAdmin && <NavLink tag={Link} to={routeTemplates.admin.root}>
+              <FormattedMessage id="app.layout.header.admin" defaultMessage="Admin" />
+            </NavLink>}
+          </NavItem>
+        </Nav>
+        <Nav navbar className="ml-auto">
+          <UncontrolledNavDropdown>
+            <DropdownToggle nav caret>
+              {currentUser.name || currentUser.email}
+            </DropdownToggle>
+            <DropdownMenu>
+              <DropdownItem tag={Link} to={routeTemplates.auth.changePassword}>
+                <FormattedMessage id="app.layout.header.change-password" defaultMessage="Change Password" />
+              </DropdownItem>
+              <DropdownItem onClick={this.props.logout.request} style={{ cursor: 'pointer' }}>
+                <FormattedMessage id="app.layout.header.logout" defaultMessage="Logout" />
+              </DropdownItem>
+            </DropdownMenu>
+          </UncontrolledNavDropdown>
+        </Nav>
+      </Collapse>
     );
   }
 
@@ -96,9 +104,7 @@ class Header extends Component {
               <span className="align-middle">{brand.name}</span>
             </h1>
           </NavbarBrand>
-          <Collapse isOpen={this.state.isOpen} navbar>
-            {loggedIn ? this.renderUserNav() : this.renderAnonymousNav()}
-          </Collapse>
+          {loggedIn ? this.renderUserNav() : this.renderAnonymousNav()}
         </section>
       </Navbar>
     );

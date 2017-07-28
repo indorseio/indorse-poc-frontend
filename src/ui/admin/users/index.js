@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import autoBind from 'react-autobind';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { FormattedMessage, injectIntl } from 'react-intl';
@@ -10,12 +11,19 @@ import {
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table';
-import Toggle from 'material-ui/Toggle';
 
-import { fetchUsers } from 'store/entities/users/actions';
+import { fetchUsers, approveUser, disapproveUser } from 'store/entities/users/actions';
 import { allUsers as selectAllUsers } from 'store/entities/users/selectors';
 
+import ApprovalStatusToggle  from './approval-status-toggle';
+
 class Users extends Component {
+  constructor(props) {
+    super(props);
+
+    autoBind(this);
+  }
+
   componentDidMount() {
     const { users, fetchUsers } = this.props;
 
@@ -24,21 +32,18 @@ class Users extends Component {
       fetchUsers.request();
   }
 
-  renderUserApprovalStatus(user) {
-    return (
-      <Toggle
-        toggled={user.approved}
-        label={(!!user.approved).toString()}
-        labelPosition="right" />
-    );
-  }
-
   renderUserRow(user) {
     return (
       <TableRow key={user.id}>
         <TableRowColumn>{user.name}</TableRowColumn>
         <TableRowColumn>{user.email}</TableRowColumn>
-        <TableRowColumn>{this.renderUserApprovalStatus(user)}</TableRowColumn>
+        <TableRowColumn>
+          <ApprovalStatusToggle
+            userId={user.id} approved={!!user.approved}
+            onApprove={this.props.approveUser.request}
+            onDisapprove={this.props.disapproveUser.request}
+          />
+        </TableRowColumn>
       </TableRow>
     );
   }
@@ -87,6 +92,12 @@ function mapDispatchToProps(dispatch) {
   return {
     fetchUsers: {
       request: bindActionCreators(fetchUsers.request, dispatch)
+    },
+    approveUser: {
+      request: bindActionCreators(approveUser.request, dispatch)
+    },
+    disapproveUser: {
+      request: bindActionCreators(disapproveUser.request, dispatch)
     }
   }
 };

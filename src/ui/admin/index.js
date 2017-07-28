@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { injectIntl } from 'react-intl';
 import { Switch, Route } from 'react-router-dom';
 
 import routeTemplates from 'ui/common/routes/templates';
@@ -10,7 +10,7 @@ class Admin extends Component {
   render() {
     return (
       <Switch>
-        <Route to={routeTemplates.admin.users} component={Users} />
+        <Route exact to={routeTemplates.admin.users} component={Users} />
       </Switch>
     );
   }

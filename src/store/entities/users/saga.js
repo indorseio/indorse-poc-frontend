@@ -26,6 +26,40 @@ function* watchFetchUsers() {
   yield takeEvery(actionTypes.FETCH_USERS.REQUEST, fetchUsers);
 }
 
+function* approveUser({ payload }) {
+  const { userId } = payload;
+  yield put(actions.approveUser.start({ userId }));
+
+  try {
+    yield call(callApi, api.approveUser({ userId }));
+    yield put(actions.approveUser.success({ userId }));
+  } catch (error) {
+    yield put(actions.approveUser.failure(error));
+  }
+}
+
+function* watchApproveUser() {
+  yield takeEvery(actionTypes.APPROVE_USER.REQUEST, approveUser);
+}
+
+function* disapproveUser({ payload }) {
+  const { userId } = payload;
+  yield put(actions.disapproveUser.start({ userId }));
+
+  try {
+    yield call(callApi, api.approveUser({ userId }));
+    yield put(actions.disapproveUser.success({ userId }));
+  } catch (error) {
+    yield put(actions.disapproveUser.failure(error));
+  }
+}
+
+function* watchDisapproveUser() {
+  yield takeEvery(actionTypes.DISAPPROVE_USER.REQUEST, disapproveUser);
+}
+
 export default function* users() {
   yield fork(watchFetchUsers);
+  yield fork(watchApproveUser);
+  yield fork(watchDisapproveUser);
 }

@@ -16,10 +16,9 @@ export default {
       index: '/admin/users'
     }
   },
-  dashboard: {
-    claims: '/claims'
-  },
   claims: {
+    root: '/claims',
+    my: '/claims',
     new: '/claims/new'
   }
 };

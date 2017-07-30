@@ -72,7 +72,7 @@ class Header extends Component {
             </NavLink>}
           </NavItem>
           <NavItem>
-            <NavLink tag={Link} to={routeTemplates.dashboard.claims}>
+            <NavLink tag={Link} to={routeTemplates.claims.root}>
               <FormattedMessage id="app.layout.header.claims" defaultMessage="My Claims" />
             </NavLink>
           </NavItem>

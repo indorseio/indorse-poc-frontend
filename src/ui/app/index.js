@@ -23,10 +23,9 @@ import ChangePassword from 'ui/auth/change-password';
 import ForgotPassword from 'ui/auth/forgot-password';
 import ResetPassword from 'ui/auth/reset-password';
 import ApprovalRequired from 'ui/auth/approval-required';
-import ClaimsDashboard from 'ui/dashboard/claims';
-import NewClaim from 'ui/claims/new';
 
 import Admin from 'ui/admin';
+import Claims from 'ui/claims';
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
@@ -47,10 +46,9 @@ class App extends Component {
             <Route exact path={routeTemplates.auth.resetPassword} component={AnonymousOnly(ResetPassword)} />
             <Route exact path={routeTemplates.auth.approvalRequired} component={Authenticated(ApprovalRequired, { approvalRequired: false })} />
             <Layout>
-              <Route exact path={routeTemplates.dashboard.claims} component={Authenticated(ClaimsDashboard, { flash: false })} />
               <Route exact path={routeTemplates.auth.changePassword} component={Authenticated(ChangePassword)} />
               <Route path={routeTemplates.admin.root} component={AllowedRoles(Admin, { roles: ['admin'] })} />
-              <Route exact path={routeTemplates.claims.new} component={Authenticated(NewClaim)} />
+              <Route path={routeTemplates.claims.root} component={Authenticated(Claims)} />
             </Layout>
           </Switch>
         </MuiThemeProvider>

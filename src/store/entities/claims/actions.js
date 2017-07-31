@@ -14,3 +14,9 @@ export const createClaim = {
   success: ({ token, user }) => defineAction(types.CREATE_CLAIM.SUCCESS, { token, user }),
   failure: (error) => defineAction(types.CREATE_CLAIM.FAILURE, error),
 };
+
+export const fetchClaim = {
+  request: ({ claimId }) => defineAction(types.FETCH_CLAIM.REQUEST, { claimId }),
+  start: ({ claimId }) => defineAction(types.FETCH_CLAIM.START, { claimId }),
+  failure: (error) => defineAction(types.FETCH_CLAIM.FAILURE, error),
+};

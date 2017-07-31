@@ -15,3 +15,12 @@ export function createClaim({ title, description: desc, proof }) {
     requireAuth: true
   };
 }
+
+export function fetchClaim({ claimId }) {
+  return {
+    endpoint: 'getClaims',
+    method: 'POST',
+    data: { claimId },
+    requireAuth: true
+  };
+}

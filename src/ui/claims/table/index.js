@@ -9,6 +9,9 @@ import {
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table';
+import { Link } from 'react-router-dom';
+
+import routeTemplates from 'ui/common/routes/templates';
 
 class ClaimsTable extends Component {
   static propTypes = {
@@ -35,7 +38,7 @@ class ClaimsTable extends Component {
           {claims.map(claim => (
             <TableRow key={claim.id}>
               <TableRowColumn>
-                <div className="lead">{claim.title}</div>
+                <Link to={routeTemplates.claims.details.replace(':id', claim.id)} className="lead">{claim.title}</Link>
               </TableRowColumn>
               <TableRowColumn>
                 <div className="lead">{claim.proof}</div>

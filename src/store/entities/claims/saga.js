@@ -58,7 +58,26 @@ function* watchCreateClaim() {
   yield takeEvery(actionTypes.CREATE_CLAIM.REQUEST, createClaim);
 }
 
+function* fetchClaim({ payload }) {
+  const { claimId } = payload;
+  yield put(actions.fetchClaim.start({ claimId }));
+
+  try {
+    const response = yield call(callApi, api.fetchClaim({ claimId }));
+    const schema = { claim: schemas.claim };
+    const { entities } = normalize(response, schema);
+    yield put(entityActions.addEntities(entities));
+  } catch (error) {
+    yield put(actions.fetchClaim.failure(error));
+  }
+}
+
+function* watchFetchClaim() {
+  yield takeEvery(actionTypes.FETCH_CLAIM.REQUEST, fetchClaim);
+}
+
 export default function* claims() {
   yield fork(watchFetchUserClaims);
   yield fork(watchCreateClaim);
+  yield fork(watchFetchClaim);
 }

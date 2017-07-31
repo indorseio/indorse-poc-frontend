@@ -18,6 +18,7 @@ export default {
   claims: {
     root: '/claims',
     my: '/claims',
-    new: '/claims/new'
+    new: '/claims/new',
+    details: '/claims/:id'
   }
 };

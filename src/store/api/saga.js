@@ -10,14 +10,14 @@ export default function* callApi(config) {
 
   if (config.requireAuth) {
     if (preferedAuthFormat === 'header') {
-      const token = yield select(authSelectors.token);
+      const token = yield select(authSelectors.selectAuthToken);
       finalConfig.headers = {
         ...finalConfig.headers,
         'Authorization': `Bearer ${token.value}`
       }
     } else {
-      const token = yield select(authSelectors.token);
-      const currentUser = yield select(authSelectors.currentUser);
+      const token = yield select(authSelectors.selectAuthToken);
+      const currentUser = yield select(authSelectors.selectCurrentUser);
       finalConfig.data = { ...finalConfig.data, token: token.value, email: currentUser.email };
     }
   }

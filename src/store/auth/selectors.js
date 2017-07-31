@@ -2,47 +2,47 @@ import { createSelector } from 'reselect';
 
 const authState = rootState => rootState.auth;
 
-export const signedUp = createSelector(
+export const selectIsSignedUp = createSelector(
   authState,
   authState => authState.signedUp
 );
 
-export const emailVerification = createSelector(
+export const selectEmailVerification = createSelector(
   authState,
   authState => authState.emailVerification
 );
 
-export const token = createSelector(
+export const selectAuthToken = createSelector(
   authState,
   authState => authState.token
 );
 
-export const loggedIn = createSelector(
+export const selectIsLoggedIn = createSelector(
   authState,
   authState => authState.loggedIn
 );
 
-export const currentUser = createSelector(
+export const selectCurrentUser = createSelector(
   authState,
   authState => authState.currentUser
 );
 
-export const currentUserIsAdmin = createSelector(
-  currentUser,
+export const selectIsCurrentUserAdmin = createSelector(
+  selectCurrentUser,
   currentUser => currentUser ? currentUser.role === 'admin' : false
 )
 
-export const currentUserId = createSelector(
+export const selectCurrentUserId = createSelector(
   authState,
   authState => authState.currentUser ? authState.currentUser.id : undefined
 );
 
-export const currentUserRole = createSelector(
+export const selectCurrentUserRole = createSelector(
   authState,
   authState => authState.currentUser ? authState.currentUser.role : undefined
 );
 
-export const forgotPasswordEmailSent = createSelector(
+export const selectIsForgotPasswordEmailSent = createSelector(
   authState,
   authState => authState.forgotPasswordEmailSent
 );

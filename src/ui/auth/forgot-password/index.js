@@ -14,7 +14,7 @@ import SubmitButton from 'ui/common/form/submit-button';
 import fields, { fieldNames } from './model';
 import * as messages from './messages';
 import { forgotPassword } from 'store/auth/actions';
-import { forgotPasswordEmailSent } from 'store/auth/selectors';
+import { selectIsForgotPasswordEmailSent } from 'store/auth/selectors';
 
 const validate = validator(fields);
 
@@ -56,7 +56,7 @@ class ForgotPassword extends Component {
 
 function mapStateToProps(state) {
   return {
-    emailSent: forgotPasswordEmailSent(state)
+    emailSent: selectIsForgotPasswordEmailSent(state)
   };
 }
 

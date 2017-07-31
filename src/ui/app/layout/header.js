@@ -9,7 +9,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import brand from 'resources/brand';
-import { loggedIn, currentUser, currentUserIsAdmin } from 'store/auth/selectors';
+import { selectIsLoggedIn, selectCurrentUser, selectIsCurrentUserAdmin } from 'store/auth/selectors';
 import { logout } from 'store/auth/actions';
 import routeTemplates from 'ui/common/routes/templates';
 
@@ -113,9 +113,9 @@ class Header extends Component {
 
 function mapStateToProps(state) {
   return {
-    loggedIn: loggedIn(state),
-    currentUser: currentUser(state),
-    currentUserIsAdmin: currentUserIsAdmin(state)
+    loggedIn: selectIsLoggedIn(state),
+    currentUser: selectCurrentUser(state),
+    currentUserIsAdmin: selectIsCurrentUserAdmin(state)
   };
 }
 

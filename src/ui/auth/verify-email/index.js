@@ -7,7 +7,7 @@ import Layout from 'ui/auth/layout';
 import Alert from 'ui/common/alert';
 
 import { verifyEmail } from 'store/auth/actions';
-import { emailVerification } from 'store/auth/selectors';
+import { selectEmailVerification } from 'store/auth/selectors';
 
 class VerifyEmail extends Component {
   componentDidMount() {
@@ -40,7 +40,7 @@ class VerifyEmail extends Component {
 }
 
 function mapStateToProps(state) {
-  return { ...emailVerification(state) };
+  return { ...selectEmailVerification(state) };
 }
 
 function mapDispatchToProps(dispatch) {

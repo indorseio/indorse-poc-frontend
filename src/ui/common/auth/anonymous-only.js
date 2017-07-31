@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { defineMessages } from 'react-intl';
 
-import { loggedIn } from 'store/auth/selectors';
+import { selectIsLoggedIn } from 'store/auth/selectors';
 import routeTemplates from 'ui/common/routes/templates';
 import { buildMessage } from 'store/flash/builder';
 
@@ -16,7 +16,7 @@ const messages = defineMessages({
 
 function mapStateToProps(state) {
   return {
-    loggedIn: loggedIn(state)
+    loggedIn: selectIsLoggedIn(state)
   }
 }
 

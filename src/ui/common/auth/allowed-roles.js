@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { defineMessages } from 'react-intl';
 import { } from 'humps';
 
-import { currentUserRole } from 'store/auth/selectors';
+import { selectCurrentUserRole } from 'store/auth/selectors';
 import routeTemplates from 'ui/common/routes/templates';
 import { buildMessage } from 'store/flash/builder';
 import Authenticated from './authenticated';
@@ -18,7 +18,7 @@ const messages = defineMessages({
 
 function mapStateToProps(state) {
   return {
-    role: currentUserRole(state)
+    role: selectCurrentUserRole(state)
   }
 }
 

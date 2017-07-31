@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { FormattedMessage, injectIntl } from 'react-intl';
 import { connect } from 'react-redux';
 
-import { signedUp } from 'store/auth/selectors';
+import { selectIsSignedUp } from 'store/auth/selectors';
 
 import Layout from 'ui/auth/layout';
 import Alert from 'ui/common/alert';
@@ -30,7 +30,7 @@ class VerificationEmailSent extends Component {
 
 function mapStateToProps(state) {
   return {
-    signedUp: signedUp(state)
+    signedUp: selectIsSignedUp(state)
   }
 }
 

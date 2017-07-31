@@ -35,7 +35,7 @@ class NewClaim extends Component {
     return (
       <div className={classnames('container', styles.page)}>
         <div className={classnames('row justify-content-center align-items-center', styles.pageRow)}>
-          <div className="col-12 col-sm-6 col-lg-4">
+          <div className="col-12 col-sm-4">
             <h1 className="text-primary text-center">
               {formatMessage(messages.header.title)}
             </h1>
@@ -47,7 +47,7 @@ class NewClaim extends Component {
                 <Field name={fieldNames.title} component={TextField} label={formatMessage(messages.labels.title)} />
               </div>
               <div>
-                <Field name={fieldNames.description} component={TextField} label={formatMessage(messages.labels.description)} />
+                <Field name={fieldNames.description} component={TextField} label={formatMessage(messages.labels.description)} multiLine rows={2} rowsMax={10} />
               </div>
               <div>
                 <Field name={fieldNames.proof} component={TextField} label={formatMessage(messages.labels.proof)} />

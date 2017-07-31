@@ -1,4 +1,4 @@
-import { call, fork, put, takeEvery, select } from 'redux-saga/effects';
+import { call, fork, put, takeEvery } from 'redux-saga/effects';
 import { normalize } from 'normalizr';
 import { startSubmit, stopSubmit } from 'redux-form';
 import { push } from 'react-router-redux';
@@ -8,7 +8,6 @@ import * as entityActions from 'store/entities/actions';
 import * as actionTypes from './action-types';
 import * as actions from './actions';
 import * as api from 'api/config/claims';
-import * as authSelectors from 'store/auth/selectors'
 import callApi from 'store/api/saga';
 import routeTemplates from 'ui/common/routes/templates';
 import { messageTypes, buildMessage } from 'store/flash/builder';
@@ -42,11 +41,11 @@ function* createClaim({ payload: values, meta }) {
     yield put(actions.createClaim.success(response));
     if (form) yield put(stopSubmit(form));
 
-    // TODO: Once API returns id after creation, replace this with entities update
-    const currentUserId = yield select(authSelectors.currentUserId);
-    yield put(actions.fetchUserClaims.request({ userId: currentUserId }));
+    const schema = { claim: [schemas.claim] };
+    const { entities } = normalize(response, schema);
+    yield put(entityActions.addEntities(entities));
 
-    yield put(push(routeTemplates.dashboard.claims, {
+    yield put(push(routeTemplates.claims.my, {
       flash: buildMessage({ kind: messageTypes.success, content: messages.created })
     }));
   } catch (error) {

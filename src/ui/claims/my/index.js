@@ -6,8 +6,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 
-import { currentUserId } from 'store/auth/selectors';
-import { currentUserClaims } from 'store/entities/claims/selectors';
+import { selectCurrentUserId } from 'store/auth/selectors';
+import { selectCurrentUserClaims } from 'store/entities/claims/selectors';
 import { fetchUserClaims } from 'store/entities/claims/actions';
 
 import ClaimsTable from 'ui/claims/table';
@@ -52,8 +52,8 @@ class Claims extends Component {
 
 function mapStateToProps(state) {
   return {
-    currentUserId: currentUserId(state),
-    claims: currentUserClaims(state)
+    currentUserId: selectCurrentUserId(state),
+    claims: selectCurrentUserClaims(state)
   };
 }
 

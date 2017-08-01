@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { fetchClaim } from 'store/entities/claims/actions';
-import { claimsById } from 'store/entities/claims/selectors';
-import { currentUserId } from 'store/auth/selectors';
+import { selectClaimsById } from 'store/entities/claims/selectors';
+import { selectCurrentUserId } from 'store/auth/selectors';
 
 const { request: fetchClaimRequest } = fetchClaim;
 
@@ -49,8 +49,8 @@ function mapStateToProps(state, ownProps) {
 
   return {
     id: id,
-    claim: id ? claimsById(state)[id] : undefined,
-    currentUserId: currentUserId(state)
+    claim: id ? selectClaimsById(state)[id] : undefined,
+    currentUserId: selectCurrentUserId(state)
   }
 }
 

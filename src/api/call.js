@@ -27,6 +27,8 @@ export const callApiRaw = ({ endpoint, method, headers, body }) => {
 }
 
 export const callApiJson = ({ endpoint, method, headers, data }) => {
+  const finalMethod = (method || 'GET').toUpperCase();
+
   const finalsHeaders = {
     ...headers,
     'Content-Type': 'application/json',
@@ -34,8 +36,8 @@ export const callApiJson = ({ endpoint, method, headers, data }) => {
 
   return callApiRaw({
     endpoint,
-    method,
+    method: finalMethod,
     headers: finalsHeaders,
-    body: JSON.stringify(decamelizeKeys({ ...data }))
+    body: finalMethod !== 'GET' ? JSON.stringify(decamelizeKeys({ ...data })) : undefined
   });
 }

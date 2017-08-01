@@ -76,6 +76,11 @@ class Header extends Component {
               <FormattedMessage id="app.layout.header.claims" defaultMessage="My Claims" />
             </NavLink>
           </NavItem>
+          <NavItem>
+            <NavLink tag={Link} to={routeTemplates.votes.root}>
+              <FormattedMessage id="app.layout.header.votes" defaultMessage="My Votes" />
+            </NavLink>
+          </NavItem>
         </Nav>
         <Nav navbar className="ml-auto">
           <UncontrolledNavDropdown>

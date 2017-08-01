@@ -1,0 +1,39 @@
+import { call, fork, put, takeEvery } from 'redux-saga/effects';
+import { normalize } from 'normalizr';
+// import { startSubmit, stopSubmit } from 'redux-form';
+// import { push } from 'react-router-redux';
+
+import * as schemas from 'store/common/schemas';
+import * as entityActions from 'store/entities/actions';
+import * as actionTypes from './action-types';
+import * as actions from './actions';
+import * as api from 'api/config/votes';
+import callApi from 'store/api/saga';
+// import routeTemplates from 'ui/common/routes/templates';
+
+function* fetchCurrentUserVotes({ payload }) {
+  yield put(actions.fetchCurrentUserVotes.start());
+
+  try {
+    const response = yield call(callApi, api.fetchCurrentUserVotes());
+    const schema = {
+      results: [{
+        claim: schemas.claim,
+        vote: schemas.vote,
+        votinground: schemas.votingRound
+      }]
+    };
+    const { entities } = normalize(response, schema);
+    yield put(entityActions.addEntities(entities));
+  } catch (error) {
+    yield put(actions.fetchCurrentUserVotes.failure(error));
+  }
+}
+
+function* watchFetchCurrentUserVotes() {
+  yield takeEvery(actionTypes.FETCH_CURRENT_USER_VOTES.REQUEST, fetchCurrentUserVotes);
+}
+
+export default function* votes() {
+  yield fork(watchFetchCurrentUserVotes);
+}

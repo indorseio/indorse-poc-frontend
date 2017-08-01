@@ -19,7 +19,7 @@ function* fetchUserClaims({ payload }) {
 
   try {
     const response = yield call(callApi, api.fetchUserClaims({ userId }));
-    const schema = { claims: [schemas.claim] };
+    const schema = { claims: [{claim: schemas.claim}] };
     const { entities } = normalize(response, schema);
     yield put(entityActions.addEntities(entities));
   } catch (error) {

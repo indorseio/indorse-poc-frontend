@@ -2,6 +2,11 @@ import { camelizeKeys, decamelizeKeys } from 'humps';
 
 const API_ROOT = process.env.REACT_APP_API_ROOT;
 
+const unconventional = {
+  ownerid: 'ownerId',
+  votinground: 'votingRound'
+};
+
 // Fetches an API response
 // This makes every API response have the same shape, regardless of how nested it was.
 export const callApiRaw = ({ endpoint, method, headers, body }) => {
@@ -17,7 +22,7 @@ export const callApiRaw = ({ endpoint, method, headers, body }) => {
         return Promise.reject(json);
       }
 
-      const camelizedJson = camelizeKeys(json);
+      const camelizedJson = camelizeKeys(json, (key, convert) => unconventional[key] || convert(key));
 
       return Object.assign({},
         camelizedJson

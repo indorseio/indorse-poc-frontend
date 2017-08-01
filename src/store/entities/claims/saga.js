@@ -19,10 +19,17 @@ function* fetchUserClaims({ payload }) {
 
   try {
     const response = yield call(callApi, api.fetchUserClaims({ userId }));
-    const schema = { claims: [{claim: schemas.claim}] };
+    const schema = {
+      claims: [{
+        claim: schemas.claim,
+        vote: schemas.vote,
+        votingRound: schemas.votingRound
+      }]
+    };
     const { entities } = normalize(response, schema);
     yield put(entityActions.addEntities(entities));
   } catch (error) {
+    console.log(error);
     yield put(actions.fetchUserClaims.failure(error));
   }
 }
@@ -41,7 +48,11 @@ function* createClaim({ payload: values, meta }) {
     yield put(actions.createClaim.success(response));
     if (form) yield put(stopSubmit(form));
 
-    const schema = { claim: [schemas.claim] };
+    const schema = {
+      claim: schemas.claim,
+      vote: schemas.vote,
+      votingRound: schemas.votingRound
+    };
     const { entities } = normalize(response, schema);
     yield put(entityActions.addEntities(entities));
 

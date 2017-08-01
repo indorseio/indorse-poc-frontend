@@ -20,7 +20,7 @@ function* fetchCurrentUserVotes({ payload }) {
       results: [{
         claim: schemas.claim,
         vote: schemas.vote,
-        votinground: schemas.votingRound
+        votingRound: schemas.votingRound
       }]
     };
     const { entities } = normalize(response, schema);

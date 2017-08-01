@@ -17,4 +17,4 @@ export const selectCurrentUserClaims = createSelector(
   (entities, claimsById, currentUserId) => denormalize(Object.keys(claimsById), [schemas.claim], entities).filter(c => c.owner && c.owner.id === currentUserId)
 );
 
-export const claimsById = claimsState;
+export const selectClaimsById = claimsState;

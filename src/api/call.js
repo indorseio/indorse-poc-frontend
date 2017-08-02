@@ -4,7 +4,8 @@ const API_ROOT = process.env.REACT_APP_API_ROOT;
 
 const unconventional = {
   ownerid: 'ownerId',
-  votinground: 'votingRound'
+  votinground: 'votingRound',
+  votingrounds: 'votingRounds'
 };
 
 // Fetches an API response

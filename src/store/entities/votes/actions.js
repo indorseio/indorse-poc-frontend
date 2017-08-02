@@ -7,3 +7,10 @@ export const fetchCurrentUserVotes = {
   start: () => defineAction(types.FETCH_CURRENT_USER_VOTES.START),
   failure: (error) => defineAction(types.FETCH_CURRENT_USER_VOTES.FAILURE, error),
 };
+
+export const registerToVote = {
+  request: ({ voteId }) => defineAction(types.REGISTER_TO_VOTE.REQUEST, { voteId }),
+  start: ({ voteId, claimId }) => defineAction(types.REGISTER_TO_VOTE.START, { voteId, claimId }),
+  success: ({ voteId, claimId }) => defineAction(types.REGISTER_TO_VOTE.SUCCESS, { voteId, claimId }),
+  failure: (error) => defineAction(types.REGISTER_TO_VOTE.FAILURE, error)
+}

@@ -19,5 +19,8 @@ export const selectCurrentUserVotes = createSelector(
 
 export const selectVotesById = votesState;
 
-window.denormalize = denormalize;
-window.schemas = schemas;
+export const selectVoteById = createSelector(
+  entitySelectors.selectEntities,
+  (state, props) => props.id,
+  (entities, id) => denormalize(id, schemas.vote, entities)
+)

@@ -18,3 +18,9 @@ export const selectCurrentUserClaims = createSelector(
 );
 
 export const selectClaimsById = claimsState;
+
+export const selectClaimById = createSelector(
+  entitySelectors.selectEntities,
+  (state, props) => props.id,
+  (entities, id) => denormalize(id, schemas.claim, entities)
+)

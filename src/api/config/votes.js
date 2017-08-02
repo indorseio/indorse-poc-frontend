@@ -13,3 +13,19 @@ export function registerToVote({ claimId }) {
     requireAuth: true
   }
 }
+
+export function endorse({ claimId }) {
+  return {
+    endpoint: `votes/${claimId}/endorse`,
+    method: 'POST',
+    requireAuth: true
+  }
+}
+
+export function flag({ claimId }) {
+  return {
+    endpoint: `votes/${claimId}/flag`,
+    method: 'POST',
+    requireAuth: true
+  }
+}

@@ -8,10 +8,12 @@ import RaisedButton from 'material-ui/RaisedButton';
 import { fetchClaim } from 'store/entities/claims/actions';
 import { selectClaimById } from 'store/entities/claims/selectors';
 import { selectCurrentUserId } from 'store/auth/selectors';
-import { registerToVote } from 'store/entities/votes/actions';
+import { registerToVote, endorse, flag } from 'store/entities/votes/actions';
 
 const { request: fetchClaimRequest } = fetchClaim;
 const { request: registerToVoteRequest } = registerToVote;
+const { request: endorseRequest } = endorse;
+const { request: flagRequest } = flag;
 
 class Details extends Component {
   static propTypes = {
@@ -36,6 +38,18 @@ class Details extends Component {
     registerToVoteRequest({ voteId: vote.id });
   }
 
+  onEndorseClick() {
+    const { claim: { vote }, endorseRequest } = this.props;
+
+    endorseRequest({ voteId: vote.id });
+  }
+
+  onFlagClick() {
+    const { claim: { vote }, flagRequest } = this.props;
+
+    flagRequest({ voteId: vote.id });
+  }
+
   renderVoteActions() {
     const { claim } = this.props;
     const { votingRound, vote } = claim;
@@ -46,9 +60,32 @@ class Details extends Component {
     if (!vote.registered && moment().isBefore(moment(votingRound.endRegistration))) {
       return (
         <ul className="list list-inline">
-          <RaisedButton label="Register" primary onClick={this.onRegisterToVoteClick} />
+          <li><RaisedButton label="Register" primary onClick={this.onRegisterToVoteClick} /></li>
         </ul>
       );
+    }
+
+    if (vote.registered) {
+      if (vote.votedAt) {
+        return <ul className="list list-inline">
+          <li>{
+            vote.endorsed ?
+              <RaisedButton label="Endorsed" primary /> :
+              <RaisedButton label="Flagged" primary />}
+          </li>
+        </ul>
+      } else if (moment().isBefore(moment(votingRound.endVoting))) {
+        return (
+          <ul className="list list-inline">
+            <li className="list-inline-item"><RaisedButton label="Endorse" primary onClick={this.onEndorseClick} /></li>
+            <li className="list-inline-item"><RaisedButton label="Flag" primary onClick={this.onFlagClick} /></li>
+          </ul>
+        );
+      } else {
+        return (<ul className="list list-inline">
+          <li>Deadline missed</li>
+        </ul>)
+      }
     }
   }
 
@@ -91,6 +128,8 @@ function mapStateToProps(state, ownProps) {
 const mapDispatchToProps = {
   fetchClaimRequest,
   registerToVoteRequest,
+  endorseRequest,
+  flagRequest
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Details);

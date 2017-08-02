@@ -13,6 +13,16 @@ export default function reducer(state = initialState, action) {
       const registeredVotes = {};
       registeredVotes[action.payload.voteId] = { registered: true };
       return state.merge(registeredVotes, { deep: true });
+    case actionTypes.ENDORSE.SUCCESS:
+      const endorsedVotes = {
+        [action.payload.voteId]: { endorsed: true, votedAt: Date.now() }
+      };
+      return state.merge(endorsedVotes, { deep: true });
+    case actionTypes.FLAG.SUCCESS:
+      const flaggedVotes = {
+        [action.payload.voteId]: { endorsed: false, votedAt: Date.now() }
+      };
+      return state.merge(flaggedVotes, { deep: true });
     default:
       return state;
   }

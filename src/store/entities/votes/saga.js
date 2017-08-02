@@ -1,7 +1,5 @@
 import { call, fork, put, takeEvery, select } from 'redux-saga/effects';
 import { normalize } from 'normalizr';
-// import { startSubmit, stopSubmit } from 'redux-form';
-// import { push } from 'react-router-redux';
 
 import * as schemas from 'store/common/schemas';
 import * as entityActions from 'store/entities/actions';
@@ -54,7 +52,47 @@ function* wathcRegisterToVote() {
   yield takeEvery(actionTypes.REGISTER_TO_VOTE.REQUEST, registerToVote);
 }
 
+function* endorse({ payload }) {
+  const { voteId } = payload;
+  const vote = yield select(selectors.selectVoteById, { id: voteId });
+  const claimId = vote.claim.id;
+
+  yield put(actions.endorse.start({ voteId, claimId }));
+
+  try {
+    yield call(callApi, api.endorse({ claimId }));
+    yield put(actions.endorse.success({ voteId, claimId }));
+  } catch (error) {
+    yield put(actions.endorse.failure(error));
+  }
+}
+
+function* watchEndorse() {
+  yield takeEvery(actionTypes.ENDORSE.REQUEST, endorse);
+}
+
+function* flag({ payload }) {
+  const { voteId } = payload;
+  const vote = yield select(selectors.selectVoteById, { id: voteId });
+  const claimId = vote.claim.id;
+
+  yield put(actions.flag.start({ voteId, claimId }));
+
+  try {
+    yield call(callApi, api.flag({ claimId }));
+    yield put(actions.flag.success({ voteId, claimId }));
+  } catch (error) {
+    yield put(actions.flag.failure(error));
+  }
+}
+
+function* watchFlag() {
+  yield takeEvery(actionTypes.FLAG.REQUEST, flag);
+}
+
 export default function* votes() {
   yield fork(watchFetchCurrentUserVotes);
   yield fork(wathcRegisterToVote);
+  yield fork(watchEndorse);
+  yield fork(watchFlag);
 }

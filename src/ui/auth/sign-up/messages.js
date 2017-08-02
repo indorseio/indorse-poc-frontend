@@ -11,6 +11,10 @@ export const labels = defineMessages({
     id: `auth.sign-up.fields.email.label`,
     defaultMessage: 'E-mail'
   },
+  [fieldNames.ethAddress]: {
+    id: `auth.sign-up.fields.ethAddress.label`,
+    defaultMessage: 'Etherium Address'
+  },
   [fieldNames.password]: {
     id: `auth.sign-up.fields.password.label`,
     defaultMessage: 'Password'

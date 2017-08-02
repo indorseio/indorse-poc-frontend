@@ -8,6 +8,10 @@
     "defaultMessage": "E-mail"
   },
   {
+    "id": "auth.sign-up.fields.ethAddress.label",
+    "defaultMessage": "Etherium Address"
+  },
+  {
     "id": "auth.sign-up.fields.password.label",
     "defaultMessage": "Password"
   },

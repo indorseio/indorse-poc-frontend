@@ -54,6 +54,9 @@ class SignUp extends Component {
             <Field name={fieldNames.email} component={TextField} label={formatMessage(messages.labels.email)} />
           </div>
           <div>
+            <Field name={fieldNames.ethAddress} component={TextField} label={formatMessage(messages.labels.ethAddress)} />
+          </div>
+          <div>
             <Field name={fieldNames.password} component={TextField} type="password" label={formatMessage(messages.labels.password)} />
           </div>
           <div>

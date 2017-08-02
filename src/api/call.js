@@ -26,7 +26,7 @@ export const callApiRaw = ({ endpoint, method, headers, body }) => {
   );
 }
 
-export const callApiJson = ({ endpoint, method, headers, data, session }) => {
+export const callApiJson = ({ endpoint, method, headers, data }) => {
   const finalsHeaders = {
     ...headers,
     'Content-Type': 'application/json',
@@ -36,6 +36,6 @@ export const callApiJson = ({ endpoint, method, headers, data, session }) => {
     endpoint,
     method,
     headers: finalsHeaders,
-    body: JSON.stringify(decamelizeKeys({ ...session, ...data }))
+    body: JSON.stringify(decamelizeKeys({ ...data }))
   });
 }

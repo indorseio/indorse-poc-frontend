@@ -20,10 +20,9 @@ class Votes extends Component {
   }
 
   componentDidMount() {
-    const { votes, fetchCurrentUserVotes } = this.props;
+    const { fetchCurrentUserVotes } = this.props;
     // TODO: Keep fetching/fetched state
-    if (votes.length === 0)
-      fetchCurrentUserVotes.request();
+    fetchCurrentUserVotes.request();
   }
 
   render() {

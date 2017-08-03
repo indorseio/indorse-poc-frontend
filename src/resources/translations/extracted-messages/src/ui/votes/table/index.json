@@ -1,10 +1,18 @@
 [
   {
-    "id": "claim.title",
+    "id": "vote.title",
     "defaultMessage": "Title"
   },
   {
-    "id": "claim.proof",
+    "id": "vote.proof",
     "defaultMessage": "Proof"
+  },
+  {
+    "id": "vote.claim.result",
+    "defaultMessage": "Result"
+  },
+  {
+    "id": "vote.your",
+    "defaultMessage": "Your Vote"
   }
 ]

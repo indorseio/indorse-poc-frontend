@@ -15,6 +15,7 @@ import AnonymousOnly from 'ui/common/auth/anonymous-only';
 import Authenticated from 'ui/common/auth/authenticated';
 import AllowedRoles from 'ui/common/auth/allowed-roles';
 
+import Home from 'ui/home';
 import SignUp from 'ui/auth/sign-up';
 import VerificationEmailSent from 'ui/auth/verification-email-sent';
 import VerifyEmail from 'ui/auth/verify-email';
@@ -47,6 +48,7 @@ class App extends Component {
             <Route exact path={routeTemplates.auth.resetPassword} component={AnonymousOnly(ResetPassword)} />
             <Route exact path={routeTemplates.auth.approvalRequired} component={Authenticated(ApprovalRequired, { approvalRequired: false })} />
             <Layout>
+              <Route exact path={routeTemplates.root} component={Authenticated(Home)} />
               <Route exact path={routeTemplates.auth.changePassword} component={Authenticated(ChangePassword)} />
               <Route path={routeTemplates.admin.root} component={AllowedRoles(Admin, { roles: ['admin'] })} />
               <Route path={routeTemplates.claims.root} component={Authenticated(Claims)} />

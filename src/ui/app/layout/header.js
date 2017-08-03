@@ -108,7 +108,7 @@ class Header extends Component {
       <Navbar tag="header" fixed="top" toggleable="md" inverse className={classnames(className)}>
         <section ref={(el => this.navbar = el && el.parentElement)} className="container">
           <NavbarToggler right onClick={this.toggleNavbar} />
-          <NavbarBrand tag={Link} to="/">
+          <NavbarBrand tag={Link} to="/" replace>
             <h1 className="mb-0">
               <img src={brand.logo.white} alt="Logo" height="50" className="mr-2" />
               <span className="align-middle">{brand.name}</span>

@@ -1,8 +1,8 @@
-export function signUp({ name, email, ethAddress, password }) {
+export function signUp({ name, email, ethereumAddress, password }) {
   return {
     endpoint: 'signup',
     method: 'POST',
-    data: { name, email, ethaddress: ethAddress, password }
+    data: { name, email, ethaddress: ethereumAddress, password }
   };
 }
 

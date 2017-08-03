@@ -1,7 +1,7 @@
 export const fieldNames = {
   name: 'name',
   email: 'email',
-  ethAddress: 'ethAddress',
+  ethereumAddress: 'ethereumAddress',
   password: 'password',
   passwordConfirmation: 'passwordConfirmation'
 }
@@ -14,8 +14,9 @@ export default {
     presence: true,
     email: true
   },
-  [fieldNames.ethAddress]: {
-    presence: true
+  [fieldNames.ethereumAddress]: {
+    presence: true,
+    ethereumAddress: true
   },
   [fieldNames.password]: {
     presence: true,

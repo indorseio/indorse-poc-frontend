@@ -10,7 +10,7 @@ import Flash from 'ui/common/flash';
 import DefaultFooter from './footer';
 
 const Layout = ({ title, children, showFooter = true, footerContent, standalone = true }) => (
-  <div className={classnames('container-fluid', styles.auth)}>
+  <div className={classnames('container-fluid', 'px-0', 'py-5', styles.auth)}>
     <div className={classnames('row align-items-center no-gutters', styles.auth)}>
       <div className="col col-sm-3 col-lg-4"></div>
       <div className="col-12 col-sm-6 col-lg-4 px-3">

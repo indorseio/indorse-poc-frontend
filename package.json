@@ -9,6 +9,7 @@
     "bootstrap": "4.0.0-alpha.6",
     "classnames": "^2.2.5",
     "compression": "^1.6.2",
+    "ethereum-address": "^0.0.4",
     "humps": "^2.0.1",
     "jwt-decode": "2.2.0",
     "material-ui": "^0.18.3",

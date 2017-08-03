@@ -2,5 +2,17 @@
   {
     "id": "claims.messages.create",
     "defaultMessage": "Claim created successfully"
+  },
+  {
+    "id": "claims.messages.pending",
+    "defaultMessage": "Pending"
+  },
+  {
+    "id": "claims.messages.completed",
+    "defaultMessage": "Completed"
+  },
+  {
+    "id": "claims.messages.unverified",
+    "defaultMessage": "Unverified"
   }
 ]

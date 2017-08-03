@@ -14,10 +14,8 @@ export const selectCurrentUserVotes = createSelector(
   entitySelectors.selectEntities,
   votesState,
   authSelectors.selectCurrentUserId,
-  (entities, votesById, currentUserId) => denormalize(Object.keys(votesById), [schemas.vote], entities).filter(c => c.voter && c.voter.id === currentUserId)
+  (entities, votesById, currentUserId) => denormalize(Object.keys(votesById), [schemas.vote], entities).filter(v => v.voter && v.voter.id === currentUserId && v.claim && v.claim.owner && v.claim.owner.id !== currentUserId)
 );
-
-export const selectVotesById = votesState;
 
 export const selectVoteById = createSelector(
   entitySelectors.selectEntities,

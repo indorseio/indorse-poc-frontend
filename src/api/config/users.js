@@ -15,11 +15,11 @@ export function approveUser({ userId: approveUserId }) {
   };
 }
 
-export function disapproveUser({ userId: disapproveUserId }) {
+export function disapproveUser({ userId: approveUserId }) {
   return {
     endpoint: 'users/disapprove',
     method: 'POST',
-    data: { disapproveUserId },
+    data: { approveUserId },
     requireAuth: true
   };
 }

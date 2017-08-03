@@ -8,8 +8,12 @@
     "defaultMessage": "Pending"
   },
   {
-    "id": "claims.messages.completed",
-    "defaultMessage": "Completed"
+    "id": "claims.messages.endorsed",
+    "defaultMessage": "Endorsed"
+  },
+  {
+    "id": "claims.messages.flagged",
+    "defaultMessage": "Flagged"
   },
   {
     "id": "claims.messages.unverified",

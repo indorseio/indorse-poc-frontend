@@ -9,9 +9,13 @@ export default defineMessages({
     id: 'claims.messages.pending',
     defaultMessage: 'Pending'
   },
-  completed: {
-    id: 'claims.messages.completed',
-    defaultMessage: 'Completed'
+  endorsed: {
+    id: 'claims.messages.endorsed',
+    defaultMessage: 'Endorsed'
+  },
+  flagged: {
+    id: 'claims.messages.flagged',
+    defaultMessage: 'Flagged'
   },
   unverified: {
     id: 'claims.messages.unverified',

@@ -5,6 +5,14 @@ export default defineMessages({
     id: 'votes.messages.register',
     defaultMessage: 'Register'
   },
+  registered: {
+    id: 'votes.messages.registered',
+    defaultMessage: 'Registered'
+  },
+  yourVote: {
+    id: 'votes.messages.yourVote',
+    defaultMessage: 'Your vote'
+  },
   endorse: {
     id: 'votes.messages.endorse',
     defaultMessage: 'Endorse'

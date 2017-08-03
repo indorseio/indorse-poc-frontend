@@ -18,6 +18,8 @@ import { selectCurrentUserId } from 'store/auth/selectors';
 import { registerToVote, endorse, flag } from 'store/entities/votes/actions';
 import messages from 'ui/claims/messages';
 import votesMessages from 'ui/votes/messages';
+import { STATUSES as CLAIM_STATUSES } from 'store/entities/claims/helpers';
+import { STATUSES as VOTE_STATUSES } from 'store/entities/votes/helpers';
 
 const { request: fetchClaimRequest } = fetchClaim;
 const { request: registerToVoteRequest } = registerToVote;
@@ -59,40 +61,12 @@ class Details extends Component {
   }
 
   renderStatusBar() {
-    const { claim, currentUserId, intl: { formatMessage } } = this.props;
-    const { owner: claimant, votingRound, vote } = claim;
+    const { claim, intl: { formatMessage } } = this.props;
+    const { votingRound } = claim;
 
-    if (claimant && claimant.id === currentUserId && votingRound) {
-      if (moment().isBefore(moment(votingRound.endVoting))) {
-        return (<Chip backgroundColor={themeConfig.palette.info} labelColor={themeConfig.palette.white}>
-          <Avatar
-            backgroundColor={themeConfig.palette.info}
-            color={themeConfig.palette.white}
-            icon={<FontIcon className="material-icons">timer</FontIcon>} />
-          {formatMessage(messages.pending)}
-        </Chip>);
-      } else if (claim.result) {
-        const endorsed = claim.result === 'endorsed';
-        const color = endorsed ? themeConfig.palette.success : themeConfig.color.danger;
-        const icon = endorsed ? 'check circle' : 'close';
-        const text = endorsed ? 'Endorsed' : 'Flagged';
-        return (<Chip backgroundColor={color} labelColor="#ffffff">
-          <Avatar backgroundColor={color} color="#ffffff" icon={<FontIcon className="material-icons">{icon}</FontIcon>} />
-          {text}
-        </Chip>);
-      } else {
-        return (<Chip backgroundColor={themeConfig.palette.warning} labelColor={themeConfig.palette.white}>
-          <Avatar
-            backgroundColor={themeConfig.palette.warning}
-            color={themeConfig.palette.white}
-            icon={<FontIcon className="material-icons">warning</FontIcon>} />
-          {formatMessage(messages.unverified)}
-        </Chip>);
-      }
-    } else if (vote) {
-      const { voter } = vote;
-      if (voter.id === currentUserId) {
-        if (!vote.registered && moment().isBefore(moment(votingRound.endRegistration))) {
+    if (claim.status) {
+      switch (claim.status) {
+        case CLAIM_STATUSES.registration:
           return (<Chip backgroundColor={themeConfig.palette.info} labelColor={themeConfig.palette.white}>
             <Avatar
               backgroundColor={themeConfig.palette.info}
@@ -104,7 +78,7 @@ class Details extends Component {
                 relativeTime: moment(votingRound.endRegistration).fromNow(true)
               }} />
           </Chip>);
-        } else if (moment().isBefore(moment(votingRound.endVoting))) {
+        case CLAIM_STATUSES.voting:
           return (<Chip backgroundColor={themeConfig.palette.info} labelColor={themeConfig.palette.white}>
             <Avatar
               backgroundColor={themeConfig.palette.info}
@@ -116,19 +90,36 @@ class Details extends Component {
                 relativeTime: moment(votingRound.endVoting).fromNow(true)
               }} />
           </Chip>);
-        } else if (claim.result) {
-          const endorsed = claim.result === 'endorsed';
-          const color = endorsed ? themeConfig.palette.success : themeConfig.color.danger;
-          const icon = endorsed ? 'check circle' : 'close';
-          const text = endorsed ? 'Endorsed' : 'Flagged';
-          return (<Chip backgroundColor={color} labelColor="#ffffff">
-            <Avatar backgroundColor={color} color="#ffffff" icon={<FontIcon className="material-icons">{icon}</FontIcon>} />
-            {text}
+        case CLAIM_STATUSES.endorsed:
+          return (<Chip backgroundColor={themeConfig.palette.success} labelColor={themeConfig.palette.white}>
+            <Avatar
+              backgroundColor={themeConfig.palette.success}
+              color={themeConfig.palette.white}
+              icon={<FontIcon className="material-icons">check circle</FontIcon>}
+            />
+            {formatMessage(messages.endorsed)}
           </Chip>);
-        }
+        case CLAIM_STATUSES.flagged:
+          return (<Chip backgroundColor={themeConfig.palette.danger} labelColor={themeConfig.palette.white}>
+            <Avatar
+              backgroundColor={themeConfig.palette.danger}
+              color={themeConfig.palette.white}
+              icon={<FontIcon className="material-icons">close</FontIcon>}
+            />
+            {formatMessage(messages.flagged)}
+          </Chip>);
+        case CLAIM_STATUSES.unverified:
+          return (<Chip backgroundColor={themeConfig.palette.warning} labelColor={themeConfig.palette.white}>
+            <Avatar
+              backgroundColor={themeConfig.palette.warning}
+              color={themeConfig.palette.white}
+              icon={<FontIcon className="material-icons">warning</FontIcon>} />
+            {formatMessage(messages.unverified)}
+          </Chip>);
+        default:
+          return null;
       }
     }
-
     return null;
   }
 
@@ -151,37 +142,37 @@ class Details extends Component {
   }
 
   renderVoteActions() {
-    const { claim } = this.props;
-    const { votingRound, vote } = claim;
+    const { claim, currentUserId } = this.props;
+    const { owner: claimant, votingRound, vote } = claim;
     const { intl: { formatMessage } } = this.props;
 
-    if (!vote || !votingRound)
+    if (!vote || !vote.status || !votingRound || !claim || (claimant && claimant.id === currentUserId))
       return null;
 
-    if (!vote.registered && moment().isBefore(moment(votingRound.endRegistration))) {
-      return (
-        <ul className="list list-inline">
-          <li><RaisedButton label={formatMessage(votesMessages.register)} primary onClick={this.onRegisterToVoteClick} /></li>
-        </ul>
-      );
-    }
+    const { voter } = vote;
+    if (voter.id !== currentUserId)
+      return null;
 
-    if (vote.registered) {
-      if (vote.votedAt) {
-        return <ul className="list list-inline">
-          <li>{
-            vote.endorsed ?
-              <RaisedButton
-                label={formatMessage(votesMessages.endorsed)}
-                backgroundColor={themeConfig.palette.success}
-                labelColor={themeConfig.palette.white} /> :
-              <RaisedButton
-                label={formatMessage(votesMessages.flagged)}
-                backgroundColor={themeConfig.palette.danger}
-                labelColor={themeConfig.palette.white} />}
-          </li>
-        </ul>
-      } else if (moment().isBefore(moment(votingRound.endVoting))) {
+    switch (vote.status) {
+      case VOTE_STATUSES.pending_registration:
+        return (
+          <ul className="list list-inline">
+            <li><RaisedButton label={formatMessage(votesMessages.register)} primary onClick={this.onRegisterToVoteClick} /></li>
+          </ul>
+        );
+      case VOTE_STATUSES.registration_missed:
+        return null;
+      case VOTE_STATUSES.registered:
+        return <Chip
+          backgroundColor={themeConfig.palette.primary}
+          labelColor={themeConfig.palette.white}>
+          <Avatar
+            backgroundColor={themeConfig.palette.primary}
+            color={themeConfig.palette.white}
+            icon={<FontIcon className="material-icons">check circle</FontIcon>} />
+          {formatMessage(votesMessages.registered)}
+        </Chip>;
+      case VOTE_STATUSES.pending_vote:
         return (
           <ul className="list list-inline">
             <li className="list-inline-item">
@@ -200,11 +191,36 @@ class Details extends Component {
             </li>
           </ul>
         );
-      } else {
-        return (<ul className="list list-inline">
-          <li>Deadline missed</li>
-        </ul>)
-      }
+      case VOTE_STATUSES.endorsed:
+        return (<dl>
+          <dt className="my-2">{formatMessage(votesMessages.yourVote)}</dt>
+          <dl>
+            <Chip
+              backgroundColor={themeConfig.palette.success}
+              labelColor={themeConfig.palette.white}>
+              <Avatar
+                backgroundColor={themeConfig.palette.success}
+                color={themeConfig.palette.white}
+                icon={<FontIcon className="material-icons">check circle</FontIcon>} />
+              {formatMessage(messages.endorsed)}
+            </Chip>
+          </dl>
+        </dl>);
+      case VOTE_STATUSES.flagged:
+        return (<dl className="my-2">
+          <dt>{formatMessage(votesMessages.yourVote)}</dt>
+          <dl><Chip
+            backgroundColor={themeConfig.palette.danger}
+            labelColor={themeConfig.palette.white}>
+            <Avatar
+              backgroundColor={themeConfig.palette.danger}
+              color={themeConfig.palette.white}
+              icon={<FontIcon className="material-icons">close</FontIcon>} />
+            {formatMessage(messages.flagged)}
+          </Chip></dl>
+        </dl>);
+      default:
+        return null;
     }
   }
 

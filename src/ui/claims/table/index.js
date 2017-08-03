@@ -10,7 +10,6 @@ import {
   TableRowColumn,
 } from 'material-ui/Table';
 import { Link } from 'react-router-dom';
-import moment from 'moment';
 import Avatar from 'material-ui/Avatar';
 import FontIcon from 'material-ui/FontIcon';
 import Chip from 'material-ui/Chip';
@@ -18,6 +17,7 @@ import autoBind from 'react-autobind';
 
 import routeTemplates from 'ui/common/routes/templates';
 import themeConfig from 'ui/theme/config';
+import { STATUSES as CLAIM_STATUSES } from 'store/entities/claims/helpers';
 import messages from 'ui/claims/messages';
 
 class ClaimsTable extends Component {
@@ -33,9 +33,10 @@ class ClaimsTable extends Component {
 
   renderStatus(claim) {
     const { intl: { formatMessage } } = this.props;
-    const { votingRound } = claim;
 
-    if (moment().isBefore(moment(votingRound.endVoting))) {
+    switch (claim.status) {
+      case CLAIM_STATUSES.registration:
+      case CLAIM_STATUSES.voting:
         return (<Chip backgroundColor={themeConfig.palette.info} labelColor={themeConfig.palette.white}>
           <Avatar
             backgroundColor={themeConfig.palette.info}
@@ -43,16 +44,25 @@ class ClaimsTable extends Component {
             icon={<FontIcon className="material-icons">timer</FontIcon>} />
           {formatMessage(messages.pending)}
         </Chip>);
-      } else if (claim.result) {
-        const endorsed = claim.result === 'endorsed';
-        const color = endorsed ? themeConfig.palette.success : themeConfig.color.danger;
-        const icon = endorsed ? 'check circle' : 'close';
-        const text = endorsed ? 'Endorsed' : 'Flagged';
-        return (<Chip backgroundColor={color} labelColor="#ffffff">
-          <Avatar backgroundColor={color} color="#ffffff" icon={<FontIcon className="material-icons">{icon}</FontIcon>} />
-          {text}
+      case CLAIM_STATUSES.endorsed:
+        return (<Chip backgroundColor={themeConfig.palette.success} labelColor={themeConfig.palette.white}>
+          <Avatar
+            backgroundColor={themeConfig.palette.success}
+            color={themeConfig.palette.white}
+            icon={<FontIcon className="material-icons">check circle</FontIcon>}
+          />
+          {formatMessage(messages.endorsed)}
         </Chip>);
-      } else {
+      case CLAIM_STATUSES.flagged:
+        return (<Chip backgroundColor={themeConfig.palette.danger} labelColor={themeConfig.palette.white}>
+          <Avatar
+            backgroundColor={themeConfig.palette.danger}
+            color={themeConfig.palette.white}
+            icon={<FontIcon className="material-icons">close</FontIcon>}
+          />
+          {formatMessage(messages.flagged)}
+        </Chip>);
+      case CLAIM_STATUSES.unverified:
         return (<Chip backgroundColor={themeConfig.palette.warning} labelColor={themeConfig.palette.white}>
           <Avatar
             backgroundColor={themeConfig.palette.warning}
@@ -60,7 +70,9 @@ class ClaimsTable extends Component {
             icon={<FontIcon className="material-icons">warning</FontIcon>} />
           {formatMessage(messages.unverified)}
         </Chip>);
-      }
+      default:
+        return null;
+    }
   }
 
   render() {

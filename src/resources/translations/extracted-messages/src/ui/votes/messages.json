@@ -4,6 +4,14 @@
     "defaultMessage": "Register"
   },
   {
+    "id": "votes.messages.registered",
+    "defaultMessage": "Registered"
+  },
+  {
+    "id": "votes.messages.yourVote",
+    "defaultMessage": "Your vote"
+  },
+  {
     "id": "votes.messages.endorse",
     "defaultMessage": "Endorse"
   },

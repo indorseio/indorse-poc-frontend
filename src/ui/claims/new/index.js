@@ -50,7 +50,7 @@ class NewClaim extends Component {
                 <Field name={fieldNames.description} component={TextField} label={formatMessage(messages.labels.description)} multiLine rows={2} rowsMax={10} />
               </div>
               <div>
-                <Field name={fieldNames.proof} component={TextField} label={formatMessage(messages.labels.proof)} />
+                <Field name={fieldNames.proof} component={TextField} label={formatMessage(messages.labels.proof)} hint={formatMessage(messages.hints.proof)} />
               </div>
               <div className="mt-3">
                 <SubmitButton label={formatMessage(messages.buttons.submit)} primary fullWidth disabled={submitting} />

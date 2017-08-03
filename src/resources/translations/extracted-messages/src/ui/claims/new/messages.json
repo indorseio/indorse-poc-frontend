@@ -12,6 +12,10 @@
     "defaultMessage": "Proof"
   },
   {
+    "id": "claims.new.fields.proof.hint",
+    "defaultMessage": "Proof must be a valid URL"
+  },
+  {
     "id": "claims.new.header.title",
     "defaultMessage": "Create a new claim"
   },

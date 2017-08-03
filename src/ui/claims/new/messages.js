@@ -17,6 +17,13 @@ export const labels = defineMessages({
   },
 });
 
+export const hints = defineMessages({
+  [fieldNames.proof]: {
+    id: 'claims.new.fields.proof.hint',
+    defaultMessage: 'Proof must be a valid URL'
+  }
+});
+
 export const header = defineMessages({
   title: {
     id: 'claims.new.header.title',

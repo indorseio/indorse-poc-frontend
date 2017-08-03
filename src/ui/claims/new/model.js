@@ -12,6 +12,9 @@ export default {
     presence: true
   },
   [fieldNames.proof]: {
-    presence: true
+    presence: true,
+    url: {
+      schemes: ['http', 'https']
+    }
   }
 }

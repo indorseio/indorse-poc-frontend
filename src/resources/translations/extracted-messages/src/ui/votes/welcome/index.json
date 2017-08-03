@@ -1,0 +1,14 @@
+[
+  {
+    "id": "votes.welcome.title",
+    "defaultMessage": "Welcome to Indorse"
+  },
+  {
+    "id": "votes.welcome.no-votes",
+    "defaultMessage": "You have not been assigned any claims to vote yet"
+  },
+  {
+    "id": "votes.welcome.notification",
+    "defaultMessage": "You will get an e-mail notification when the system assigns you a claim"
+  }
+]

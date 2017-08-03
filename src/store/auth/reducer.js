@@ -1,6 +1,8 @@
 import Immutable from 'seamless-immutable';
 
 import * as types from './action-types';
+import * as claimActionTypes from 'store/entities/claims/action-types';
+import * as voteActionTypes from 'store/entities/votes/action-types';
 
 const initialState = Immutable({
   loggedIn: false,
@@ -12,7 +14,9 @@ const initialState = Immutable({
     verified: false,
     error: undefined
   },
-  forgotPasswordEmailSent: false
+  forgotPasswordEmailSent: false,
+  currentUserClaimsFetched: false,
+  currentUserVotesFetched: false,
 });
 
 export default function reducer(state = initialState, action) {
@@ -67,6 +71,18 @@ export default function reducer(state = initialState, action) {
       return state.merge({ forgotPasswordEmailSent: true });
     case types.FORGOT_PASSWORD.FAILURE:
       return state.merge({ forgotPasswordEmailSent: false });
+    case claimActionTypes.FETCH_USER_CLAIMS.START:
+      const { userId: fetchingUserId } = action.payload;
+      const fetchingCurrentUserId = state.currentUser ? state.currentUser.id : undefined;
+      return fetchingUserId === fetchingCurrentUserId ? state.merge({ currentUserClaimsFetched: false }) : state;
+    case claimActionTypes.FETCH_USER_CLAIMS.SUCCESS:
+      const { userId: fetchedUserId } = action.payload;
+      const fetchedCurrentUserId = state.currentUser ? state.currentUser.id : undefined;
+      return fetchedUserId === fetchedCurrentUserId ? state.merge({ currentUserClaimsFetched: true }) : state;
+    case voteActionTypes.FETCH_CURRENT_USER_VOTES.START:
+      return state.merge({ currentUserVotesFetched: false });
+    case voteActionTypes.FETCH_CURRENT_USER_VOTES.SUCCESS:
+      return state.merge({ currentUserVotesFetched: true });
     default:
       return state;
   }

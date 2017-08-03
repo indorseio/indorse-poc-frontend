@@ -6,11 +6,12 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 
-import { selectCurrentUserId } from 'store/auth/selectors';
+import { selectCurrentUserId, selectCurrentUserClaimsFetched } from 'store/auth/selectors';
 import { selectCurrentUserClaims } from 'store/entities/claims/selectors';
 import { fetchUserClaims } from 'store/entities/claims/actions';
 
 import ClaimsTable from 'ui/claims/table';
+import Welcome from 'ui/claims/welcome';
 import routeTemplates from 'ui/common/routes/templates';
 
 class Claims extends Component {
@@ -29,6 +30,11 @@ class Claims extends Component {
   }
 
   render() {
+    const { claims, claimsFetched } = this.props;
+
+    if (claimsFetched && claims.length === 0)
+      return <Welcome />;
+
     return (
       <article className="container">
         <header className="mt-4 d-flex align-items-center justify-content-between">
@@ -42,7 +48,7 @@ class Claims extends Component {
           </Link>
         </header>
         <main>
-          <ClaimsTable claims={this.props.claims} />
+          {<ClaimsTable claims={claims} />}
         </main>
       </article>
     );
@@ -52,7 +58,8 @@ class Claims extends Component {
 function mapStateToProps(state) {
   return {
     currentUserId: selectCurrentUserId(state),
-    claims: selectCurrentUserClaims(state)
+    claims: selectCurrentUserClaims(state),
+    claimsFetched: selectCurrentUserClaimsFetched(state)
   };
 }
 

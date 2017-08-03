@@ -4,11 +4,12 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { selectCurrentUserId } from 'store/auth/selectors';
+import { selectCurrentUserId, selectCurrentUserVotesFetched } from 'store/auth/selectors';
 import { selectCurrentUserVotes } from 'store/entities/votes/selectors';
 import { fetchCurrentUserVotes } from 'store/entities/votes/actions';
 
 import VotesTable from 'ui/votes/table';
+import Welcome from 'ui/votes/welcome';
 
 class Votes extends Component {
   static propTypes = {
@@ -26,6 +27,11 @@ class Votes extends Component {
   }
 
   render() {
+    const { votes, votesFetched } = this.props;
+
+    if (votesFetched && votes.length === 0)
+      return <Welcome />;
+
     return (
       <article className="container">
         <header className="mt-4 d-flex align-items-center justify-content-between">
@@ -34,7 +40,7 @@ class Votes extends Component {
           </h1>
         </header>
         <main>
-          <VotesTable votes={this.props.votes} />
+          <VotesTable votes={votes} />
         </main>
       </article>
     );
@@ -44,7 +50,8 @@ class Votes extends Component {
 function mapStateToProps(state) {
   return {
     currentUserId: selectCurrentUserId(state),
-    votes: selectCurrentUserVotes(state)
+    votes: selectCurrentUserVotes(state),
+    votesFetched: selectCurrentUserVotesFetched(state)
   };
 }
 

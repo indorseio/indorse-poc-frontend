@@ -28,6 +28,7 @@ function* fetchUserClaims({ payload }) {
     };
     const { entities } = normalize(response, schema);
     yield put(entityActions.addEntities(entities));
+    yield put(actions.fetchUserClaims.success({ userId }));
   } catch (error) {
     yield put(actions.fetchUserClaims.failure(error));
   }

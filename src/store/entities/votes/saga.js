@@ -26,6 +26,7 @@ function* fetchCurrentUserVotes({ payload }) {
     };
     const { entities } = normalize(response, schema);
     yield put(entityActions.addEntities(entities));
+    yield put(actions.fetchCurrentUserVotes.success());
   } catch (error) {
     yield put(actions.fetchCurrentUserVotes.failure(error));
   }

@@ -11,6 +11,7 @@ import { selectCurrentUserClaims } from 'store/entities/claims/selectors';
 import { fetchUserClaims } from 'store/entities/claims/actions';
 
 import ClaimsTable from 'ui/claims/table';
+import Loading from 'ui/common/loading';
 import Welcome from 'ui/claims/welcome';
 import routeTemplates from 'ui/common/routes/templates';
 
@@ -31,6 +32,9 @@ class Claims extends Component {
 
   render() {
     const { claims, claimsFetched } = this.props;
+
+    if (!claimsFetched && claims.length === 0)
+      return <Loading />;
 
     if (claimsFetched && claims.length === 0)
       return <Welcome />;

@@ -20,6 +20,7 @@ import messages from 'ui/claims/messages';
 import votesMessages from 'ui/votes/messages';
 import { STATUSES as CLAIM_STATUSES } from 'store/entities/claims/helpers';
 import { STATUSES as VOTE_STATUSES } from 'store/entities/votes/helpers';
+import Loading from 'ui/common/loading';
 
 const { request: fetchClaimRequest } = fetchClaim;
 const { request: registerToVoteRequest } = registerToVote;
@@ -229,7 +230,7 @@ class Details extends Component {
 
     // TODO: Replace with loading indicator icon
     if (!claim)
-      return <h1 className="text-center mt-4">'Loading...'</h1>;
+      return <Loading />;
 
     return (
       <article className="container">

@@ -9,6 +9,7 @@ import { selectCurrentUserVotes } from 'store/entities/votes/selectors';
 import { fetchCurrentUserVotes } from 'store/entities/votes/actions';
 
 import VotesTable from 'ui/votes/table';
+import Loading from 'ui/common/loading';
 import Welcome from 'ui/votes/welcome';
 
 class Votes extends Component {
@@ -28,6 +29,9 @@ class Votes extends Component {
 
   render() {
     const { votes, votesFetched } = this.props;
+
+    if (!votesFetched && votes.length === 0)
+      return <Loading />;
 
     if (votesFetched && votes.length === 0)
       return <Welcome />;

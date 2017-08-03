@@ -19,7 +19,13 @@ function* fetchUserClaims({ payload }) {
 
   try {
     const response = yield call(callApi, api.fetchUserClaims({ userId }));
-    const schema = { claims: [{claim: schemas.claim}] };
+    const schema = {
+      claims: [{
+        claim: schemas.claim,
+        vote: schemas.vote,
+        votingRound: schemas.votingRound
+      }]
+    };
     const { entities } = normalize(response, schema);
     yield put(entityActions.addEntities(entities));
   } catch (error) {
@@ -64,7 +70,11 @@ function* fetchClaim({ payload }) {
 
   try {
     const response = yield call(callApi, api.fetchClaim({ claimId }));
-    const schema = { claim: schemas.claim };
+    const schema = {
+      claim: schemas.claim,
+      vote: schemas.vote,
+      votingRounds: [schemas.votingRound]
+    };
     const { entities } = normalize(response, schema);
     yield put(entityActions.addEntities(entities));
   } catch (error) {

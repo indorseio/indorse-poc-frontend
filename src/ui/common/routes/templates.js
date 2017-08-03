@@ -21,5 +21,9 @@ export default {
     my: '/claims',
     new: '/claims/new',
     details: '/claims/:id'
+  },
+  votes: {
+    root: '/votes',
+    my: '/votes'
   }
 };

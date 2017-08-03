@@ -26,6 +26,7 @@ import ApprovalRequired from 'ui/auth/approval-required';
 
 import Admin from 'ui/admin';
 import Claims from 'ui/claims';
+import Votes from 'ui/votes';
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
@@ -49,6 +50,7 @@ class App extends Component {
               <Route exact path={routeTemplates.auth.changePassword} component={Authenticated(ChangePassword)} />
               <Route path={routeTemplates.admin.root} component={AllowedRoles(Admin, { roles: ['admin'] })} />
               <Route path={routeTemplates.claims.root} component={Authenticated(Claims)} />
+              <Route path={routeTemplates.votes.root} component={Authenticated(Votes)} />
             </Layout>
           </Switch>
         </MuiThemeProvider>

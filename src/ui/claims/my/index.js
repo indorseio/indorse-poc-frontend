@@ -23,10 +23,9 @@ class Claims extends Component {
   }
 
   componentDidMount() {
-    const { claims, currentUserId, fetchUserClaims } = this.props;
+    const { currentUserId, fetchUserClaims } = this.props;
     // TODO: Keep fetching/fetched state
-    if (claims.length === 0)
-      fetchUserClaims.request({ userId: currentUserId });
+    fetchUserClaims.request({ userId: currentUserId });
   }
 
   render() {

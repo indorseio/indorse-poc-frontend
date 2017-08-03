@@ -12,6 +12,10 @@
     "defaultMessage": "Proof"
   },
   {
+    "id": "claims.new.fields.title.hint",
+    "defaultMessage": "Please select a Skill"
+  },
+  {
     "id": "claims.new.fields.proof.hint",
     "defaultMessage": "Proof must be a valid URL"
   },

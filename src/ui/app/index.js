@@ -15,6 +15,8 @@ import AnonymousOnly from 'ui/common/auth/anonymous-only';
 import Authenticated from 'ui/common/auth/authenticated';
 import AllowedRoles from 'ui/common/auth/allowed-roles';
 
+import ConfirmationDialog from 'ui/common/confirmation-dialog';
+
 import Home from 'ui/home';
 import SignUp from 'ui/auth/sign-up';
 import VerificationEmailSent from 'ui/auth/verification-email-sent';
@@ -36,9 +38,9 @@ injectTapEventPlugin();
 class App extends Component {
   render() {
     return (
-      <div className={styles.app}>
-        <Helmet />
-        <MuiThemeProvider muiTheme={muiTheme}>
+      <MuiThemeProvider muiTheme={muiTheme}>
+        <div className={styles.app}>
+          <Helmet />
           <Switch>
             <Route exact path={routeTemplates.auth.signUp} component={AnonymousOnly(SignUp)} />
             <Route exact path={routeTemplates.auth.verificationEmailSent} component={AnonymousOnly(VerificationEmailSent)} />
@@ -55,8 +57,9 @@ class App extends Component {
               <Route path={routeTemplates.votes.root} component={Authenticated(Votes)} />
             </Layout>
           </Switch>
-        </MuiThemeProvider>
-      </div>
+          <ConfirmationDialog />
+        </div>
+      </MuiThemeProvider>
     );
   }
 }

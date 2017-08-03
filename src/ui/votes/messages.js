@@ -36,5 +36,9 @@ export default defineMessages({
   votingTimeRemaining: {
     id: 'votes.messages.votingTimeRemaining',
     defaultMessage: '{relativeTime} remaining for voting'
+  },
+  confirmRegistration: {
+    id: 'votes.messages.confirmRegistration',
+    defaultMessage: 'Are you sure you want to register to verify claim "{title}"?'
   }
 });

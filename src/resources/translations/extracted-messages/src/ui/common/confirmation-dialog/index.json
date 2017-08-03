@@ -1,0 +1,14 @@
+[
+  {
+    "id": "confirmation-dialog.title",
+    "defaultMessage": "Confirm"
+  },
+  {
+    "id": "confirmation-dialog.confirm",
+    "defaultMessage": "Confirm"
+  },
+  {
+    "id": "confirmation-dialog.cancel",
+    "defaultMessage": "Cancel"
+  }
+]

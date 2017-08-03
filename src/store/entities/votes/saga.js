@@ -8,6 +8,8 @@ import * as actions from './actions';
 import * as selectors from './selectors';
 import * as api from 'api/config/votes';
 import callApi from 'store/api/saga';
+import votesMessages from 'ui/votes/messages';
+import { confirmSaga as confirm } from 'store/confirmation-dialog/saga';
 // import routeTemplates from 'ui/common/routes/templates';
 
 function* fetchCurrentUserVotes({ payload }) {
@@ -36,8 +38,17 @@ function* watchFetchCurrentUserVotes() {
 function* registerToVote({ payload }) {
   const { voteId } = payload;
   const vote = yield select(selectors.selectVoteById, { id: voteId });
-  const claimId = vote.claim.id;
+  const claim = vote.claim;
+  const confirmationMessage = {
+    ...votesMessages.confirmRegistration,
+    values: { title: claim.title }
+  }
+  const confirmed = yield call(confirm, { message: confirmationMessage });
+  if (!confirmed) {
+    return;
+  }
 
+  const claimId = claim.id;
   yield put(actions.registerToVote.start({ voteId, claimId }));
 
   try {
@@ -48,7 +59,7 @@ function* registerToVote({ payload }) {
   }
 }
 
-function* wathcRegisterToVote() {
+function* watchRegisterToVote() {
   yield takeEvery(actionTypes.REGISTER_TO_VOTE.REQUEST, registerToVote);
 }
 
@@ -92,7 +103,7 @@ function* watchFlag() {
 
 export default function* votes() {
   yield fork(watchFetchCurrentUserVotes);
-  yield fork(wathcRegisterToVote);
+  yield fork(watchRegisterToVote);
   yield fork(watchEndorse);
   yield fork(watchFlag);
 }

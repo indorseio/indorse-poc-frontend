@@ -1,0 +1,14 @@
+[
+  {
+    "id": "auth.approval-required.title",
+    "defaultMessage": "Approval required"
+  },
+  {
+    "id": "auth.approval-required.signed-up",
+    "defaultMessage": "Thank you for signing up"
+  },
+  {
+    "id": "auth.approval-required.instructions",
+    "defaultMessage": "Your account has not been approved by your administrator yet. You will receive an email when admin approves you account"
+  }
+]

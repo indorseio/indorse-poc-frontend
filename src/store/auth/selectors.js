@@ -27,6 +27,11 @@ export const selectCurrentUser = createSelector(
   authState => authState.currentUser
 );
 
+export const selectIsCurrentUserApproved = createSelector(
+  selectCurrentUser,
+  currentUser => currentUser && currentUser.approved ? currentUser.approved.toString() === 'true' : false
+)
+
 export const selectIsCurrentUserAdmin = createSelector(
   selectCurrentUser,
   currentUser => currentUser ? currentUser.role === 'admin' : false

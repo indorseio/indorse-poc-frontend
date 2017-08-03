@@ -8,6 +8,7 @@ export default {
     changePassword: '/password/change',
     forgotPassword: '/password/forgot',
     resetPassword: '/password/reset',
+    approvalRequired: '/approval-required'
   },
   admin: {
     root: '/admin',

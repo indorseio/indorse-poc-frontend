@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { defineMessages } from 'react-intl';
 
-import { selectIsLoggedIn } from 'store/auth/selectors';
+import { selectIsLoggedIn, selectIsCurrentUserApproved } from 'store/auth/selectors';
 import routeTemplates from 'ui/common/routes/templates';
 import { buildMessage } from 'store/flash/builder';
 
@@ -16,16 +16,25 @@ const messages = defineMessages({
 
 function mapStateToProps(state) {
   return {
-    loggedIn: selectIsLoggedIn(state)
+    loggedIn: selectIsLoggedIn(state),
+    currentUserApproved: selectIsCurrentUserApproved(state)
   }
 }
 
-const Authenticated = (WrappedComponent, { flash = true } = {}) => {
+const approvalRequiredDefault = process.env.ADMIN_APPROVAL_REQUIRED_FOR_USER === 'true';
+
+const Authenticated = (WrappedComponent, { approvalRequired = approvalRequiredDefault, flash = true } = {}) => {
   class Wrapper extends React.Component {
     render() {
-      const { loggedIn, ...passThrough } = this.props;
+      const { loggedIn, currentUserApproved, ...passThrough } = this.props;
 
       if (loggedIn) {
+        if (approvalRequired && !currentUserApproved) {
+          return <Redirect to={{
+            pathname: routeTemplates.auth.approvalRequired,
+            state: null
+          }} />
+        }
         return <WrappedComponent {...passThrough} />;
       }
       else {

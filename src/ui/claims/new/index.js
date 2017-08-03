@@ -8,10 +8,12 @@ import { reduxForm, Field } from 'redux-form';
 
 import Alert from 'ui/common/alert';
 import TextField from 'ui/common/form/fields/text-field';
+import SelectField from 'ui/common/form/fields/select-field';
+import MenuItem from 'material-ui/MenuItem';
 import validator from 'ui/common/form/validator';
 import SubmitButton from 'ui/common/form/submit-button';
 
-import fields, { fieldNames } from './model';
+import fields, { fieldNames, skills } from './model';
 import * as messages from './messages';
 import { createClaim } from 'store/entities/claims/actions';
 import styles from './index.module.scss';
@@ -35,7 +37,7 @@ class NewClaim extends Component {
     return (
       <div className={classnames('container', styles.page)}>
         <div className={classnames('row justify-content-center align-items-center', styles.pageRow)}>
-          <div className="col-12 col-sm-4">
+          <div className="col-12 col-sm-6">
             <h1 className="text-primary text-center">
               {formatMessage(messages.header.title)}
             </h1>
@@ -44,7 +46,13 @@ class NewClaim extends Component {
                 {error}
               </Alert>}
               <div>
-                <Field name={fieldNames.title} component={TextField} label={formatMessage(messages.labels.title)} />
+                <Field
+                  name={fieldNames.title}
+                  component={SelectField}
+                  label={formatMessage(messages.labels.title)}
+                  hint={formatMessage(messages.hints.title)}>
+                  {skills.map(skill => <MenuItem key={skill} value={skill} primaryText={skill} />)}
+                </Field>
               </div>
               <div>
                 <Field name={fieldNames.description} component={TextField} label={formatMessage(messages.labels.description)} multiLine rows={2} rowsMax={10} />

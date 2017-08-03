@@ -18,6 +18,10 @@ export const labels = defineMessages({
 });
 
 export const hints = defineMessages({
+  [fieldNames.title]: {
+    id: 'claims.new.fields.title.hint',
+    defaultMessage: 'Please select a Skill'
+  },
   [fieldNames.proof]: {
     id: 'claims.new.fields.proof.hint',
     defaultMessage: 'Proof must be a valid URL'

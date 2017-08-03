@@ -4,9 +4,19 @@ export const fieldNames = {
   proof: 'proof'
 }
 
+export const skills = [
+  'Solidity',
+  'NodeJS',
+  'ReactJS',
+  'Technical Writing',
+  'HTML/CSS',
+  'VueJs'
+];
+
 export default {
   [fieldNames.title]: {
-    presence: true
+    presence: true,
+    inclusion: skills
   },
   [fieldNames.description]: {
     presence: true

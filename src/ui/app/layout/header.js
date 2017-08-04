@@ -41,9 +41,14 @@ class Header extends Component {
     });
   }
 
+  logout() {
+    this.collapseNavbar();
+    this.props.logout.request();
+  }
+
   renderAnonymousNav() {
     return (
-      <Collapse isOpen={this.state.isOpen} navbar>
+      <Collapse isOpen={this.state.isOpen} navbar onClickCapture={this.collapseNavbar}>
         <Nav navbar className="ml-auto">
           <NavItem>
             <NavLink tag={Link} to={routeTemplates.auth.login}>
@@ -65,7 +70,7 @@ class Header extends Component {
 
     return (
       <Collapse isOpen={this.state.isOpen} navbar>
-        <Nav navbar className="mr-auto">
+        <Nav navbar className="mr-auto" onClickCapture={this.collapseNavbar}>
           <NavItem>
             {currentUserIsAdmin && <NavLink tag={Link} to={routeTemplates.admin.root}>
               <FormattedMessage id="app.layout.header.admin" defaultMessage="Admin" />
@@ -88,10 +93,10 @@ class Header extends Component {
               {currentUser.name || currentUser.email}
             </DropdownToggle>
             <DropdownMenu>
-              <DropdownItem tag={Link} to={routeTemplates.auth.changePassword}>
+              <DropdownItem tag={Link} to={routeTemplates.auth.changePassword} onClick={this.collapseNavbar}>
                 <FormattedMessage id="app.layout.header.change-password" defaultMessage="Change Password" />
               </DropdownItem>
-              <DropdownItem onClick={this.props.logout.request} style={{ cursor: 'pointer' }}>
+              <DropdownItem onClick={this.logout} style={{ cursor: 'pointer' }}>
                 <FormattedMessage id="app.layout.header.logout" defaultMessage="Logout" />
               </DropdownItem>
             </DropdownMenu>

@@ -5,7 +5,7 @@
   },
   {
     "id": "votes.welcome.no-votes",
-    "defaultMessage": "You have not been assigned any claims to vote yet"
+    "defaultMessage": "You have not been assigned any claims to vote on"
   },
   {
     "id": "votes.welcome.notification",

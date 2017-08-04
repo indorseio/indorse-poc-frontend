@@ -15,7 +15,7 @@ const Welcome = (props) => {
         </header>
         <main>
           <p className="lead">
-            <FormattedMessage id="votes.welcome.no-votes" defaultMessage="You have not been assigned any claims to vote yet" />
+            <FormattedMessage id="votes.welcome.no-votes" defaultMessage="You have not been assigned any claims to vote on" />
           </p>
           <p className="lead">
             <FormattedMessage id="votes.welcome.notification" defaultMessage="You will get an e-mail notification when the system assigns you a claim" />

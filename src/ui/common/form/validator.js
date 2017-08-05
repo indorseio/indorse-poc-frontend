@@ -21,5 +21,3 @@ const validator = (fields, options = null) => {
 }
 
 export default validator;
-
-window.validate = validate;

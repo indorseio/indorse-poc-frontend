@@ -51,3 +51,13 @@ export const selectIsForgotPasswordEmailSent = createSelector(
   authState,
   authState => authState.forgotPasswordEmailSent
 );
+
+export const selectCurrentUserClaimsFetched = createSelector(
+  authState,
+  authState => authState.currentUserClaimsFetched
+);
+
+export const selectCurrentUserVotesFetched = createSelector(
+  authState,
+  authState => authState.currentUserVotesFetched
+);

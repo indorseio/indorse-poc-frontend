@@ -1,0 +1,42 @@
+[
+  {
+    "id": "votes.messages.register",
+    "defaultMessage": "Register"
+  },
+  {
+    "id": "votes.messages.registered",
+    "defaultMessage": "Registered"
+  },
+  {
+    "id": "votes.messages.yourVote",
+    "defaultMessage": "Your vote"
+  },
+  {
+    "id": "votes.messages.endorse",
+    "defaultMessage": "Endorse"
+  },
+  {
+    "id": "votes.messages.endorsed",
+    "defaultMessage": "Endorsed"
+  },
+  {
+    "id": "votes.messages.flag",
+    "defaultMessage": "Flag"
+  },
+  {
+    "id": "votes.messages.flagged",
+    "defaultMessage": "Flagged"
+  },
+  {
+    "id": "votes.messages.registrationTimeRemaining",
+    "defaultMessage": "{relativeTime} remaining for registration"
+  },
+  {
+    "id": "votes.messages.votingTimeRemaining",
+    "defaultMessage": "{relativeTime} remaining for voting"
+  },
+  {
+    "id": "votes.messages.confirmRegistration",
+    "defaultMessage": "Are you sure you want to register to verify claim \"{title}\"?"
+  }
+]

@@ -15,5 +15,15 @@ export default {
     users: {
       index: '/admin/users'
     }
+  },
+  claims: {
+    root: '/claims',
+    my: '/claims',
+    new: '/claims/new',
+    details: '/claims/:id'
+  },
+  votes: {
+    root: '/votes',
+    my: '/votes'
   }
 };

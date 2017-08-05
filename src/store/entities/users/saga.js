@@ -47,7 +47,7 @@ function* disapproveUser({ payload }) {
   yield put(actions.disapproveUser.start({ userId }));
 
   try {
-    yield call(callApi, api.approveUser({ userId }));
+    yield call(callApi, api.disapproveUser({ userId }));
     yield put(actions.disapproveUser.success({ userId }));
   } catch (error) {
     yield put(actions.disapproveUser.failure(error));

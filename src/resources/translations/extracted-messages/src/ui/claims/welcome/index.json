@@ -1,0 +1,14 @@
+[
+  {
+    "id": "claims.welcome.title",
+    "defaultMessage": "Welcome to Indorse"
+  },
+  {
+    "id": "claims.welcome.no-claims",
+    "defaultMessage": "You have not created any claims yet"
+  },
+  {
+    "id": "claims.welcome.links.new",
+    "defaultMessage": "Create you first claim"
+  }
+]

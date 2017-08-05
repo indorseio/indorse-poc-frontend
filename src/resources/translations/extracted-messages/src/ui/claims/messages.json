@@ -1,0 +1,22 @@
+[
+  {
+    "id": "claims.messages.create",
+    "defaultMessage": "Claim created successfully"
+  },
+  {
+    "id": "claims.messages.pending",
+    "defaultMessage": "Pending"
+  },
+  {
+    "id": "claims.messages.endorsed",
+    "defaultMessage": "Endorsed"
+  },
+  {
+    "id": "claims.messages.flagged",
+    "defaultMessage": "Flagged"
+  },
+  {
+    "id": "claims.messages.unverified",
+    "defaultMessage": "Unverified"
+  }
+]

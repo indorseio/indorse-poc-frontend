@@ -1,0 +1,14 @@
+[
+  {
+    "id": "claim.title",
+    "defaultMessage": "Title"
+  },
+  {
+    "id": "claim.proof",
+    "defaultMessage": "Proof"
+  },
+  {
+    "id": "claim.status",
+    "defaultMessage": "Status"
+  }
+]

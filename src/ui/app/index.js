@@ -15,6 +15,8 @@ import AnonymousOnly from 'ui/common/auth/anonymous-only';
 import Authenticated from 'ui/common/auth/authenticated';
 import AllowedRoles from 'ui/common/auth/allowed-roles';
 
+import ConfirmationDialog from 'ui/common/confirmation-dialog';
+
 import Home from 'ui/home';
 import SignUp from 'ui/auth/sign-up';
 import VerificationEmailSent from 'ui/auth/verification-email-sent';
@@ -26,6 +28,8 @@ import ResetPassword from 'ui/auth/reset-password';
 import ApprovalRequired from 'ui/auth/approval-required';
 
 import Admin from 'ui/admin';
+import Claims from 'ui/claims';
+import Votes from 'ui/votes';
 
 // Needed for onTouchTap
 // http://stackoverflow.com/a/34015469/988941
@@ -34,9 +38,9 @@ injectTapEventPlugin();
 class App extends Component {
   render() {
     return (
-      <div className={styles.app}>
-        <Helmet />
-        <MuiThemeProvider muiTheme={muiTheme}>
+      <MuiThemeProvider muiTheme={muiTheme}>
+        <div className={styles.app}>
+          <Helmet />
           <Switch>
             <Route exact path={routeTemplates.auth.signUp} component={AnonymousOnly(SignUp)} />
             <Route exact path={routeTemplates.auth.verificationEmailSent} component={AnonymousOnly(VerificationEmailSent)} />
@@ -46,13 +50,16 @@ class App extends Component {
             <Route exact path={routeTemplates.auth.resetPassword} component={AnonymousOnly(ResetPassword)} />
             <Route exact path={routeTemplates.auth.approvalRequired} component={Authenticated(ApprovalRequired, { approvalRequired: false })} />
             <Layout>
-              <Route exact path={routeTemplates.root} component={Authenticated(Home, { flash: false })} />
+              <Route exact path={routeTemplates.root} component={Authenticated(Home)} />
               <Route exact path={routeTemplates.auth.changePassword} component={Authenticated(ChangePassword)} />
               <Route path={routeTemplates.admin.root} component={AllowedRoles(Admin, { roles: ['admin'] })} />
+              <Route path={routeTemplates.claims.root} component={Authenticated(Claims)} />
+              <Route path={routeTemplates.votes.root} component={Authenticated(Votes)} />
             </Layout>
           </Switch>
-        </MuiThemeProvider>
-      </div>
+          <ConfirmationDialog />
+        </div>
+      </MuiThemeProvider>
     );
   }
 }

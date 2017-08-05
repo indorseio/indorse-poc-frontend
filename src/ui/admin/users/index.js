@@ -11,7 +11,9 @@ import {
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table';
+import FontIcon from 'material-ui/FontIcon';
 
+import themeConfig from 'ui/theme/config';
 import { fetchUsers, approveUser, disapproveUser } from 'store/entities/users/actions';
 import { allUsers as selectAllUsers } from 'store/entities/users/selectors';
 
@@ -25,18 +27,23 @@ class Users extends Component {
   }
 
   componentDidMount() {
-    const { users, fetchUsers } = this.props;
+    const { fetchUsers } = this.props;
 
     // TODO: Keep fetching/fetched state
-    if (users.length === 0)
-      fetchUsers.request();
+    fetchUsers.request();
   }
 
   renderUserRow(user) {
     return (
       <TableRow key={user.id}>
         <TableRowColumn>{user.name}</TableRowColumn>
-        <TableRowColumn>{user.email}</TableRowColumn>
+        <TableRowColumn>
+          {user.email}
+          {user.verified && <FontIcon className="ml-2 fa fa-check-circle" color={themeConfig.palette.success} style={{ fontSize: '0.8rem' }}></FontIcon>}
+        </TableRowColumn>
+        <TableRowColumn>
+          {user.ethereumAddress}
+        </TableRowColumn>
         <TableRowColumn>
           <ApprovalStatusToggle
             userId={user.id} approved={!!user.approved}
@@ -67,6 +74,7 @@ class Users extends Component {
             <TableRow>
               <TableHeaderColumn>Name</TableHeaderColumn>
               <TableHeaderColumn>E-mail</TableHeaderColumn>
+              <TableHeaderColumn>Ethereum Addr</TableHeaderColumn>
               <TableHeaderColumn>Approval</TableHeaderColumn>
             </TableRow>
           </TableHeader>

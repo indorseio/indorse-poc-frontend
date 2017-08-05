@@ -12,6 +12,14 @@
     "defaultMessage": "Admin"
   },
   {
+    "id": "app.layout.header.claims",
+    "defaultMessage": "My Claims"
+  },
+  {
+    "id": "app.layout.header.votes",
+    "defaultMessage": "My Votes"
+  },
+  {
     "id": "app.layout.header.change-password",
     "defaultMessage": "Change Password"
   },

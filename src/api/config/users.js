@@ -1,7 +1,7 @@
 export function fetchUsers() {
   return {
-    endpoint: 'users',
-    method: 'POST',
+    endpoint: 'users/1/100', // TODO: Accept pageNo and pageSize
+    method: 'GET',
     requireAuth: true
   };
 }
@@ -15,11 +15,11 @@ export function approveUser({ userId: approveUserId }) {
   };
 }
 
-export function disapproveUser({ userId: disapproveUserId }) {
+export function disapproveUser({ userId: approveUserId }) {
   return {
     endpoint: 'users/disapprove',
     method: 'POST',
-    data: { disapproveUserId },
+    data: { approveUserId },
     requireAuth: true
   };
 }

@@ -1,10 +1,7 @@
-import React from 'react';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import React from 'react'
+import { withRouter, Redirect } from 'react-router';
+import routeTemplates from 'ui/common/routes/templates';
 
-const Home = (props) => (
-  <header className="text-center my-4">
-    <FormattedMessage id="home.title" defaultMessage="Welcome" tagName="h1" />
-  </header>
-);
+const Home = (props) => <Redirect to={routeTemplates.claims.my} />;
 
-export default injectIntl(Home);
+export default withRouter(Home);

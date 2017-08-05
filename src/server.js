@@ -1,17 +1,21 @@
 const express = require('express');
 const path = require('path');
 const morgan = require('morgan');
-
-const app = express();
+const helmet = require('helmet');
 
 // Ensure environment variables are read.
 require('../config/env');
 
 const paths = require('../config/paths');
 
+const app = express();
+
 // Setup logger
 const logger = morgan(':remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] :response-time ms');
 app.use(logger);
+
+// Setup helmet
+app.use(helmet());
 
 // Use compression only on production
 if (process.env.NODE_ENV === 'production')

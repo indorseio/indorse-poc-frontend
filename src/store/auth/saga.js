@@ -60,6 +60,26 @@ function* watchVerifyEmail() {
   yield takeEvery(types.VERIFY_EMAIL.REQUEST, verifyEmail);
 }
 
+function* resendVerificationEmail({ payload: values, meta }) {
+  const form = meta && meta.form;
+  yield put(actions.resendVerificationEmail.start(values));
+  if (form) yield put(startSubmit(form));
+
+  try {
+    const response = yield call(callApi, api.resendVerificationEmail(values));
+    yield put(actions.resendVerificationEmail.success(response));
+    if (form) yield put(stopSubmit(form));
+    yield put(push(routeTemplates.auth.verificationEmailSent));
+  } catch (error) {
+    yield put(actions.resendVerificationEmail.failure(error));
+    if (form) yield put(stopSubmit(form, { _error: error.message }));
+  }
+}
+
+function* watchResendVerificationEmail() {
+  yield takeEvery(types.RESEND_VERIFICATION_EMAIL.REQUEST, resendVerificationEmail);
+}
+
 function* login({ payload: values, meta }) {
   const form = meta && meta.form;
   yield put(actions.login.start(values));
@@ -187,6 +207,7 @@ export default function* auth() {
 
   yield fork(watchSignUp);
   yield fork(watchVerifyEmail);
+  yield fork(watchResendVerificationEmail);
   yield fork(watchLogin);
   yield fork(watchLogout);
   yield fork(watchChangePassword);

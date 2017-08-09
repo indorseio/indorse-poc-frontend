@@ -12,7 +12,7 @@ class VerificationEmailSent extends Component {
     const { signedUp } = this.props;
 
     return (
-      <Layout title={<FormattedMessage id="auth.verification-email-sent.title" defaultMessage="Verify you email" />} showFooter={false}>
+      <Layout title={<FormattedMessage id="auth.verification-email-sent.title" defaultMessage="Verify your email" />} showFooter={false}>
         {signedUp && <Alert color="success" inverse>
           <FormattedMessage
             id="auth.verification-email-sent.signed-up"

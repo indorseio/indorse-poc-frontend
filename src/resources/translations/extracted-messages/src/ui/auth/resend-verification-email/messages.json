@@ -1,0 +1,18 @@
+[
+  {
+    "id": "auth.resend-verification-email.fields.email.label",
+    "defaultMessage": "E-mail"
+  },
+  {
+    "id": "auth.resend-verification-email.header.title",
+    "defaultMessage": "Re-send Verification Email"
+  },
+  {
+    "id": "auth.resend-verification-email.email-sent",
+    "defaultMessage": "A message with a verification link has been sent to your email address. Please follow the link to verify your email."
+  },
+  {
+    "id": "auth.resend-verification-email.buttons.submit",
+    "defaultMessage": "Submit"
+  }
+]

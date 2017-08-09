@@ -32,6 +32,14 @@ export const links = defineMessages({
     id: 'auth.login.links.forgot-password',
     defaultMessage: 'Forgot Password?'
   },
+  resendVerificationEmailPrompt: {
+    id: 'auth.login.links.resend-verification-email.prompt',
+    defaultMessage: "Didn't receive verification e-mail? {link}"
+  },
+  resendVerificationEmail: {
+    id: 'auth.login.links.resend-verification-email',
+    defaultMessage: "Re-send"
+  },
   signUpPrompt: {
     id: 'auth.login.links.signUp.prompt',
     defaultMessage: 'New to {brand}? {link}'

@@ -3,6 +3,7 @@ export default {
   auth: {
     signUp: '/sign-up',
     verificationEmailSent: '/verification-email-sent',
+    resendVerificationEmail: '/resend-verification-email',
     verifyEmail: '/verify-email',
     login: '/login',
     changePassword: '/password/change',

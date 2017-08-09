@@ -20,6 +20,14 @@
     "defaultMessage": "Forgot Password?"
   },
   {
+    "id": "auth.login.links.resend-verification-email.prompt",
+    "defaultMessage": "Didn't receive verification e-mail? {link}"
+  },
+  {
+    "id": "auth.login.links.resend-verification-email",
+    "defaultMessage": "Re-send"
+  },
+  {
     "id": "auth.login.links.signUp.prompt",
     "defaultMessage": "New to {brand}? {link}"
   },

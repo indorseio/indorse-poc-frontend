@@ -34,10 +34,17 @@ class Login extends Component {
   renderFooter() {
     const { intl: { formatMessage } } = this.props;
 
-    return <FormattedMessage {...messages.links.signUpPrompt} values={{
-      brand: brand.name,
-      link: <Link to={routeTemplates.auth.signUp}>{formatMessage(messages.links.signUp)}</Link>
-    }} />;
+    return <div className="text-left">
+      <FormattedMessage {...messages.links.signUpPrompt} values={{
+        brand: brand.name,
+        link: <Link to={routeTemplates.auth.signUp}>{formatMessage(messages.links.signUp)}</Link>
+      }} />
+      <p />
+      <FormattedMessage {...messages.links.resendVerificationEmailPrompt} values={{
+        brand: brand.name,
+        link: <Link to={routeTemplates.auth.resendVerificationEmail}>{formatMessage(messages.links.resendVerificationEmail)}</Link>
+      }} />
+    </div>;
   }
 
   render() {
@@ -56,9 +63,12 @@ class Login extends Component {
             <Field name={fieldNames.password} component={TextField} type="password" label={formatMessage(messages.labels.password)} />
           </div>
           <div className="mt-3 d-flex justify-content-between align-items-center">
-            <Link to={routeTemplates.auth.forgotPassword}>
-              {formatMessage(messages.links.forgotPassword)}
-            </Link>
+            <div>
+              <Link to={routeTemplates.auth.forgotPassword}>
+                {formatMessage(messages.links.forgotPassword)}
+              </Link>
+              <br />
+            </div>
             <SubmitButton label={formatMessage(messages.buttons.submit)} primary disabled={submitting} />
           </div>
         </form>

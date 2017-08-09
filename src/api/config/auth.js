@@ -14,6 +14,14 @@ export function verifyEmail({ email, verifyToken }) {
   };
 }
 
+export function resendVerificationEmail({ email }) {
+  return {
+    endpoint: 'resendverification',
+    method: 'POST',
+    data: { email }
+  };
+}
+
 export function login({ email, password }) {
   return {
     endpoint: 'login',

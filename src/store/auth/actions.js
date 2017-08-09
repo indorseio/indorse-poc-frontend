@@ -16,6 +16,13 @@ export const verifyEmail = {
   failure: (error) => defineAction(types.VERIFY_EMAIL.FAILURE, error),
 };
 
+export const resendVerificationEmail = {
+  request: (values, form) => defineAction(types.RESEND_VERIFICATION_EMAIL.REQUEST, values, { form }),
+  start: () => defineAction(types.RESEND_VERIFICATION_EMAIL.START),
+  success: () => defineAction(types.RESEND_VERIFICATION_EMAIL.SUCCESS),
+  failure: (error) => defineAction(types.RESEND_VERIFICATION_EMAIL.FAILURE, error),
+};
+
 export const login = {
   request: (values, form) => defineAction(types.LOGIN.REQUEST, values, { form }),
   start: (values) => defineAction(types.LOGIN.START, values),

@@ -20,6 +20,7 @@ import ConfirmationDialog from 'ui/common/confirmation-dialog';
 import Home from 'ui/home';
 import SignUp from 'ui/auth/sign-up';
 import VerificationEmailSent from 'ui/auth/verification-email-sent';
+import ResendVerificationEmail from 'ui/auth/resend-verification-email';
 import VerifyEmail from 'ui/auth/verify-email';
 import Login from 'ui/auth/login';
 import ChangePassword from 'ui/auth/change-password';
@@ -44,6 +45,7 @@ class App extends Component {
           <Switch>
             <Route exact path={routeTemplates.auth.signUp} component={AnonymousOnly(SignUp)} />
             <Route exact path={routeTemplates.auth.verificationEmailSent} component={AnonymousOnly(VerificationEmailSent)} />
+            <Route exact path={routeTemplates.auth.resendVerificationEmail} component={AnonymousOnly(ResendVerificationEmail)} />
             <Route exact path={routeTemplates.auth.verifyEmail} component={AnonymousOnly(VerifyEmail)} />
             <Route exact path={routeTemplates.auth.login} component={AnonymousOnly(Login)} />
             <Route exact path={routeTemplates.auth.forgotPassword} component={AnonymousOnly(ForgotPassword)} />

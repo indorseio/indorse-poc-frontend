@@ -15,3 +15,5 @@ export const CHANGE_PASSWORD = defineApiActionTypes('CHANGE_PASSWORD');
 export const FORGOT_PASSWORD = defineApiActionTypes('FORGOT_PASSWORD');
 
 export const RESET_PASSWORD = defineApiActionTypes('RESET_PASSWORD');
+
+export const INVALIDATE_SESSION = 'auth/INVALIDATE_SESSION';

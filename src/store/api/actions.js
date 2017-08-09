@@ -57,5 +57,3 @@ export const resetPassword = {
   success: () => defineAction(types.RESET_PASSWORD.SUCCESS),
   failure: (error) => defineAction(types.RESET_PASSWORD.FAILURE, error),
 };
-
-export const invalidateSession = () => defineAction(types.INVALIDATE_SESSION);

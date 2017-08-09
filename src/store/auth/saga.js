@@ -195,15 +195,26 @@ function* tryRestoreSession() {
     } else {
       return false;
     }
-  } catch(error) {
+  } catch (error) {
     // TODO: Dispatch some error action
     console.error(error);
     return false;
   }
 }
 
+function* invalidateSession() {
+  yield put(actions.logout.success());
+  storage.deleteToken();
+  yield put(push(routeTemplates.auth.login));
+}
+
+function* watchInvalidateSession() {
+  yield takeEvery(types.INVALIDATE_SESSION, invalidateSession);
+}
+
 export default function* auth() {
   yield call(tryRestoreSession);
+  yield fork(watchInvalidateSession);
 
   yield fork(watchSignUp);
   yield fork(watchVerifyEmail);

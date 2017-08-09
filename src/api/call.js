@@ -21,7 +21,8 @@ export const callApiRaw = ({ endpoint, method, headers, body }) => {
   }).then(response =>
     response.json().then(json => {
       if (!response.ok) {
-        return Promise.reject(json);
+        const error = { ...json, response };
+        return Promise.reject(error);
       }
 
       const camelizedJson = camelizeKeys(json, (key, convert) => unconventional[key] || convert(key));

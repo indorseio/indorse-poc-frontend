@@ -81,7 +81,7 @@ function* watchResendVerificationEmail() {
 }
 
 function* login({ payload: values, meta }) {
-  const form = meta && meta.form;
+  const { form, from } = meta || {};
   yield put(actions.login.start(values));
   if (form) yield put(startSubmit(form));
 
@@ -91,7 +91,7 @@ function* login({ payload: values, meta }) {
     storage.setToken(token);
     yield put(actions.login.success(unwrapToken(token)));
     if (form) yield put(stopSubmit(form));
-    yield put(push(routeTemplates.root, {
+    yield put(push(from || routeTemplates.root, {
       flash: buildMessage({ kind: messageTypes.success, content: messages.loggedIn })
     }));
   } catch (error) {

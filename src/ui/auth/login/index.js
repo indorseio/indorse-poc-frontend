@@ -28,7 +28,9 @@ class Login extends Component {
   }
 
   onSubmit(values) {
-    return this.props.login.request(values, this.props.form);
+    const { form } = this.props;
+    const { from } = this.props.location.state || { from: { pathname: routeTemplates.root } }
+    return this.props.login.request(values, { form, from });
   }
 
   renderFooter() {

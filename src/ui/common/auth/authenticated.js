@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { withRouter } from 'react-router';
 import { defineMessages } from 'react-intl';
 
 import { selectIsLoggedIn, selectIsCurrentUserApproved } from 'store/auth/selectors';
@@ -26,7 +27,7 @@ const approvalRequiredDefault = process.env.ADMIN_APPROVAL_REQUIRED_FOR_USER ===
 const Authenticated = (WrappedComponent, { approvalRequired = approvalRequiredDefault, flash = true } = {}) => {
   class Wrapper extends React.Component {
     render() {
-      const { loggedIn, currentUserApproved, ...passThrough } = this.props;
+      const { loggedIn, currentUserApproved, location, ...passThrough } = this.props;
 
       if (loggedIn) {
         if (approvalRequired && !currentUserApproved) {
@@ -41,6 +42,7 @@ const Authenticated = (WrappedComponent, { approvalRequired = approvalRequiredDe
         return <Redirect to={{
           pathname: routeTemplates.auth.login,
           state: flash ? {
+            from: location,
             flash: buildMessage({
               id: 'authentication-required',
               kind: 'danger',
@@ -54,7 +56,7 @@ const Authenticated = (WrappedComponent, { approvalRequired = approvalRequiredDe
 
   Wrapper.displayName = 'Authenticated';
 
-  return connect(mapStateToProps)(Wrapper);
+  return withRouter(connect(mapStateToProps)(Wrapper));
 }
 
 export default Authenticated;

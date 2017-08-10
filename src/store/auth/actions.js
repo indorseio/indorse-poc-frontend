@@ -24,7 +24,7 @@ export const resendVerificationEmail = {
 };
 
 export const login = {
-  request: (values, form) => defineAction(types.LOGIN.REQUEST, values, { form }),
+  request: (values, { form, from }) => defineAction(types.LOGIN.REQUEST, values, { form, from }),
   start: (values) => defineAction(types.LOGIN.START, values),
   success: ({ token, user }) => defineAction(types.LOGIN.SUCCESS, { token, user }),
   failure: (error) => defineAction(types.LOGIN.FAILURE, error),

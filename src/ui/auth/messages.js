@@ -16,5 +16,9 @@ export default defineMessages({
   passwordResetSuccess: {
     id: 'auth.messages.password-reset-success',
     defaultMessage: 'Password reset successfully. Please login to continue'
+  },
+  authenticationRequired: {
+    id: 'auth.messages.authentication-required',
+    defaultMessage: 'You need to login first'
   }
 });

@@ -14,5 +14,9 @@
   {
     "id": "auth.messages.password-reset-success",
     "defaultMessage": "Password reset successfully. Please login to continue"
+  },
+  {
+    "id": "auth.messages.authentication-required",
+    "defaultMessage": "You need to login first"
   }
 ]

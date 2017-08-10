@@ -205,7 +205,13 @@ function* tryRestoreSession() {
 function* invalidateSession() {
   yield put(actions.logout.success());
   storage.deleteToken();
-  yield put(push(routeTemplates.auth.login));
+  yield put(push(routeTemplates.auth.login, {
+    flash: buildMessage({
+      id: 'authentication-required',
+      kind: 'danger',
+      content: messages.authenticationRequired
+    })
+  }));
 }
 
 function* watchInvalidateSession() {
@@ -220,7 +226,13 @@ function* watchStorage() {
       const { oldValue, newValue } = yield take(chan);
       if (oldValue && !newValue) {
         yield put(actions.logout.success());
-        yield put(push(routeTemplates.auth.login));
+        yield put(push(routeTemplates.auth.login, {
+          flash: buildMessage({
+            id: 'authentication-required',
+            kind: 'danger',
+            content: messages.authenticationRequired
+          })
+        }));
       } else if (oldValue !== newValue && !!newValue) {
         yield put(actions.login.success(unwrapToken(newValue)));
         yield put(push(routeTemplates.root, {

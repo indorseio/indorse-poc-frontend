@@ -1,4 +1,4 @@
-import { call, fork, put, takeEvery } from 'redux-saga/effects';
+import { call, fork, put, takeEvery, take } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
 import { startSubmit, stopSubmit } from 'redux-form';
 import jwtDecode from 'jwt-decode';
@@ -212,6 +212,27 @@ function* watchInvalidateSession() {
   yield takeEvery(types.INVALIDATE_SESSION, invalidateSession);
 }
 
+function* watchStorage() {
+  const chan = yield call(storage.createTokenChangeChannel);
+
+  while (true) {
+    try {
+      const { oldValue, newValue } = yield take(chan);
+      if (oldValue && !newValue) {
+        yield put(actions.logout.success());
+        yield put(push(routeTemplates.auth.login));
+      } else if (oldValue !== newValue && !!newValue) {
+        yield put(actions.login.success(unwrapToken(newValue)));
+        yield put(push(routeTemplates.root, {
+          flash: buildMessage({ kind: messageTypes.success, content: messages.loggedIn })
+        }));
+      }
+    } catch (e) {
+      console.log('Error while handling token change', e);
+    }
+  }
+}
+
 export default function* auth() {
   yield call(tryRestoreSession);
   yield fork(watchInvalidateSession);
@@ -224,4 +245,5 @@ export default function* auth() {
   yield fork(watchChangePassword);
   yield fork(watchForgotPassword);
   yield fork(watchResetPassword);
+  yield fork(watchStorage);
 }

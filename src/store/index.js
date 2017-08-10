@@ -32,7 +32,9 @@ export default function creator(raven, history) {
   );
 
   const store = createStore(rootReducer, initialState, enhancer);
-  sagaMiddleware.run(rootSaga, raven);
+  sagaMiddleware.run(rootSaga, raven).done.catch(ex => {
+    raven.captureException(ex);
+  });
 
   return store;
 };

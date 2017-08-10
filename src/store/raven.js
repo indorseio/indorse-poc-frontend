@@ -1,6 +1,7 @@
 const identity = x => x;
 const getUndefined = () => { };
-function createRavenMiddleware(Raven, options = {}) {
+
+export default function createRavenMiddleware(Raven, options = {}) {
   // TODO: Validate options.
   const {
     breadcrumbDataFromAction = getUndefined,
@@ -36,5 +37,3 @@ function createRavenMiddleware(Raven, options = {}) {
     };
   };
 }
-
-module.exports = createRavenMiddleware;

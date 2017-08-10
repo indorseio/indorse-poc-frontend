@@ -4,10 +4,6 @@ import auth from 'store/auth/saga';
 import entities from 'store/entities/saga';
 
 export default function* rootSaga(raven) {
-  try {
-    yield fork(auth);
-    yield fork(entities);
-  } catch (ex) {
-    raven.captureException(ex);
-  }
+  yield fork(auth);
+  yield fork(entities);
 }

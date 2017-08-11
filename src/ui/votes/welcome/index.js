@@ -1,16 +1,27 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
 import classnames from 'classnames';
+import { Helmet } from "react-helmet";
 
 import styles from './index.module.scss';
 
-const Welcome = (props) => {
+const messages = defineMessages({
+  title: {
+    id: "votes.welcome.title",
+    defaultMessage: "Welcome to Indorse"
+  }
+});
+
+const Welcome = ({ intl: { formatMessage } }) => {
   return (<article className={classnames('container', styles.page)}>
+    <Helmet>
+      <title>{formatMessage(messages.title)}</title>
+    </Helmet>
     <div className={classnames('row justify-content-center align-items-center', styles.pageRow)}>
       <div className="col-12 col-md-8 text-center">
         <header>
           <h1 className="text-primary">
-            <FormattedMessage id="votes.welcome.title" defaultMessage="Welcome to Indorse" />
+            {formatMessage(messages.title)}
           </h1>
         </header>
         <main>
@@ -27,4 +38,4 @@ const Welcome = (props) => {
   );
 };
 
-export default Welcome;
+export default injectIntl(Welcome);

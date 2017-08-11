@@ -1,5 +1,9 @@
 [
   {
+    "id": "votes.welcome.title",
+    "defaultMessage": "Welcome to Indorse"
+  },
+  {
     "id": "claims.welcome.title",
     "defaultMessage": "Welcome to Indorse"
   },

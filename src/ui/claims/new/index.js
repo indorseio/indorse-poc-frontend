@@ -6,6 +6,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 
+import { Helmet } from "react-helmet";
 import Alert from 'ui/common/alert';
 import TextField from 'ui/common/form/fields/text-field';
 import SelectField from 'ui/common/form/fields/select-field';
@@ -36,6 +37,9 @@ class NewClaim extends Component {
 
     return (
       <div className={classnames('container', styles.page)}>
+        <Helmet>
+          <title>{formatMessage(messages.header.title)}</title>
+        </Helmet>
         <div className={classnames('row justify-content-center align-items-center', styles.pageRow)}>
           <div className="col-12 col-sm-6">
             <h1 className="text-primary text-center">

@@ -28,6 +28,9 @@ const { request: registerToVoteRequest } = registerToVote;
 const { request: endorseRequest } = endorse;
 const { request: flagRequest } = flag;
 
+moment.relativeTimeThreshold('s', 59);
+moment.relativeTimeThreshold('ss', 0);
+
 class Details extends Component {
   static propTypes = {
     id: PropTypes.string.isRequired,

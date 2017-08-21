@@ -8,6 +8,8 @@ import * as actions from './actions';
 import * as selectors from './selectors';
 import * as api from 'api/config/votes';
 import callApi from 'store/api/saga';
+import * as flashActions from 'store/flash/actions';
+import { messageTypes } from 'store/flash/builder';
 import votesMessages from 'ui/votes/messages';
 import { confirmSaga as confirm } from 'store/confirmation-dialog/saga';
 // import routeTemplates from 'ui/common/routes/templates';
@@ -57,6 +59,8 @@ function* registerToVote({ payload }) {
     yield put(actions.registerToVote.success({ voteId, claimId }));
   } catch (error) {
     yield put(actions.registerToVote.failure(error));
+    if (error && error.message)
+      yield put(flashActions.addMessage({ kind: messageTypes.danger, content: error.message }));
   }
 }
 
@@ -76,6 +80,8 @@ function* endorse({ payload }) {
     yield put(actions.endorse.success({ voteId, claimId }));
   } catch (error) {
     yield put(actions.endorse.failure(error));
+    if (error && error.message)
+      yield put(flashActions.addMessage({ kind: messageTypes.danger, content: error.message }));
   }
 }
 
@@ -95,6 +101,8 @@ function* flag({ payload }) {
     yield put(actions.flag.success({ voteId, claimId }));
   } catch (error) {
     yield put(actions.flag.failure(error));
+    if (error && error.message)
+      yield put(flashActions.addMessage({ kind: messageTypes.danger, content: error.message }));
   }
 }
 

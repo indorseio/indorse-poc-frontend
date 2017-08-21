@@ -21,6 +21,14 @@ import styles from './index.module.scss';
 
 const validate = validator(fields);
 
+const httpScheme = 'http://';
+function autoPrefixHttp(value, name) {
+  if (value && value.indexOf('://') < 0 && value.length > httpScheme.length)
+    return httpScheme + value;
+
+  return value;
+}
+
 class NewClaim extends Component {
   constructor(props) {
     super(props);
@@ -62,7 +70,7 @@ class NewClaim extends Component {
                 <Field name={fieldNames.description} component={TextField} label={formatMessage(messages.labels.description)} multiLine rows={2} rowsMax={10} />
               </div>
               <div>
-                <Field name={fieldNames.proof} component={TextField} label={formatMessage(messages.labels.proof)} hint={formatMessage(messages.hints.proof)} />
+                <Field name={fieldNames.proof} component={TextField} label={formatMessage(messages.labels.proof)} hint={formatMessage(messages.hints.proof)} parse={autoPrefixHttp} />
               </div>
               <div className="mt-3">
                 <SubmitButton label={formatMessage(messages.buttons.submit)} primary fullWidth disabled={submitting} />

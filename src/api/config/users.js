@@ -1,6 +1,6 @@
 export function fetchUsers() {
   return {
-    endpoint: 'users/1/100', // TODO: Accept pageNo and pageSize
+    endpoint: 'users/1/500', // TODO: Accept pageNo and pageSize
     method: 'GET',
     requireAuth: true
   };

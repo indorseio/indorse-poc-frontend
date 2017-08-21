@@ -31,7 +31,6 @@ class VerifyEmail extends Component {
           <FormattedMessage id="auth.verify-email.verified" defaultMessage="Thank you for verifying your email. Please login to continue" />
         </Alert>}
         {error && <Alert color="danger">
-          <FormattedMessage id="auth.verify-email.error" defaultMessage="There was " />
           {error}
         </Alert>}
       </Layout>

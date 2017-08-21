@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
 import Paper from 'material-ui/Paper';
@@ -11,6 +12,9 @@ import DefaultFooter from './footer';
 
 const Layout = ({ title, children, showFooter = true, footerContent, standalone = true }) => (
   <div className={classnames('container-fluid', 'px-0', 'py-5', styles.auth)}>
+    <Helmet>
+      <title>{title}</title>
+    </Helmet>
     <div className={classnames('row align-items-center no-gutters', styles.auth)}>
       <div className="col col-sm-3 col-lg-4"></div>
       <div className="col-12 col-sm-6 col-lg-4 px-3">

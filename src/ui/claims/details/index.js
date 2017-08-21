@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import { Helmet } from "react-helmet";
 import { Link } from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 import Avatar from 'material-ui/Avatar';
@@ -234,6 +235,9 @@ class Details extends Component {
 
     return (
       <article className="container">
+        <Helmet>
+          <title>{claim.title}</title>
+        </Helmet>
         <div className="row">
           <div className="col-12">
             {this.renderBreadcrumbs()}

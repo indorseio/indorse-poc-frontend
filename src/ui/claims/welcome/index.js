@@ -1,14 +1,25 @@
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
+import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
 import { Link } from 'react-router-dom';
+import { Helmet } from "react-helmet";
 import RaisedButton from 'material-ui/RaisedButton';
 import classnames from 'classnames';
 
 import routeTemplates from 'ui/common/routes/templates';
 import styles from './index.module.scss';
 
-const Welcome = (props) => {
+const messages = defineMessages({
+  title: {
+    id: "votes.welcome.title",
+    defaultMessage: "Welcome to Indorse"
+  }
+});
+
+const Welcome = ({ intl: { formatMessage } }) => {
   return (<article className={classnames('container', styles.page)}>
+    <Helmet>
+      <title>{formatMessage(messages.title)}</title>
+    </Helmet>
     <div className={classnames('row justify-content-center align-items-center', styles.pageRow)}>
       <div className="col-12 col-md-6 text-center">
         <header>
@@ -32,4 +43,4 @@ const Welcome = (props) => {
   );
 };
 
-export default Welcome;
+export default injectIntl(Welcome);

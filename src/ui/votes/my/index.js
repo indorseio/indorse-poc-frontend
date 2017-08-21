@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { FormattedMessage, injectIntl } from 'react-intl';
+import { defineMessages, injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { Helmet } from "react-helmet";
 
 import { selectCurrentUserId, selectCurrentUserVotesFetched } from 'store/auth/selectors';
 import { selectCurrentUserVotes } from 'store/entities/votes/selectors';
@@ -11,6 +12,13 @@ import { fetchCurrentUserVotes } from 'store/entities/votes/actions';
 import VotesTable from 'ui/votes/table';
 import Loading from 'ui/common/loading';
 import Welcome from 'ui/votes/welcome';
+
+const messages = defineMessages({
+  title: {
+    id: "dashboard.votes.title",
+    defaultMessage: "My Votes"
+  }
+});
 
 class Votes extends Component {
   static propTypes = {
@@ -28,7 +36,7 @@ class Votes extends Component {
   }
 
   render() {
-    const { votes, votesFetched } = this.props;
+    const { votes, votesFetched, intl: { formatMessage } } = this.props;
 
     if (!votesFetched && votes.length === 0)
       return <Loading />;
@@ -38,9 +46,12 @@ class Votes extends Component {
 
     return (
       <article className="container">
+        <Helmet>
+          <title>{formatMessage(messages.title)}</title>
+        </Helmet>
         <header className="mt-4 d-flex align-items-center justify-content-between">
           <h1 className="text-primary">
-            <FormattedMessage id="dashboard.votes.title" defaultMessage="My Votes" />
+            {formatMessage(messages.title)}
           </h1>
         </header>
         <main>

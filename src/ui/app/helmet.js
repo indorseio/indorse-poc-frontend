@@ -21,8 +21,8 @@ const messages = defineMessages({
 
 const Element = ({ intl: { formatMessage } }) => {
   return (
-    <Helmet>
-      <title>{formatMessage(messages.title)}</title>
+    <Helmet titleTemplate={`%s | ${formatMessage(messages.title)}`} defaultTitle={formatMessage(messages.title)}>
+      {/* <title>{formatMessage(messages.title)}</title> */}
       <meta name="description" content={formatMessage(messages.metaDescription)} />
       <meta property="og:locale" content="en_US" />
       <meta property="og:type" content="website" />

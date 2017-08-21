@@ -229,7 +229,6 @@ class Details extends Component {
   render() {
     const { claim } = this.props;
 
-    // TODO: Replace with loading indicator icon
     if (!claim)
       return <Loading />;
 

@@ -7,6 +7,9 @@ import rootReducer from './reducers';
 import rootSaga from './sagas';
 
 export default function creator(history) {
+  if (history && history.location && history.location.state && history.location.state.flash)
+    delete history.location.state.flash;
+
   const initialState = {
     intl: {
       locale: 'en',

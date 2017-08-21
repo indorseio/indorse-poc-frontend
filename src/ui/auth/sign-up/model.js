@@ -11,7 +11,9 @@ export default {
     presence: true,
   },
   [fieldNames.email]: {
-    presence: true,
+    presence: {
+      allowEmpty: true
+    },
     email: true
   },
   [fieldNames.ethereumAddress]: {

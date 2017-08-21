@@ -4,7 +4,9 @@ export const fieldNames = {
 
 export default {
   [fieldNames.email]: {
-    presence: true,
+    presence: {
+      allowEmpty: true
+    },
     email: true
   }
 }

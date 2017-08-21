@@ -5629,6 +5629,10 @@ reduce-function-call@^1.0.1:
   dependencies:
     balanced-match "^0.4.2"
 
+redux-beacon@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/redux-beacon/-/redux-beacon-1.1.0.tgz#d28a7a9b82183f9ed80e646a56ee434df379614d"
+
 redux-form@^7.0.0:
   version "7.0.2"
   resolved "https://registry.yarnpkg.com/redux-form/-/redux-form-7.0.2.tgz#6fcc3e847ee95e1eca6af46da34c949458c6e950"

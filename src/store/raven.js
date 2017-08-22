@@ -1,7 +1,7 @@
 const identity = x => x;
 const getUndefined = () => { };
 
-export default function createRavenMiddleware(Raven, options = {}) {
+export default function createRavenMiddleware(raven, options = {}) {
   // TODO: Validate options.
   const {
     breadcrumbDataFromAction = getUndefined,
@@ -13,7 +13,7 @@ export default function createRavenMiddleware(Raven, options = {}) {
   return store => {
     let lastAction;
 
-    Raven.setDataCallback((data, original) => {
+    raven.setDataCallback((data, original) => {
       data.extra.lastAction = actionTransformer(lastAction);
       data.extra.state = stateTransformer(store.getState());
       return original ? original(data) : data;
@@ -22,7 +22,7 @@ export default function createRavenMiddleware(Raven, options = {}) {
     return next => action => {
       // Log the action taken to Raven so that we have narrative context in our
       // error report.
-      Raven.captureBreadcrumb({
+      raven.captureBreadcrumb({
         category: breadcrumbCategory,
         message: action.type,
         data: breadcrumbDataFromAction(action)
@@ -32,7 +32,7 @@ export default function createRavenMiddleware(Raven, options = {}) {
       try {
         return next(action);
       } catch (ex) {
-        Raven.captureException(ex);
+        raven.captureException(ex);
       }
     };
   };

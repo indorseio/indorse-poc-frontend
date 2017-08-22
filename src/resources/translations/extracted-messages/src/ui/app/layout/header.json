@@ -20,6 +20,10 @@
     "defaultMessage": "My Votes"
   },
   {
+    "id": "app.layout.header.score",
+    "defaultMessage": "Score: {score}"
+  },
+  {
     "id": "app.layout.header.change-password",
     "defaultMessage": "Change Password"
   },

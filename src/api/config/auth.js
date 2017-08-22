@@ -62,3 +62,11 @@ export function resetPassword({ email, password, passwordToken: passToken }) {
     data: { email, password, passToken },
   };
 }
+
+export function fetchCurrentUser() {
+  return {
+    endpoint: 'me',
+    method: 'POST',
+    requireAuth: true
+  };
+}

@@ -65,6 +65,10 @@ export default function reducer(state = initialState, action) {
         token: undefined,
         currentUser: undefined
       });
+    case types.FETCH_CURRENT_USER.SUCCESS:
+      return state.merge({
+        currentUser: action.payload.user
+      });
     case types.FORGOT_PASSWORD.START:
       return state.merge({ forgotPasswordEmailSent: false });
     case types.FORGOT_PASSWORD.SUCCESS:

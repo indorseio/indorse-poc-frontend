@@ -59,3 +59,9 @@ export const resetPassword = {
 };
 
 export const invalidateSession = () => defineAction(types.INVALIDATE_SESSION);
+
+export const fetchCurrentUser = {
+  start: () => defineAction(types.FETCH_CURRENT_USER.START),
+  success: ({ profile }) => defineAction(types.FETCH_CURRENT_USER.SUCCESS, { user: profile }),
+  failure: (error) => defineAction(types.FETCH_CURRENT_USER.FAILURE, error),
+};

@@ -1,4 +1,5 @@
-import { call, fork, put, takeEvery, take } from 'redux-saga/effects';
+import { call, fork, put, takeEvery, take, race } from 'redux-saga/effects';
+import { delay } from 'redux-saga';
 import { push } from 'react-router-redux';
 import { startSubmit, stopSubmit } from 'redux-form';
 import jwtDecode from 'jwt-decode';
@@ -245,7 +246,41 @@ function* watchStorage() {
   }
 }
 
+function* fetchCurrentUser() {
+  yield put(actions.fetchCurrentUser.start());
+
+  try {
+    const response = yield call(callApi, api.fetchCurrentUser());
+    yield put(actions.fetchCurrentUser.success(response));
+  } catch (error) {
+    yield put(actions.fetchCurrentUser.failure(error));
+  }
+}
+
+const pollCurrentUserIntervalInSeconds = parseInt(process.env.REACT_APP_POLL_CURRENT_USER_INTERVAL_IN_SEC || 60, 10) || 60;
+function* pollCurrentUser() {
+  try {
+    while (true) {
+      yield call(fetchCurrentUser);
+
+      yield delay(pollCurrentUserIntervalInSeconds * 1000);
+    }
+  } catch (error) {
+    return;
+  }
+}
+
+function* watchAuthStatus() {
+  while (yield take(types.LOGIN.SUCCESS)) {
+    yield race({
+      poller: call(pollCurrentUser),
+      logout: take(types.LOGOUT.REQUEST)
+    });
+  }
+}
+
 export default function* auth() {
+  yield fork(watchAuthStatus);
   yield call(tryRestoreSession);
   yield fork(watchInvalidateSession);
 

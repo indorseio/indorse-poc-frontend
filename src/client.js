@@ -13,6 +13,7 @@ import en from 'react-intl/locale-data/en';
 import createStore from './store';
 import App from './ui/app';
 import registerServiceWorker from './registerServiceWorker';
+import './moment-config';
 
 addLocaleData([...en]);
 

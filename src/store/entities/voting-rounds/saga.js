@@ -5,6 +5,7 @@ import moment from 'moment';
 import * as actions from './actions';
 import * as selectors from './selectors';
 import * as helpers from './helpers';
+import * as claimActions from 'store/entities/claims/actions';
 
 const UPDATE_STATUSES_INTERVAL = 60000;
 const UPDATE_STATUS_INTERVAL = 1000;
@@ -30,6 +31,8 @@ function* checkEndingSoon({ votingRound, status }) {
     yield call(updateStatusTimer, { votingRoundId:  votingRound.id, endDate: votingRound.endRegistration });
   } else if (helpers.isVotingEndingSoon(votingRound, status, UPDATE_STATUSES_INTERVAL)) {
     yield call(updateStatusTimer, { votingRoundId: votingRound.id, endDate: votingRound.endVoting });
+    if (votingRound.claim && votingRound.claim.id)
+      yield put(claimActions.fetchClaim.request({ claimId: votingRound.claim.id }))
   }
 }
 

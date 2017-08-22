@@ -16,13 +16,13 @@ const pageView = action => ({
 const signupSuccess = action => ({
   hitType: 'event',
   eventCategory: 'auth',
-  eventAction: 'loggedIn',
+  eventAction: 'signedUp',
 });
 
 const loginSuccess = action => ({
   hitType: 'event',
   eventCategory: 'auth',
-  eventAction: 'signedUp',
+  eventAction: 'loggedIn',
 });
 
 const createClaimSuccess = action => ({

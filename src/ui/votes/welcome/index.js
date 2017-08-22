@@ -31,6 +31,12 @@ const Welcome = ({ intl: { formatMessage } }) => {
           <p className="lead">
             <FormattedMessage id="votes.welcome.notification" defaultMessage="You will get an e-mail notification when the system assigns you a claim" />
           </p>
+          <p className="pt-5">
+            <FormattedMessage 
+            id="welcome.more-poc-info" 
+            defaultMessage="Thank you for joining Indorse. For more information about what this POC is about, and what to expect please read this {link}"
+            values={{ link: <a href="https://medium.com/joinindorse/indorse-dev-update-13-august-2017-249722f7630e" target="blank" rel="noreferrer noopener">Medium Blog post</a> }} />
+          </p>
         </main>
       </div>
     </div>

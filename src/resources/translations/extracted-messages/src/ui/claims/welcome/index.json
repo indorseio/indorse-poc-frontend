@@ -14,5 +14,9 @@
   {
     "id": "claims.welcome.links.new",
     "defaultMessage": "Create you first claim"
+  },
+  {
+    "id": "welcome.more-poc-info",
+    "defaultMessage": "Thank you for joining Indorse. For more information about what this POC is about, and what to expect please read this {link}"
   }
 ]

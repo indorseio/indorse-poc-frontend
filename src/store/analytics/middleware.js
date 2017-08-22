@@ -6,6 +6,8 @@ import { SIGN_UP, LOGIN } from 'store/auth/action-types';
 import { CREATE_CLAIM } from 'store/entities/claims/action-types';
 import { REGISTER_TO_VOTE, ENDORSE, FLAG } from 'store/entities/votes/action-types';
 
+import formEventDefinitions from './form-event-definitions';
+
 const pageView = action => ({
   hitType: 'pageview',
   page: action.payload && action.payload.pathname
@@ -58,7 +60,8 @@ const eventsMap = {
   [CREATE_CLAIM.SUCCESS]: createClaimSuccess,
   [REGISTER_TO_VOTE.SUCCESS]: registerToVoteSuccess,
   [ENDORSE.SUCCESS]: indorseSuccess,
-  [FLAG.SUCCESS]: flagSuccess
+  [FLAG.SUCCESS]: flagSuccess,
+  ...formEventDefinitions
 };
 
 export default createMiddleware(eventsMap, GoogleAnalytics);

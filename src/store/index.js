@@ -1,13 +1,14 @@
 import { compose, createStore, applyMiddleware } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
 import createSagaMiddleware from 'redux-saga';
+import createRavenMiddleware from './raven';
 
 import enMessages from 'resources/translations/locales/en.json';
 import analyticsMiddleware from './analytics/middleware';
 import rootReducer from './reducers';
 import rootSaga from './sagas';
 
-export default function creator(history) {
+export default function creator(raven, history) {
   if (history && history.location && history.location.state && history.location.state.flash)
     delete history.location.state.flash;
 
@@ -18,9 +19,12 @@ export default function creator(history) {
     }
   };
 
+  const ravenMiddleware = createRavenMiddleware(raven);
   const router = routerMiddleware(history);
-  const sagaMiddleware = createSagaMiddleware();
-  const middleware = applyMiddleware(router, sagaMiddleware, analyticsMiddleware);
+  const sagaMiddleware = createSagaMiddleware({
+    onError: (ex) => raven.captureException(ex)
+  });
+  const middleware = applyMiddleware(ravenMiddleware, router, sagaMiddleware, analyticsMiddleware);
 
   const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
   const enhancer = composeEnhancers(
@@ -28,7 +32,9 @@ export default function creator(history) {
   );
 
   const store = createStore(rootReducer, initialState, enhancer);
-  sagaMiddleware.run(rootSaga);
+  sagaMiddleware.run(rootSaga, raven).done.catch(ex => {
+    raven.captureException(ex);
+  });
 
   return store;
 };

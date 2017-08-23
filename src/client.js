@@ -12,13 +12,15 @@ import en from 'react-intl/locale-data/en';
 
 import createStore from './store';
 import App from './ui/app';
+import installRaven from './install-raven';
 import registerServiceWorker from './registerServiceWorker';
 import './moment-config';
 
 addLocaleData([...en]);
 
+const raven = installRaven();
 const history = createHistory();
-const store = createStore(history);
+const store = createStore(raven, history);
 
 render(
   <Provider store={store}>

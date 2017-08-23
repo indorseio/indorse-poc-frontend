@@ -19,15 +19,9 @@ import * as messages from './messages';
 import { createClaim } from 'store/entities/claims/actions';
 import styles from './index.module.scss';
 
+import { ensureScheme } from 'utils/url';
+
 const validate = validator(fields);
-
-const httpScheme = 'http://';
-function autoPrefixHttp(value, name) {
-  if (value && value.indexOf('://') < 0 && value.length > httpScheme.length)
-    return httpScheme + value;
-
-  return value;
-}
 
 class NewClaim extends Component {
   constructor(props) {
@@ -37,7 +31,8 @@ class NewClaim extends Component {
   }
 
   onSubmit(values) {
-    return this.props.createClaim.request(values, this.props.form);
+    const proof = ensureScheme(values[fieldNames.proof], fields[fieldNames.proof].url.defaultScheme);
+    return this.props.createClaim.request({ ...values, proof }, this.props.form);
   }
 
   render() {
@@ -70,7 +65,7 @@ class NewClaim extends Component {
                 <Field name={fieldNames.description} component={TextField} label={formatMessage(messages.labels.description)} multiLine rows={2} rowsMax={10} />
               </div>
               <div>
-                <Field name={fieldNames.proof} component={TextField} label={formatMessage(messages.labels.proof)} hint={formatMessage(messages.hints.proof)} parse={autoPrefixHttp} />
+                <Field name={fieldNames.proof} component={TextField} label={formatMessage(messages.labels.proof)} hint={formatMessage(messages.hints.proof)} />
               </div>
               <div className="mt-3">
                 <SubmitButton label={formatMessage(messages.buttons.submit)} primary fullWidth disabled={submitting} />

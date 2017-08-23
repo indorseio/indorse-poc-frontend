@@ -26,7 +26,8 @@ export default {
       allowEmpty: true
     },
     url: {
-      schemes: ['http', 'https']
+      schemes: ['http', 'https'],
+      defaultScheme: 'http'
     }
   }
 }

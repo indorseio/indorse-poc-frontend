@@ -1,6 +1,18 @@
 import validate from 'validate.js';
 import ethereumAddress from 'ethereum-address';
 
+import { ensureScheme } from 'utils/url';
+
+const originalUrlValidator = validate.validators.url;
+
+validate.validators.url = validate.extend(function (value, options) {
+  const defaultScheme = options && options.defaultScheme;
+  if (defaultScheme) {
+    return originalUrlValidator.bind(this)(ensureScheme(value, defaultScheme), options);
+  }
+  return originalUrlValidator.bind(this)(value, options);
+});
+
 validate.validators.ethereumAddress = validate.extend(function (value, options) {
   options = validate.extend({}, this.options, options);
   var message = options.message || this.message || "is not a valid ethereum address";

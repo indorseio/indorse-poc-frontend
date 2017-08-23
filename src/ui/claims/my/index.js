@@ -1,20 +1,17 @@
 import React, { Component } from 'react';
-import { FormattedMessage, defineMessages, injectIntl } from 'react-intl';
+import { defineMessages, injectIntl } from 'react-intl';
 import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 import { Helmet } from "react-helmet";
-import RaisedButton from 'material-ui/RaisedButton';
 
 import { selectCurrentUserId, selectCurrentUserClaimsFetched } from 'store/auth/selectors';
 import { selectCurrentUserClaims } from 'store/entities/claims/selectors';
 import { fetchUserClaims } from 'store/entities/claims/actions';
 
-import ClaimsTable from 'ui/claims/table';
+import ClaimsGrid from 'ui/claims/grid';
 import Loading from 'ui/common/loading';
 import Welcome from 'ui/claims/welcome';
-import routeTemplates from 'ui/common/routes/templates';
 
 const messages = defineMessages({
   title: {
@@ -52,18 +49,13 @@ class Claims extends Component {
         <Helmet>
           <title>{formatMessage(messages.title)}</title>
         </Helmet>
-        <header className="mt-4 d-flex align-items-center justify-content-between">
+        <header className="mt-4 d-flex align-items-center justify-content-center">
           <h1 className="text-primary">
             {formatMessage(messages.title)}
           </h1>
-          <Link to={routeTemplates.claims.new}>
-            <RaisedButton
-              primary
-              label={<FormattedMessage id="dashboard.claims.links.new" defaultMessage="New Claim" />} />
-          </Link>
         </header>
-        <main>
-          {<ClaimsTable claims={claims} />}
+        <main className="pt-5">
+          {<ClaimsGrid claims={claims} showNewClaimLink minimumClaimCount={3} />}
         </main>
       </article>
     );

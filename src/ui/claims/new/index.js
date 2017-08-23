@@ -9,12 +9,11 @@ import { reduxForm, Field } from 'redux-form';
 import { Helmet } from "react-helmet";
 import Alert from 'ui/common/alert';
 import TextField from 'ui/common/form/fields/text-field';
-import SelectField from 'ui/common/form/fields/select-field';
-import MenuItem from 'material-ui/MenuItem';
+import SkillsSelectField from 'ui/claims/skill-select-field';
 import validator from 'ui/common/form/validator';
 import SubmitButton from 'ui/common/form/submit-button';
 
-import fields, { fieldNames, skills } from './model';
+import fields, { fieldNames } from './model';
 import * as messages from './messages';
 import { createClaim } from 'store/entities/claims/actions';
 import styles from './index.module.scss';
@@ -55,11 +54,9 @@ class NewClaim extends Component {
               <div>
                 <Field
                   name={fieldNames.title}
-                  component={SelectField}
+                  component={SkillsSelectField}
                   label={formatMessage(messages.labels.title)}
-                  hint={formatMessage(messages.hints.title)}>
-                  {skills.map(skill => <MenuItem key={skill} value={skill} primaryText={skill} />)}
-                </Field>
+                  hint={formatMessage(messages.hints.title)} />
               </div>
               <div>
                 <Field name={fieldNames.description} component={TextField} label={formatMessage(messages.labels.description)} multiLine rows={2} rowsMax={10} />

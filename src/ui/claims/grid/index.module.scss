@@ -1,0 +1,14 @@
+.claim-card {
+  text-decoration: none;
+  transition: transform 0.25s;
+
+  &:hover {
+    text-decoration: none;
+
+    transform: scale(1.1);
+  }
+}
+
+.claim-skill-img {
+  width: 7.5rem;
+}

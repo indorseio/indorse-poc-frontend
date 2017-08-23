@@ -88,12 +88,12 @@ class Header extends Component {
           </NavItem>
         </Nav>
         <Nav navbar className="ml-auto">
-          {currentUser.scoreCount && <NavItem>
+          {currentUser.scoreCount && <li className="navbar-text mx-4">
             <FormattedMessage
               id="app.layout.header.score"
               defaultMessage="Score: {score}"
               values={{ score: currentUser.scoreCount }} />
-          </NavItem>}
+          </li>}
           <UncontrolledNavDropdown>
             <DropdownToggle nav caret>
               {currentUser.name || currentUser.email}

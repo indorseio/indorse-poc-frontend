@@ -22,6 +22,7 @@ import votesMessages from 'ui/votes/messages';
 import { STATUSES as CLAIM_STATUSES } from 'store/entities/claims/helpers';
 import { STATUSES as VOTE_STATUSES } from 'store/entities/votes/helpers';
 import Loading from 'ui/common/loading';
+import ExternalLink from 'ui/common/external-link';
 
 const { request: fetchClaimRequest } = fetchClaim;
 const { request: registerToVoteRequest } = registerToVote;
@@ -247,7 +248,9 @@ class Details extends Component {
             {claim.desc && <p className="lead">{claim.desc}</p>}
             {claim.proof && <dl>
               <dt>Proof:</dt>
-              <dl className="lead">{claim.proof}</dl>
+              <dl className="lead">
+                <ExternalLink href={claim.proof} openInNewTab />
+              </dl>
             </dl>}
             {claim.vote && this.renderVoteActions()}
           </div>

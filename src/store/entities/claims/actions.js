@@ -12,7 +12,7 @@ export const fetchUserClaims = {
 export const createClaim = {
   request: (values, form) => defineAction(types.CREATE_CLAIM.REQUEST, values, { form }),
   start: (values) => defineAction(types.CREATE_CLAIM.START, values),
-  success: ({ token, user }) => defineAction(types.CREATE_CLAIM.SUCCESS, { token, user }),
+  success: ({ token, claim }) => defineAction(types.CREATE_CLAIM.SUCCESS, { token, claim }),
   failure: (error) => defineAction(types.CREATE_CLAIM.FAILURE, error),
 };
 

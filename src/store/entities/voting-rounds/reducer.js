@@ -10,8 +10,9 @@ export default function reducer(state = initialState, action) {
     case entityActionTypes.ADD_ENTITIES:
       return action.payload.votingRounds ? state.merge(action.payload.votingRounds) : state;
     case actionTypes.SET_VOTING_ROUND_STATUSES:
-      const patch = Object.entries(action.payload.statusesById).reduce((res, [id, status]) => {
-        res[id] = { status, statusUpdatedAt: action.payload.statusUpdatedAt };
+      const { statusesById } = action.payload;
+      const patch = Object.keys(statusesById).reduce((res, id) => {
+        res[id] = { status: statusesById[id], statusUpdatedAt: action.payload.statusUpdatedAt };
         return res;
       }, {});
 

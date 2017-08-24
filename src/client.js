@@ -10,6 +10,7 @@ import 'ui/theme/global.scss';
 import { addLocaleData } from 'react-intl';
 import en from 'react-intl/locale-data/en';
 
+import loadPolyfills from './dynamic-polyfills';
 import createStore from './store';
 import App from './ui/app';
 import installRaven from './install-raven';
@@ -22,15 +23,17 @@ const raven = installRaven();
 const history = createHistory();
 const store = createStore(raven, history);
 
-render(
-  <Provider store={store}>
-    <IntlProvider>
-      <ConnectedRouter history={history}>
-        <App />
-      </ConnectedRouter>
-    </IntlProvider>
-  </Provider>,
-  document.getElementById('root')
-);
+loadPolyfills().then(() => {
+  render(
+    <Provider store={store}>
+      <IntlProvider>
+        <ConnectedRouter history={history}>
+          <App />
+        </ConnectedRouter>
+      </IntlProvider>
+    </Provider>,
+    document.getElementById('root')
+  );
+});
 
 registerServiceWorker();

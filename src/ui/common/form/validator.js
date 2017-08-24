@@ -15,7 +15,7 @@ validate.validators.url = validate.extend(function (value, options) {
 
 validate.validators.ethereumAddress = validate.extend(function (value, options) {
   options = validate.extend({}, this.options, options);
-  var message = options.message || this.message || "is not a valid ethereum address";
+  const message = options.message || this.message || "is not a valid ethereum address";
   // Empty values are fine
   if (!validate.isDefined(value)) {
     return;

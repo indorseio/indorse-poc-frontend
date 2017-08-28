@@ -15,11 +15,11 @@ export default defineMessages({
   },
   endorse: {
     id: 'votes.messages.endorse',
-    defaultMessage: 'Endorse'
+    defaultMessage: 'Indorse'
   },
   endorsed: {
     id: 'votes.messages.endorsed',
-    defaultMessage: 'Endorsed'
+    defaultMessage: 'Indorsed'
   },
   flag: {
     id: 'votes.messages.flag',

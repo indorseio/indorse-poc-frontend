@@ -11,7 +11,7 @@ export default defineMessages({
   },
   endorsed: {
     id: 'claims.messages.endorsed',
-    defaultMessage: 'Endorsed'
+    defaultMessage: 'Indorsed'
   },
   flagged: {
     id: 'claims.messages.flagged',

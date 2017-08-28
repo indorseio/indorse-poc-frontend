@@ -13,11 +13,11 @@
   },
   {
     "id": "votes.messages.endorse",
-    "defaultMessage": "Endorse"
+    "defaultMessage": "Indorse"
   },
   {
     "id": "votes.messages.endorsed",
-    "defaultMessage": "Endorsed"
+    "defaultMessage": "Indorsed"
   },
   {
     "id": "votes.messages.flag",

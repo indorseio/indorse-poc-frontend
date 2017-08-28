@@ -60,7 +60,7 @@
   "claim.status": "Status",
   "claim.title": "Title",
   "claims.messages.create": "Claim created successfully",
-  "claims.messages.endorsed": "Endorsed",
+  "claims.messages.endorsed": "Indorsed",
   "claims.messages.flagged": "Flagged",
   "claims.messages.pending": "Pending",
   "claims.messages.unverified": "Unverified",

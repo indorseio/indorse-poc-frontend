@@ -4,7 +4,7 @@ import { Collapse, Navbar, NavbarToggler, NavbarBrand, Nav, NavItem, NavLink } f
 import { UncontrolledNavDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
 import classnames from 'classnames';
 import { FormattedMessage, injectIntl, intlShape } from 'react-intl';
-import { Link } from 'react-router-dom';
+import { NavLink as RouterLink } from 'react-router-dom';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -51,12 +51,12 @@ class Header extends Component {
       <Collapse isOpen={this.state.isOpen} navbar onClickCapture={this.collapseNavbar}>
         <Nav navbar className="ml-auto">
           <NavItem>
-            <NavLink tag={Link} to={routeTemplates.auth.login}>
+            <NavLink tag={RouterLink} to={routeTemplates.auth.login}>
               <FormattedMessage id="app.layout.header.login" defaultMessage="Login" />
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink tag={Link} to={routeTemplates.auth.signUp}>
+            <NavLink tag={RouterLink} to={routeTemplates.auth.signUp}>
               <FormattedMessage id="app.layout.header.sign-up" defaultMessage="Sign Up" />
             </NavLink>
           </NavItem>
@@ -72,17 +72,17 @@ class Header extends Component {
       <Collapse isOpen={this.state.isOpen} navbar>
         <Nav navbar className="mr-auto" onClickCapture={this.collapseNavbar}>
           <NavItem>
-            {currentUserIsAdmin && <NavLink tag={Link} to={routeTemplates.admin.root}>
+            {currentUserIsAdmin && <NavLink tag={RouterLink} to={routeTemplates.admin.root}>
               <FormattedMessage id="app.layout.header.admin" defaultMessage="Admin" />
             </NavLink>}
           </NavItem>
           <NavItem>
-            <NavLink tag={Link} to={routeTemplates.claims.root}>
+            <NavLink tag={RouterLink} to={routeTemplates.claims.root}>
               <FormattedMessage id="app.layout.header.claims" defaultMessage="My Claims" />
             </NavLink>
           </NavItem>
           <NavItem>
-            <NavLink tag={Link} to={routeTemplates.votes.root}>
+            <NavLink tag={RouterLink} to={routeTemplates.votes.root}>
               <FormattedMessage id="app.layout.header.votes" defaultMessage="My Votes" />
             </NavLink>
           </NavItem>
@@ -99,7 +99,7 @@ class Header extends Component {
               {currentUser.name || currentUser.email}
             </DropdownToggle>
             <DropdownMenu>
-              <DropdownItem tag={Link} to={routeTemplates.auth.changePassword} onClick={this.collapseNavbar}>
+              <DropdownItem tag={RouterLink} to={routeTemplates.auth.changePassword} onClick={this.collapseNavbar}>
                 <FormattedMessage id="app.layout.header.change-password" defaultMessage="Change Password" />
               </DropdownItem>
               <DropdownItem onClick={this.logout} style={{ cursor: 'pointer' }}>
@@ -119,7 +119,7 @@ class Header extends Component {
       <Navbar tag="header" fixed="top" toggleable="md" inverse className={classnames(className)}>
         <section ref={(el => this.navbar = el && el.parentElement)} className="container">
           <NavbarToggler right onClick={this.toggleNavbar} />
-          <NavbarBrand tag={Link} to="/" replace>
+          <NavbarBrand tag={RouterLink} to="/" replace>
             <h1 className="mb-0">
               <img src={brand.logo.white} alt="Logo" height="50" className="mr-2" />
               <span className="align-middle">{brand.name}</span>
@@ -148,4 +148,6 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(injectIntl(Header));
+export default connect(mapStateToProps, mapDispatchToProps, null, {
+  pure: false /* This is required for link 'active' feature to work when route is changed. It works on refresh without this */
+})(injectIntl(Header));

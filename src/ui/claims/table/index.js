@@ -36,13 +36,20 @@ class ClaimsTable extends Component {
 
     switch (claim.status) {
       case CLAIM_STATUSES.registration:
+      return (<Chip backgroundColor={themeConfig.palette.info} labelColor={themeConfig.palette.white}>
+        <Avatar
+          backgroundColor={themeConfig.palette.info}
+          color={themeConfig.palette.white}
+          icon={<FontIcon className="material-icons">timer</FontIcon>} />
+        {formatMessage(messages.registration)}
+      </Chip>);
       case CLAIM_STATUSES.voting:
         return (<Chip backgroundColor={themeConfig.palette.info} labelColor={themeConfig.palette.white}>
           <Avatar
             backgroundColor={themeConfig.palette.info}
             color={themeConfig.palette.white}
             icon={<FontIcon className="material-icons">timer</FontIcon>} />
-          {formatMessage(messages.pending)}
+          {formatMessage(messages.voting)}
         </Chip>);
       case CLAIM_STATUSES.endorsed:
         return (<Chip backgroundColor={themeConfig.palette.success} labelColor={themeConfig.palette.white}>

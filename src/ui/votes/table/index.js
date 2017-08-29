@@ -14,6 +14,7 @@ import autoBind from 'react-autobind';
 import Avatar from 'material-ui/Avatar';
 import FontIcon from 'material-ui/FontIcon';
 import Chip from 'material-ui/Chip';
+import ExternalLink from 'ui/common/external-link';
 
 import routeTemplates from 'ui/common/routes/templates';
 import themeConfig from 'ui/theme/config';
@@ -153,7 +154,9 @@ class VotesTable extends Component {
                 <Link to={routeTemplates.claims.details.replace(':id', vote.claim.id)} className="lead">{vote.claim.title}</Link>
               </TableRowColumn>
               <TableRowColumn>
-                <div className="lead">{vote.claim.proof}</div>
+                <div className="lead">
+                  <ExternalLink href={vote.claim.proof} openInNewTab />
+                </div>
               </TableRowColumn>
               <TableRowColumn>
                 {this.renderResult(vote)}

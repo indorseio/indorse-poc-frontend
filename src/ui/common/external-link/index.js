@@ -7,7 +7,7 @@ export default ({ children, href, className, openInNewTab }) => {
   };
 
   if (openInNewTab) {
-    linkProps.target = "blank";
+    linkProps.target = "_blank";
     linkProps.rel = "noreferrer noopener"
   }
 

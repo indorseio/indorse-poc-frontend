@@ -91,7 +91,7 @@ class Header extends Component {
           {currentUser.scoreCount ? <li className="navbar-text mx-4">
             <FormattedMessage
               id="app.layout.header.score"
-              defaultMessage="Score: {score}"
+              defaultMessage="My Score: {score}"
               values={{ score: currentUser.scoreCount }} />
           </li> : null}
           <UncontrolledNavDropdown>

@@ -21,7 +21,7 @@
   },
   {
     "id": "app.layout.header.score",
-    "defaultMessage": "Score: {score}"
+    "defaultMessage": "My Score: {score}"
   },
   {
     "id": "app.layout.header.change-password",

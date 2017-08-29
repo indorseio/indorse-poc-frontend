@@ -4,8 +4,12 @@
     "defaultMessage": "Claim created successfully"
   },
   {
-    "id": "claims.messages.pending",
-    "defaultMessage": "Pending"
+    "id": "claims.messages.registration",
+    "defaultMessage": "Pending registrations"
+  },
+  {
+    "id": "claims.messages.voting",
+    "defaultMessage": "Pending votes"
   },
   {
     "id": "claims.messages.endorsed",

@@ -5,9 +5,13 @@ export default defineMessages({
     id: 'claims.messages.create',
     defaultMessage: 'Claim created successfully'
   },
-  pending: {
-    id: 'claims.messages.pending',
-    defaultMessage: 'Pending'
+  registration: {
+    id: 'claims.messages.registration',
+    defaultMessage: 'Pending registrations'
+  },
+  voting: {
+    id: 'claims.messages.voting',
+    defaultMessage: 'Pending votes'
   },
   endorsed: {
     id: 'claims.messages.endorsed',

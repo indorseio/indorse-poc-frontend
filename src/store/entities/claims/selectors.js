@@ -7,6 +7,8 @@ import * as authSelectors from 'store/auth/selectors';
 import * as helpers from './helpers';
 import * as voteHelpers from 'store/entities/votes/helpers';
 
+import { findSkillById } from 'resources/skills';
+
 const claimsState = createSelector(
   entitySelectors.selectEntities,
   entities => entities.claims
@@ -19,7 +21,7 @@ export const selectCurrentUserClaims = createSelector(
   (entities, claimsById, currentUserId) =>
     denormalize(Object.keys(claimsById), [schemas.claim], entities)
       .filter(c => c.owner && c.owner.id === currentUserId)
-      .map(c => ({ ...c, status: helpers.calculateClaimStatus(c) }))
+      .map(c => ({ ...c, skill: findSkillById(c.title), status: helpers.calculateClaimStatus(c) }))
 );
 
 export const selectClaimById = createSelector(
@@ -29,6 +31,7 @@ export const selectClaimById = createSelector(
     const claim = denormalize(id, schemas.claim, entities);
     if (claim) {
       const result = { ...claim, status: helpers.calculateClaimStatus(claim) };
+      result.skill = findSkillById(claim.title);
       if (claim.vote)
         result.vote = { ...claim.vote, status: voteHelpers.calculateVoteStatus(claim.vote) };
       return result;
